@@ -1,0 +1,271 @@
+{% extends 'base.html' %}
+{% load static %}
+
+
+{% block content %}
+<!--User Panel:start-->
+<main class="mt-xxxx-large">
+    <!--    User Panel Wrapper:start-->
+    <div class="user-panel-wrapper">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-12 col-md-12 col-lg-4 col-xl-3">
+                    <!-- User Panel Aside:start -->
+                    <aside class="user-panel-aside border border-radius-3xl py-3" dir="rtl" aria-label="پنل کاربر">
+                        <!-- header (ثابت بالای پنل) -->
+                        <div class="user-panel-aside-header text-center">
+                            <div class="user-avatar" aria-hidden="true">
+                                <i class="fa fa-user-circle" aria-hidden="true"></i>
+                            </div>
+                            <p class="fw-bold mt-2 user-name">
+                                علی رضا ملکی
+                                <a href="#" class="ps-2 user-edit-link" aria-label="ویرایش">
+                                    <i class="fa fa-pen" aria-hidden="true"></i>
+                                </a>
+                            </p>
+                            <p class="gray-500 user-phone">09033234324</p>
+                        </div>
+
+                        <!-- منو — قابل اسکرول (بخش قابل رشد) -->
+                        <div class="user-panel-aside-menu">
+                            <ul class="menu-list" role="menu" aria-label="منوی پنل کاربری">
+                                <li class="menu-item" role="menuitem">
+                                    <a href="user-dashboard.html" class="menu-link">
+                                              <span class="icon-wrap">
+                                               <svg
+                                                       xmlns="http://www.w3.org/2000/svg"
+                                                       viewBox="0 0 12 12"
+                                                       width="1.4em"
+                                                       height="1.4em"
+                                                       {...props}
+                                               >
+                                          <g fill="none">
+                                            <g clipPath="url(#bubblesActivitiesSolid0)">
+                                              <path
+                                                      fill="currentColor"
+                                                      fillRule="evenodd"
+                                                      d="M5.896.005a1.5 1.5 0 0 0-1.05.536c-.158.193-.27.425-.317.664c-.03.148-.028.114-.03.857c-.002.724-.002.75.02.826a.5.5 0 0 0 .394.355c.062.01 2.11.01 2.172 0a.5.5 0 0 0 .413-.448c.003-.036.004-.255.003-.728c-.002-.729-.002-.713-.028-.847A1.503 1.503 0 0 0 5.896.005m.063.999a.372.372 0 0 0-.115.708c.054.026.1.036.16.036s.109-.012.169-.042a.373.373 0 0 0-.214-.702M2.2 1.5a1 1 0 0 0-.946.928c-.004.05-.005 1.336-.004 4.368c.001 4.103.002 4.3.01 4.349q.028.164.096.3a1 1 0 0 0 .793.55c.06.006 7.644.006 7.704 0a1 1 0 0 0 .889-.855c.008-.053.008-.243.008-4.392c0-4.15 0-4.339-.008-4.39a1.005 1.005 0 0 0-.79-.839c-.1-.02-.094-.02-.865-.02c-.68 0-.743.001-.759.008a.14.14 0 0 0-.066.067c-.01.024-.01.024-.009.433l.001.41l.017.024a.13.13 0 0 0 .066.052c.015.006.125.007.604.007c.643 0 .615 0 .675.03s.115.101.129.169c.003.017.004 1.005.004 3.262L9.746 9.2l-.01.028a.4.4 0 0 1-.029.056c-.01.016-.326.335-.838.848l-.822.82l-.04.02a.2.2 0 0 1-.085.025c-.028.004-.993.005-2.753.004c-2.619-.001-2.71-.002-2.736-.01a.26.26 0 0 1-.177-.19c-.003-.018-.005-1.15-.005-4.053c0-3.553 0-4.032.007-4.056a.25.25 0 0 1 .186-.184c.026-.006.117-.007.616-.007c.479 0 .589-.001.604-.007a.13.13 0 0 0 .066-.052l.016-.024l.002-.41c0-.41 0-.41-.01-.433a.14.14 0 0 0-.065-.067c-.016-.007-.078-.008-.73-.008zm1.518 3a.38.38 0 0 0-.331.28a.5.5 0 0 0 .002.194a.4.4 0 0 0 .106.175c.028.026.083.06.117.074c.073.03-.098.028 2.389.028s2.316.002 2.388-.027a.5.5 0 0 0 .118-.075a.4.4 0 0 0 .106-.175a.5.5 0 0 0 .002-.194a.39.39 0 0 0-.278-.272C8.308 4.5 8.167 4.5 6.02 4.5zm-.04 1.756a.37.37 0 0 0-.301.346a.37.37 0 0 0 .283.386c.038.01.045.01 2.337.01c2.563 0 2.328.003 2.406-.034a.3.3 0 0 0 .11-.075a.37.37 0 0 0 .074-.426a.38.38 0 0 0-.24-.2l-.035-.012H6.01c-1.9-.001-2.307 0-2.332.005m-.02 1.755a.374.374 0 0 0-.074.698c.085.042-.021.038 1.104.038c1.12 0 1.019.004 1.1-.035A.37.37 0 0 0 6 8.394a.37.37 0 0 0-.222-.362c-.072-.033.004-.031-1.093-.03c-.968 0-.991 0-1.026.009"
+                                                      clipRule="evenodd"
+                                              ></path>
+                                            </g>
+                                            <defs>
+                                              <clipPath id="bubblesActivitiesSolid0">
+                                                <path fill="#fff" d="M0 0h12v12H0z"></path>
+                                              </clipPath>
+                                            </defs>
+                                          </g>
+                                        </svg>
+                                              </span>
+                                        <span class="menu-text">خلاصه فعالیت ها</span>
+                                    </a>
+                                </li>
+
+                                <li class="menu-item" role="menuitem">
+                                    <a href="#" class="menu-link">
+          <span class="icon-wrap">
+            <svg width="18" height="18" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true">
+              <path d="M11.354 6.354a.5.5 0 0 0-.708-.708L8 8.293 6.854 7.146a.5.5 0 1 0-.708.708l1.5 1.5a.5.5 0 0 0 .708 0l3-3z"/>
+              <path d="M.5 1a.5.5 0 0 0 0 1h1.11l.401 1.607 1.498 7.985A.5.5 0 0 0 4 12h1a2 2 0 1 0 0 4 2 2 0 0 0 0-4h7a2 2 0 1 0 0 4 2 2 0 0 0 0-4h1a.5.5 0 0 0 .491-.408l1.5-8A.5.5 0 0 0 14.5 3H2.89l-.405-1.621A.5.5 0 0 0 2 1H.5z"/>
+            </svg>
+          </span>
+                                        <span class="menu-text">سفارش ها</span>
+                                    </a>
+                                </li>
+                                <li class="menu-item" role="menuitem">
+                                    <a href="#" class="menu-link">
+                                          <span class="icon-wrap">
+                                            <svg
+                                                    xmlns="http://www.w3.org/2000/svg"
+                                                    viewBox="0 0 24 24"
+                                                    width="1.4em"
+                                                    height="1.4em"
+                                                    {...props}
+                                            >
+      <g
+              fill="none"
+              stroke="currentColor"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth="1.5"
+              color="currentColor"
+      >
+        <path d="M17 20a2 2 0 1 0 0-4a2 2 0 0 0 0 4M7 20a2 2 0 1 0 0-4a2 2 0 0 0 0 4"></path>
+        <path d="M19 11h3v2c0 2.357 0 3.535-.732 4.268c-.487.487-1.171.65-2.268.704m-14 0c-1.097-.054-1.78-.217-2.268-.704C2 16.535 2 15.357 2 13V9c0-2.357 0-3.536.732-4.268S4.643 4 7 4h3.3c1.117 0 1.675 0 2.127.147a3 3 0 0 1 1.926 1.926c.147.452.147 1.01.147 2.127c0 1.22 0 1.831-.334 2.244q-.099.122-.222.222C13.531 11 12.921 11 11.7 11H8m7 7H9m5.5-12h1.821c1.456 0 2.183 0 2.775.354c.593.353.938.994 1.628 2.276L22 11"></path>
+        <path d="M10 13s-.672-.556-1.263-1.084C8.32 11.58 8 11.293 8 11.005c0-.255.25-.492.656-.864C9.232 9.662 10 9 10 9"></path>
+      </g>
+    </svg>
+                                          </span>
+                                        <span class="menu-text">بازگشت محصول</span>
+                                    </a>
+                                </li>
+
+                                <li class="menu-item" role="menuitem">
+                                    <a href="#" class="menu-link">
+          <span class="icon-wrap">
+               <svg
+                       xmlns="http://www.w3.org/2000/svg"
+                       viewBox="0 0 24 24"
+                       width="1.4em"
+                       height="1.4em"
+                       {...props}
+               >
+      <path
+              fill="currentColor"
+              d="m8.962 18.91l.464-.588zM12 5.5l-.54.52a.75.75 0 0 0 1.08 0zm3.038 13.41l.465.59zm-5.612-.588C7.91 17.127 6.253 15.96 4.938 14.48C3.65 13.028 2.75 11.335 2.75 9.137h-1.5c0 2.666 1.11 4.7 2.567 6.339c1.43 1.61 3.254 2.9 4.68 4.024zM2.75 9.137c0-2.15 1.215-3.954 2.874-4.713c1.612-.737 3.778-.541 5.836 1.597l1.08-1.04C10.1 2.444 7.264 2.025 5 3.06C2.786 4.073 1.25 6.425 1.25 9.137zM8.497 19.5c.513.404 1.063.834 1.62 1.16s1.193.59 1.883.59v-1.5c-.31 0-.674-.12-1.126-.385c-.453-.264-.922-.628-1.448-1.043zm7.006 0c1.426-1.125 3.25-2.413 4.68-4.024c1.457-1.64 2.567-3.673 2.567-6.339h-1.5c0 2.198-.9 3.891-2.188 5.343c-1.315 1.48-2.972 2.647-4.488 3.842zM22.75 9.137c0-2.712-1.535-5.064-3.75-6.077c-2.264-1.035-5.098-.616-7.54 1.92l1.08 1.04c2.058-2.137 4.224-2.333 5.836-1.596c1.659.759 2.874 2.562 2.874 4.713zm-8.176 9.185c-.526.415-.995.779-1.448 1.043s-.816.385-1.126.385v1.5c.69 0 1.326-.265 1.883-.59c.558-.326 1.107-.756 1.62-1.16z"
+      ></path>
+    </svg>
+          </span>
+                                        <span class="menu-text">علاقه مندی ها</span>
+                                    </a>
+                                </li>
+
+                                <li class="menu-item active" role="menuitem">
+                                    <a href="#" class="menu-link">
+          <span class="icon-wrap">
+                <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        viewBox="0 0 20 20"
+                        width="1.4em"
+                        height="1.4em"
+                        {...props}
+                >
+      <path
+              fill="currentColor"
+              d="M5 2h9c1.1 0 2 .9 2 2v7c0 1.1-.9 2-2 2h-2l-5 5v-5H5c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2"
+      ></path>
+    </svg>
+          </span>
+                                        <span class="menu-text">دیدگاه ها</span>
+                                    </a>
+                                </li>
+
+                                <!-- item active: class روی li، نه a -->
+                                <li class="menu-item" role="menuitem" aria-current="page">
+                                    <a href="#" class="menu-link">
+          <span class="icon-wrap">
+               <svg class="text-dark"
+                    xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 24 24"
+                    width="1.4em"
+                    height="1.4em"
+                    {...props}
+               >
+      <path
+              fill="currentColor"
+              d="M10.115 21.811c.606.5 1.238.957 1.885 1.403a27 27 0 0 0 1.885-1.403a28 28 0 0 0 2.853-2.699C18.782 16.877 21 13.637 21 10a9 9 0 1 0-18 0c0 3.637 2.218 6.876 4.262 9.112a28 28 0 0 0 2.853 2.7M12 13.25a3.25 3.25 0 1 1 0-6.5a3.25 3.25 0 0 1 0 6.5"
+      ></path>
+    </svg>
+          </span>
+                                        <span class="menu-text">آدرس ها</span>
+                                    </a>
+                                </li>
+
+                                <li class="menu-item" role="menuitem">
+                                    <a href="#" class="menu-link">
+          <span class="icon-wrap">
+             <svg class="text-dark"
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 24 24"
+                  width="1.4em"
+                  height="1.4em"
+                  {...props}
+             >
+      <path
+              fill="currentColor"
+              d="M12 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12a12 12 0 0 0 12-12A12 12 0 0 0 12 0M4.911 7.089h11.456a2.197 2.197 0 0 1 2.165 2.19v5.863a2.213 2.213 0 0 1-2.177 2.178H8.04c-1.174 0-2.04-.99-2.04-2.178v-4.639L4.503 7.905c-.31-.42-.05-.816.408-.816m3.415 2.19c-.347 0-.68.21-.68.544s.333.544.68.544h7.905c.346 0 .68-.21.68-.544s-.334-.545-.68-.545zm0 2.177c-.347 0-.68.21-.68.544s.333.544.68.544h7.905c.346 0 .68-.21.68-.544s-.334-.544-.68-.544zm-.013 2.19c-.346 0-.68.21-.68.544s.334.544.68.544h5.728c.347 0 .68-.21.68-.544s-.333-.545-.68-.545z"
+      ></path>
+    </svg>
+          </span>
+                                        <span class="menu-text">پیغام ها</span>
+                                    </a>
+                                </li>
+
+                                <li class="menu-item" role="menuitem">
+                                    <a href="#" class="menu-link">
+          <span class="icon-wrap">
+          <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 14 14"
+                  width="1.4em"
+                  height="1.4em"
+                  {...props}
+          >
+      <path
+              fill="currentColor"
+              fillRule="evenodd"
+              d="M0 4.355a3.5 3.5 0 0 1 3.5-3.5H10a.5.5 0 0 1 .5.5v1.398H3.355a.625.625 0 1 0 0 1.25h7.585q.03 0 .058-.003h.214a1.5 1.5 0 0 1 1.5 1.5v.916h-2.95c-.824 0-1.75.625-1.75 1.695v1.778c0 1.07.926 1.695 1.75 1.695h2.95v.916a1.5 1.5 0 0 1-1.5 1.5H1.5A1.5 1.5 0 0 1 0 12.5zm9.763 3.311h3.5c.276 0 .5.2.5.445v1.778c0 .246-.224.445-.5.445h-3.5c-.276 0-.5-.2-.5-.445V8.111c0-.246.224-.445.5-.445"
+              clipRule="evenodd"
+      ></path>
+    </svg>
+          </span>
+                                        <span class="menu-text">کیف پول</span>
+                                    </a>
+                                </li>
+
+                                <li class="menu-item" role="menuitem">
+                                    <a href="#" class="menu-link">
+          <span class="icon-wrap">
+         <svg
+                 xmlns="http://www.w3.org/2000/svg"
+                 viewBox="0 0 32 32"
+                 width="1.4em"
+                 height="1.4em"
+                 {...props}
+         >
+      <path
+              fill="currentColor"
+              d="M17 22v-8h-4v2h2v6h-3v2h8v-2zM16 8a1.5 1.5 0 1 0 1.5 1.5A1.5 1.5 0 0 0 16 8"
+      ></path>
+      <path
+              fill="currentColor"
+              d="M26 28H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h20a2 2 0 0 1 2 2v20a2 2 0 0 1-2 2M6 6v20h20V6Z"
+      ></path>
+    </svg>
+          </span>
+                                        <span class="menu-text">اطلاعات حساب کاربری</span>
+                                    </a>
+                                </li>
+
+                                <li class="menu-item logout" role="menuitem">
+                                    <a href="#" class="menu-link">
+          <span class="icon-wrap">
+            <i class="fa fa-sign-out-alt" aria-hidden="true"></i>
+          </span>
+                                        <span class="menu-text">خروج</span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </aside>
+
+                    <!-- User Panel Aside:end -->
+                </div>
+
+                <div class="col-sm-12 col-md-12 col-lg-8 col-xl-9">
+                    <!--        User Panel Content:start-->
+                    <div class="user-panel-content">
+
+                        <!--                        User Panel Comments:start-->
+                        <div class="user-panel-comments mt-3 border border-radius-3xl">
+                            <!--                            User Panel Comments Header:start-->
+                            <div class="user-panel-comments-header d-flex justify-content-between align-items-center p-3 border-bottom-gray-300">
+                                <p class="fw-bold">پیغام / اطلاعیه ها</p>
+                            </div>
+                            <!--                            User Panel Comments Header:end-->
+
+                            <div class="text-center my-5">
+                                <img src="{% '/img/empty-notification.svg'%}" alt="">
+                                <p class="fs-8">هنوز هیچ پیامی ندارید.</p>
+                            </div>
+                        </div>
+                        <!--                        User Panel Comments:end-->
+                    </div>
+                    <!--        User Panel Content:end-->
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--    User Panel Wrapper:end-->
+</main>
+<!--User Panel:end-->
+{% endblock %}

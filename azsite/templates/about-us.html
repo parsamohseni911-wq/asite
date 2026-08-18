@@ -1,0 +1,2394 @@
+
+{% extends "base.html" %}
+{% block content %}
+    درباره ما | فروش قطعات و اسمبل سیستم
+
+<style>
+
+    /* =========================================================
+       RESET / BASE
+    ========================================================= */
+
+    .about-page,
+    .about-page * {
+        box-sizing: border-box;
+    }
+
+    .about-page {
+        --orange: #ff7a00;
+        --orange-light: #ff9d3d;
+        --orange-dark: #d95f00;
+        --black: #050505;
+        --black-soft: #0b0b0b;
+        --card: rgba(20, 20, 20, 0.78);
+        --white: #ffffff;
+        --muted: #a7a7a7;
+
+        position: relative;
+        overflow: hidden;
+
+        min-height: 100vh;
+
+        direction: rtl;
+
+        color: var(--white);
+
+        background:
+            radial-gradient(
+                circle at 85% 10%,
+                rgba(255, 122, 0, 0.18),
+                transparent 28%
+            ),
+            radial-gradient(
+                circle at 10% 55%,
+                rgba(255, 122, 0, 0.09),
+                transparent 30%
+            ),
+            linear-gradient(
+                180deg,
+                #050505 0%,
+                #080808 45%,
+                #030303 100%
+            );
+
+        font-family:
+            Tahoma,
+            Arial,
+            sans-serif;
+    }
+
+
+    /* =========================================================
+       BACKGROUND
+    ========================================================= */
+
+    .about-page::before {
+        content: "";
+
+        position: absolute;
+
+        width: 600px;
+        height: 600px;
+
+        top: 150px;
+        right: -300px;
+
+        border-radius: 50%;
+
+        background: rgba(255, 122, 0, 0.08);
+
+        filter: blur(100px);
+
+        pointer-events: none;
+    }
+
+
+    .about-page::after {
+        content: "";
+
+        position: absolute;
+
+        width: 500px;
+        height: 500px;
+
+        left: -250px;
+        top: 1000px;
+
+        border-radius: 50%;
+
+        background: rgba(255, 122, 0, 0.07);
+
+        filter: blur(100px);
+
+        pointer-events: none;
+    }
+
+
+    /* =========================================================
+       FLOATING GRID
+    ========================================================= */
+
+    .about-grid-bg {
+        position: absolute;
+
+        inset: 0;
+
+        opacity: 0.14;
+
+        background-image:
+            linear-gradient(
+                rgba(255,255,255,0.035) 1px,
+                transparent 1px
+            ),
+            linear-gradient(
+                90deg,
+                rgba(255,255,255,0.035) 1px,
+                transparent 1px
+            );
+
+        background-size: 60px 60px;
+
+        mask-image:
+            linear-gradient(
+                to bottom,
+                black,
+                transparent 80%
+            );
+
+        pointer-events: none;
+    }
+
+
+    /* =========================================================
+       MOUSE GLOW
+    ========================================================= */
+
+    .mouse-glow {
+        position: fixed;
+
+        width: 300px;
+        height: 300px;
+
+        border-radius: 50%;
+
+        background:
+            radial-gradient(
+                circle,
+                rgba(255, 122, 0, 0.13),
+                transparent 68%
+            );
+
+        transform:
+            translate(-50%, -50%);
+
+        pointer-events: none;
+
+        z-index: 0;
+
+        opacity: 0;
+
+        transition: opacity 0.3s ease;
+    }
+
+
+    /* =========================================================
+       CONTAINER
+    ========================================================= */
+
+    .about-container {
+        width: min(1180px, calc(100% - 40px));
+
+        margin: auto;
+
+        position: relative;
+
+        z-index: 2;
+    }
+
+
+    /* =========================================================
+       HERO
+    ========================================================= */
+
+    .about-hero {
+        min-height: 760px;
+
+        display: flex;
+
+        align-items: center;
+
+        position: relative;
+
+        padding:
+            100px 0
+            80px;
+    }
+
+
+    .hero-content {
+        width: 62%;
+
+        opacity: 0;
+
+        transform: translateY(50px);
+
+        animation:
+            heroIn 1s cubic-bezier(.2,.8,.2,1)
+            forwards;
+    }
+
+
+    @keyframes heroIn {
+
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+    }
+
+
+    .hero-badge {
+        display: inline-flex;
+
+        align-items: center;
+
+        gap: 9px;
+
+        padding:
+            9px 16px;
+
+        border:
+            1px solid
+            rgba(255, 122, 0, 0.35);
+
+        background:
+            rgba(255, 122, 0, 0.07);
+
+        border-radius: 100px;
+
+        color:
+            #ff9d3d;
+
+        font-size: 13px;
+
+        margin-bottom: 25px;
+    }
+
+
+    .hero-badge-dot {
+        width: 8px;
+        height: 8px;
+
+        border-radius: 50%;
+
+        background: var(--orange);
+
+        box-shadow:
+            0 0 15px
+            var(--orange);
+
+        animation: pulse 1.7s infinite;
+    }
+
+
+    @keyframes pulse {
+
+        0%, 100% {
+            opacity: 1;
+            transform: scale(1);
+        }
+
+        50% {
+            opacity: .45;
+            transform: scale(.7);
+        }
+
+    }
+
+
+    .hero-title {
+        margin: 0;
+
+        font-size:
+            clamp(42px, 6vw, 76px);
+
+        line-height: 1.05;
+
+        font-weight: 900;
+
+        letter-spacing: -2px;
+    }
+
+
+    .hero-title span {
+        display: block;
+
+        color: var(--orange);
+
+        text-shadow:
+            0 0 40px
+            rgba(255, 122, 0, 0.22);
+    }
+
+
+    .hero-description {
+        max-width: 650px;
+
+        margin:
+            28px 0 35px;
+
+        color: #bcbcbc;
+
+        font-size: 17px;
+
+        line-height: 2;
+    }
+
+
+    .hero-buttons {
+        display: flex;
+
+        gap: 13px;
+
+        flex-wrap: wrap;
+    }
+
+
+    .hero-btn {
+        border: none;
+
+        padding:
+            14px 24px;
+
+        border-radius: 12px;
+
+        font-family: inherit;
+
+        font-size: 14px;
+
+        cursor: pointer;
+
+        text-decoration: none;
+
+        transition:
+            .3s ease;
+
+        display: inline-flex;
+
+        align-items: center;
+
+        justify-content: center;
+
+        gap: 8px;
+    }
+
+
+    .hero-btn-primary {
+        color: #000;
+
+        background:
+            linear-gradient(
+                135deg,
+                #ff9d3d,
+                #ff6b00
+            );
+
+        box-shadow:
+            0 10px 35px
+            rgba(255, 122, 0, .18);
+    }
+
+
+    .hero-btn-primary:hover {
+        transform: translateY(-4px);
+
+        box-shadow:
+            0 15px 45px
+            rgba(255, 122, 0, .30);
+    }
+
+
+    .hero-btn-secondary {
+        color: #fff;
+
+        background:
+            rgba(255,255,255,.04);
+
+        border:
+            1px solid
+            rgba(255,255,255,.12);
+    }
+
+
+    .hero-btn-secondary:hover {
+        border-color:
+            rgba(255,122,0,.5);
+
+        color:
+            #ff9d3d;
+
+        transform:
+            translateY(-4px);
+    }
+
+
+    /* =========================================================
+       HERO VISUAL
+    ========================================================= */
+
+    .hero-visual {
+        position: absolute;
+
+        left: 0;
+
+        width: 390px;
+        height: 390px;
+
+        display: flex;
+
+        align-items: center;
+        justify-content: center;
+
+        opacity: 0;
+
+        animation:
+            visualIn 1.2s .25s
+            cubic-bezier(.2,.8,.2,1)
+            forwards;
+    }
+
+
+    @keyframes visualIn {
+
+        to {
+            opacity: 1;
+        }
+
+    }
+
+
+    .visual-ring {
+        position: absolute;
+
+        width: 330px;
+        height: 330px;
+
+        border-radius: 50%;
+
+        border:
+            1px solid
+            rgba(255,122,0,.25);
+
+        box-shadow:
+            0 0 80px
+            rgba(255,122,0,.08);
+
+        animation:
+            rotateRing 15s
+            linear infinite;
+    }
+
+
+    .visual-ring::before {
+        content: "";
+
+        position: absolute;
+
+        width: 12px;
+        height: 12px;
+
+        background: var(--orange);
+
+        border-radius: 50%;
+
+        top: 15px;
+        right: 50px;
+
+        box-shadow:
+            0 0 20px
+            var(--orange);
+    }
+
+
+    .visual-ring-two {
+        width: 250px;
+        height: 250px;
+
+        border:
+            1px dashed
+            rgba(255,122,0,.2);
+
+        animation:
+            rotateRingReverse 12s
+            linear infinite;
+    }
+
+
+    @keyframes rotateRing {
+
+        to {
+            transform: rotate(360deg);
+        }
+
+    }
+
+
+    @keyframes rotateRingReverse {
+
+        to {
+            transform: rotate(-360deg);
+        }
+
+    }
+
+
+    .visual-center {
+        position: relative;
+
+        width: 150px;
+        height: 150px;
+
+        border-radius: 35px;
+
+        display: flex;
+
+        flex-direction: column;
+
+        align-items: center;
+        justify-content: center;
+
+        background:
+            linear-gradient(
+                145deg,
+                #191919,
+                #090909
+            );
+
+        border:
+            1px solid
+            rgba(255,122,0,.3);
+
+        box-shadow:
+            0 25px 70px
+            rgba(0,0,0,.7),
+            inset 0 0 30px
+            rgba(255,122,0,.04);
+
+        transform:
+            rotate(-5deg);
+
+        transition:
+            transform .5s ease;
+    }
+
+
+    .visual-center:hover {
+        transform:
+            rotate(0deg)
+            scale(1.05);
+    }
+
+
+    .visual-icon {
+        font-size: 50px;
+
+        filter:
+            drop-shadow(
+                0 0 20px
+                rgba(255,122,0,.5)
+            );
+    }
+
+
+    .visual-text {
+        margin-top: 8px;
+
+        font-size: 12px;
+
+        color: #aaa;
+    }
+
+
+    /* =========================================================
+       SCROLL INDICATOR
+    ========================================================= */
+
+    .scroll-indicator {
+        position: absolute;
+
+        bottom: 35px;
+
+        right: 50%;
+
+        transform:
+            translateX(50%);
+
+        display: flex;
+
+        flex-direction: column;
+
+        align-items: center;
+
+        gap: 8px;
+
+        color: #777;
+
+        font-size: 11px;
+    }
+
+
+    .scroll-mouse {
+        width: 23px;
+        height: 36px;
+
+        border:
+            1px solid
+            #555;
+
+        border-radius: 20px;
+
+        position: relative;
+    }
+
+
+    .scroll-mouse::before {
+        content: "";
+
+        position: absolute;
+
+        width: 3px;
+        height: 7px;
+
+        border-radius: 10px;
+
+        background:
+            var(--orange);
+
+        top: 7px;
+        left: 50%;
+
+        transform:
+            translateX(-50%);
+
+        animation:
+            scrollDot 1.5s infinite;
+    }
+
+
+    @keyframes scrollDot {
+
+        0% {
+            opacity: 0;
+            transform:
+                translate(-50%, 0);
+        }
+
+        30% {
+            opacity: 1;
+        }
+
+        100% {
+            opacity: 0;
+            transform:
+                translate(-50%, 12px);
+        }
+
+    }
+
+
+    /* =========================================================
+       SECTION TITLE
+    ========================================================= */
+
+    .section-heading {
+        text-align: center;
+
+        max-width: 700px;
+
+        margin:
+            0 auto 60px;
+    }
+
+
+    .section-label {
+        color:
+            var(--orange);
+
+        font-size: 13px;
+
+        font-weight: bold;
+
+        letter-spacing: 1px;
+
+        margin-bottom: 12px;
+    }
+
+
+    .section-title {
+        margin: 0;
+
+        font-size:
+            clamp(30px, 4vw, 48px);
+
+        line-height: 1.25;
+
+        font-weight: 900;
+    }
+
+
+    .section-description {
+        color: #888;
+
+        line-height: 1.9;
+
+        margin-top: 17px;
+
+        font-size: 15px;
+    }
+
+
+    /* =========================================================
+       SERVICES
+    ========================================================= */
+
+    .services-section {
+        padding:
+            100px 0;
+    }
+
+
+    .services-grid {
+        display: grid;
+
+        grid-template-columns:
+            repeat(3, 1fr);
+
+        gap: 18px;
+    }
+
+
+    .service-card {
+        position: relative;
+
+        padding: 32px;
+
+        min-height: 330px;
+
+        border-radius: 24px;
+
+        background:
+            linear-gradient(
+                145deg,
+                rgba(25,25,25,.9),
+                rgba(10,10,10,.8)
+            );
+
+        border:
+            1px solid
+            rgba(255,255,255,.08);
+
+        overflow: hidden;
+
+        opacity: 0;
+
+        transform:
+            translateY(50px);
+
+        transition:
+            transform .7s ease,
+            border-color .3s ease,
+            box-shadow .3s ease;
+    }
+
+
+    .service-card.visible {
+        opacity: 1;
+
+        transform:
+            translateY(0);
+    }
+
+
+    .service-card::before {
+        content: "";
+
+        position: absolute;
+
+        width: 180px;
+        height: 180px;
+
+        top: -90px;
+        left: -90px;
+
+        border-radius: 50%;
+
+        background:
+            rgba(255,122,0,.1);
+
+        filter: blur(20px);
+
+        transition:
+            .5s ease;
+    }
+
+
+    .service-card:hover {
+        transform:
+            translateY(-10px);
+
+        border-color:
+            rgba(255,122,0,.4);
+
+        box-shadow:
+            0 25px 60px
+            rgba(0,0,0,.4);
+    }
+
+
+    .service-card:hover::before {
+        transform:
+            scale(2);
+    }
+
+
+    .service-number {
+        position: absolute;
+
+        top: 25px;
+        left: 27px;
+
+        font-size: 12px;
+
+        color: #444;
+    }
+
+
+    .service-icon {
+        width: 65px;
+        height: 65px;
+
+        display: flex;
+
+        align-items: center;
+        justify-content: center;
+
+        border-radius: 18px;
+
+        background:
+            rgba(255,122,0,.1);
+
+        border:
+            1px solid
+            rgba(255,122,0,.15);
+
+        font-size: 29px;
+
+        margin-bottom: 25px;
+
+        transition:
+            .3s ease;
+    }
+
+
+    .service-card:hover .service-icon {
+        background:
+            var(--orange);
+
+        color:
+            #000;
+
+        transform:
+            rotate(-5deg)
+            scale(1.08);
+    }
+
+
+    .service-title {
+        margin: 0 0 13px;
+
+        font-size: 22px;
+    }
+
+
+    .service-text {
+        margin: 0;
+
+        color: #8d8d8d;
+
+        line-height: 1.9;
+
+        font-size: 14px;
+    }
+
+
+    .service-link {
+        display: inline-flex;
+
+        align-items: center;
+
+        gap: 8px;
+
+        margin-top: 24px;
+
+        color:
+            var(--orange);
+
+        font-size: 13px;
+
+        text-decoration: none;
+    }
+
+
+    /* =========================================================
+       ONLINE / OFFLINE
+    ========================================================= */
+
+    .availability-section {
+        padding:
+            90px 0 120px;
+    }
+
+
+    .availability-box {
+        display: grid;
+
+        grid-template-columns:
+            1fr 1fr;
+
+        padding: 7px;
+
+        border-radius: 28px;
+
+        background:
+            #111;
+
+        border:
+            1px solid
+            rgba(255,255,255,.08);
+
+        position: relative;
+
+        overflow: hidden;
+    }
+
+
+    .availability-option {
+        min-height: 330px;
+
+        padding: 45px;
+
+        position: relative;
+
+        border-radius: 22px;
+
+        cursor: pointer;
+
+        transition:
+            .45s ease;
+
+        display: flex;
+
+        flex-direction: column;
+
+        justify-content: center;
+    }
+
+
+    .availability-option.active {
+        background:
+            linear-gradient(
+                145deg,
+                rgba(255,122,0,.16),
+                rgba(255,122,0,.035)
+            );
+
+        box-shadow:
+            inset 0 0 0
+            1px rgba(255,122,0,.18);
+    }
+
+
+    .availability-option:hover {
+        background:
+            rgba(255,255,255,.025);
+    }
+
+
+    .availability-option.active:hover {
+        background:
+            linear-gradient(
+                145deg,
+                rgba(255,122,0,.19),
+                rgba(255,122,0,.05)
+            );
+    }
+
+
+    .availability-status {
+        display: inline-flex;
+
+        align-items: center;
+
+        gap: 8px;
+
+        width: fit-content;
+
+        padding:
+            7px 12px;
+
+        border-radius: 50px;
+
+        font-size: 11px;
+
+        margin-bottom: 22px;
+    }
+
+
+    .online-status {
+        color: #71e6a0;
+
+        background:
+            rgba(50, 205, 120, .08);
+
+        border:
+            1px solid
+            rgba(50,205,120,.16);
+    }
+
+
+    .offline-status {
+        color: #ff9d3d;
+
+        background:
+            rgba(255,122,0,.08);
+
+        border:
+            1px solid
+            rgba(255,122,0,.16);
+    }
+
+
+    .status-dot {
+        width: 7px;
+        height: 7px;
+
+        border-radius: 50%;
+
+        background:
+            currentColor;
+    }
+
+
+    .availability-title {
+        margin: 0 0 15px;
+
+        font-size: 27px;
+    }
+
+
+    .availability-text {
+        color: #888;
+
+        line-height: 1.9;
+
+        font-size: 14px;
+
+        max-width: 450px;
+    }
+
+
+    .availability-list {
+        list-style: none;
+
+        padding: 0;
+
+        margin: 25px 0 0;
+
+        display: flex;
+
+        flex-wrap: wrap;
+
+        gap: 8px;
+    }
+
+
+    .availability-list li {
+        padding:
+            8px 11px;
+
+        border-radius: 8px;
+
+        background:
+            rgba(255,255,255,.04);
+
+        color: #aaa;
+
+        font-size: 11px;
+    }
+
+
+    /* =========================================================
+       STATS
+    ========================================================= */
+
+    .stats-section {
+        padding:
+            30px 0 100px;
+    }
+
+
+    .stats-grid {
+        display: grid;
+
+        grid-template-columns:
+            repeat(4, 1fr);
+
+        border-top:
+            1px solid
+            rgba(255,255,255,.08);
+
+        border-bottom:
+            1px solid
+            rgba(255,255,255,.08);
+    }
+
+
+    .stat-item {
+        padding:
+            40px 20px;
+
+        text-align: center;
+
+        border-left:
+            1px solid
+            rgba(255,255,255,.07);
+    }
+
+
+    .stat-item:last-child {
+        border-left: none;
+    }
+
+
+    .stat-number {
+        display: block;
+
+        font-size:
+            clamp(32px, 4vw, 52px);
+
+        font-weight: 900;
+
+        color:
+            var(--orange);
+
+        margin-bottom: 8px;
+    }
+
+
+    .stat-label {
+        color: #777;
+
+        font-size: 13px;
+    }
+
+
+    /* =========================================================
+       CTA
+    ========================================================= */
+
+    .cta-section {
+        padding:
+            70px 0 130px;
+    }
+
+
+    .cta-box {
+        position: relative;
+
+        padding:
+            75px 50px;
+
+        text-align: center;
+
+        border-radius: 30px;
+
+        overflow: hidden;
+
+        border:
+            1px solid
+            rgba(255,122,0,.25);
+
+        background:
+            radial-gradient(
+                circle at 50% 100%,
+                rgba(255,122,0,.16),
+                transparent 55%
+            ),
+            #0c0c0c;
+    }
+
+
+    .cta-box::before {
+        content: "";
+
+        position: absolute;
+
+        width: 500px;
+        height: 500px;
+
+        left: 50%;
+        top: 50%;
+
+        transform:
+            translate(-50%, -50%);
+
+        border-radius: 50%;
+
+        border:
+            1px solid
+            rgba(255,122,0,.08);
+
+        pointer-events: none;
+    }
+
+
+    .cta-title {
+        position: relative;
+
+        margin: 0 0 15px;
+
+        font-size:
+            clamp(28px, 4vw, 45px);
+
+        font-weight: 900;
+    }
+
+
+    .cta-text {
+        position: relative;
+
+        max-width: 600px;
+
+        margin:
+            0 auto 28px;
+
+        color: #888;
+
+        line-height: 1.9;
+
+        font-size: 14px;
+    }
+
+
+    /* =========================================================
+       SCROLL REVEAL
+    ========================================================= */
+
+    .reveal {
+        opacity: 0;
+
+        transform:
+            translateY(50px);
+
+        transition:
+            opacity .8s ease,
+            transform .8s cubic-bezier(.2,.8,.2,1);
+    }
+
+
+    .reveal.visible {
+        opacity: 1;
+
+        transform:
+            translateY(0);
+    }
+
+
+    /* =========================================================
+       RESPONSIVE
+    ========================================================= */
+
+    @media (max-width: 950px) {
+
+        .hero-content {
+            width: 100%;
+
+            text-align: center;
+        }
+
+        .hero-description {
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .hero-buttons {
+            justify-content: center;
+        }
+
+        .hero-visual {
+            display: none;
+        }
+
+        .services-grid {
+            grid-template-columns:
+                repeat(2, 1fr);
+        }
+
+    }
+
+
+    @media (max-width: 700px) {
+
+        .about-container {
+            width:
+                min(
+                    100% - 28px,
+                    1180px
+                );
+        }
+
+        .about-hero {
+            min-height:
+                680px;
+
+            padding:
+                80px 0;
+        }
+
+        .hero-title {
+            font-size:
+                clamp(38px, 12vw, 58px);
+
+            letter-spacing:
+                -1px;
+        }
+
+        .hero-description {
+            font-size: 14px;
+        }
+
+        .services-section,
+        .availability-section {
+            padding:
+                70px 0;
+        }
+
+        .services-grid {
+            grid-template-columns:
+                1fr;
+        }
+
+        .service-card {
+            min-height: auto;
+
+            padding: 28px;
+        }
+
+        .availability-box {
+            grid-template-columns:
+                1fr;
+        }
+
+        .availability-option {
+            min-height: 280px;
+
+            padding: 30px;
+        }
+
+        .stats-grid {
+            grid-template-columns:
+                repeat(2, 1fr);
+        }
+
+        .stat-item {
+            border-bottom:
+                1px solid
+                rgba(255,255,255,.07);
+        }
+
+        .stat-item:nth-child(2) {
+            border-left: none;
+        }
+
+        .cta-box {
+            padding:
+                55px 25px;
+        }
+
+    }
+
+
+    @media (max-width: 430px) {
+
+        .hero-btn {
+            width: 100%;
+        }
+
+        .hero-buttons {
+            width: 100%;
+        }
+
+        .stats-grid {
+            grid-template-columns:
+                1fr 1fr;
+        }
+
+        .stat-number {
+            font-size: 30px;
+        }
+
+    }
+
+</style>
+
+
+
+
+
+
+<div class="about-page">
+
+    <div class="about-grid-bg"></div>
+
+    <div class="mouse-glow" id="mouseGlow"></div>
+
+
+    <!-- =====================================================
+         HERO
+    ====================================================== -->
+
+    <section class="about-hero">
+
+        <div class="about-container">
+
+            <div class="hero-content">
+
+                <div class="hero-badge">
+
+                    <span class="hero-badge-dot"></span>
+
+                    فروشگاه آنلاین + مرکز تخصصی اسمبل
+
+                </div>
+
+
+                <h1 class="hero-title">
+
+                    سیستم خوب،
+                    <span>تصادفی ساخته نمی‌شود.</span>
+
+                </h1>
+
+
+                <p class="hero-description">
+
+                    از انتخاب اولین قطعه تا اسمبل نهایی سیستم،
+                    کنارت هستیم. قطعات را آنلاین سفارش بده،
+                    یا حضوری بیا و سیستم موردنظرت را با
+                    مشاوره تخصصی و اسمبل حرفه‌ای تحویل بگیر.
+
+                </p>
+
+
+                <div class="hero-buttons">
+
+                    <a
+                        href="#services"
+                        class="hero-btn hero-btn-primary"
+                    >
+                        مشاهده خدمات
+                        <span>←</span>
+                    </a>
+
+
+                    <a
+                        href="#experience"
+                        class="hero-btn hero-btn-secondary"
+                    >
+                        تجربه ما
+                    </a>
+
+                </div>
+
+            </div>
+
+
+            <!-- VISUAL -->
+
+            <div class="hero-visual">
+
+                <div class="visual-ring"></div>
+
+                <div class="visual-ring visual-ring-two"></div>
+
+                <div class="visual-center">
+
+                    <div class="visual-icon">
+                        ⚙
+                    </div>
+
+                    <div class="visual-text">
+                        BUILD • BUY • TRUST
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <div class="scroll-indicator">
+
+                <div class="scroll-mouse"></div>
+
+                <span>
+                    برای ادامه اسکرول کنید
+                </span>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- =====================================================
+         SERVICES
+    ====================================================== -->
+
+    <section
+        class="services-section"
+        id="services"
+    >
+
+        <div class="about-container">
+
+            <div class="section-heading reveal">
+
+                <div class="section-label">
+                    EVERYTHING YOU NEED
+                </div>
+
+                <h2 class="section-title">
+                    فقط یک فروشگاه قطعات نیستیم
+                </h2>
+
+                <p class="section-description">
+
+                    خرید قطعه تنها بخشی از کاری است که انجام
+                    می‌دهیم. هدف ما این است که در تمام مسیر
+                    ساخت سیستم مناسب کنار شما باشیم.
+
+                </p>
+
+            </div>
+
+
+            <div class="services-grid">
+
+
+                <!-- CARD 1 -->
+
+                <div class="service-card reveal">
+
+                    <span class="service-number">
+                        01
+                    </span>
+
+                    <div class="service-icon">
+                        🧩
+                    </div>
+
+                    <h3 class="service-title">
+                        قطعات کامپیوتر
+                    </h3>
+
+                    <p class="service-text">
+
+                        انواع قطعات کامپیوتر از پردازنده و
+                        کارت گرافیک گرفته تا RAM، SSD،
+                        مادربرد، پاور و تجهیزات جانبی.
+
+                    </p>
+
+                    <a
+                        href="#"
+                        class="service-link"
+                    >
+                        مشاهده قطعات
+                        <span>←</span>
+                    </a>
+
+                </div>
+
+
+
+                <!-- CARD 2 -->
+
+                <div class="service-card reveal">
+
+                    <span class="service-number">
+                        02
+                    </span>
+
+                    <div class="service-icon">
+                        🔧
+                    </div>
+
+                    <h3 class="service-title">
+                        اسمبل حرفه‌ای
+                    </h3>
+
+                    <p class="service-text">
+
+                        قطعات را انتخاب کرده‌ای؟
+                        ما آن‌ها را با دقت مونتاژ،
+                        تست و آماده استفاده می‌کنیم.
+
+                    </p>
+
+                    <a
+                        href="#"
+                        class="service-link"
+                    >
+                        خدمات اسمبل
+                        <span>←</span>
+                    </a>
+
+                </div>
+
+
+
+                <!-- CARD 3 -->
+
+                <div class="service-card reveal">
+
+                    <span class="service-number">
+                        03
+                    </span>
+
+                    <div class="service-icon">
+                        💡
+                    </div>
+
+                    <h3 class="service-title">
+                        مشاوره تخصصی
+                    </h3>
+
+                    <p class="service-text">
+
+                        نمی‌دانی چه سیستمی برایت مناسب است؟
+                        با توجه به بودجه و نیازت، بهترین
+                        ترکیب قطعات را پیدا می‌کنیم.
+
+                    </p>
+
+                    <a
+                        href="#"
+                        class="service-link"
+                    >
+                        دریافت مشاوره
+                        <span>←</span>
+                    </a>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- =====================================================
+         ONLINE / OFFLINE
+    ====================================================== -->
+
+    <section
+        class="availability-section"
+        id="experience"
+    >
+
+        <div class="about-container">
+
+            <div class="section-heading reveal">
+
+                <div class="section-label">
+                    HOW DO YOU WANT TO SHOP?
+                </div>
+
+                <h2 class="section-title">
+                    انتخاب با شماست
+                </h2>
+
+                <p class="section-description">
+
+                    فرقی نمی‌کند از خانه خرید می‌کنی یا
+                    ترجیح می‌دهی حضوری با متخصص صحبت کنی.
+
+                </p>
+
+            </div>
+
+
+            <div class="availability-box reveal">
+
+
+                <!-- ONLINE -->
+
+                <div
+                    class="availability-option active"
+                    data-mode="online"
+                >
+
+                    <div class="availability-status online-status">
+
+                        <span class="status-dot"></span>
+
+                        آنلاین
+
+                    </div>
+
+
+                    <h3 class="availability-title">
+                        خرید آنلاین
+                    </h3>
+
+
+                    <p class="availability-text">
+
+                        قطعه موردنظر را پیدا کن،
+                        مشخصات را بررسی کن و سفارش بده.
+                        بدون نیاز به مراجعه حضوری،
+                        خریدت را از هرجا انجام بده.
+
+                    </p>
+
+
+                    <ul class="availability-list">
+
+                        <li>
+                            🛒 خرید آنلاین
+                        </li>
+
+                        <li>
+                            📦 ارسال سفارش
+                        </li>
+
+                        <li>
+                            💳 پرداخت امن
+                        </li>
+
+                        <li>
+                            🔍 مشاهده مشخصات
+                        </li>
+
+                    </ul>
+
+                </div>
+
+
+
+                <!-- OFFLINE -->
+
+                <div
+                    class="availability-option"
+                    data-mode="offline"
+                >
+
+                    <div class="availability-status offline-status">
+
+                        <span class="status-dot"></span>
+
+                        حضوری
+
+                    </div>
+
+
+                    <h3 class="availability-title">
+                        مراجعه حضوری
+                    </h3>
+
+
+                    <p class="availability-text">
+
+                        اگر دوست داری قبل از خرید
+                        قطعات را از نزدیک ببینی،
+                        با متخصص مشورت کنی یا اسمبل
+                        سیستم را به ما بسپاری،
+                        می‌توانی حضوری مراجعه کنی.
+
+                    </p>
+
+
+                    <ul class="availability-list">
+
+                        <li>
+                            🏪 فروش حضوری
+                        </li>
+
+                        <li>
+                            🔧 اسمبل
+                        </li>
+
+                        <li>
+                            💬 مشاوره
+                        </li>
+
+                        <li>
+                            🧪 تست سیستم
+                        </li>
+
+                    </ul>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- =====================================================
+         STATS
+    ====================================================== -->
+
+    <section class="stats-section">
+
+        <div class="about-container">
+
+            <div class="stats-grid reveal">
+
+
+                <div class="stat-item">
+
+                    <span
+                        class="stat-number"
+                        data-target="5000"
+                    >
+                        0
+                    </span>
+
+                    <span class="stat-label">
+                        مشتری
+                    </span>
+
+                </div>
+
+
+                <div class="stat-item">
+
+                    <span
+                        class="stat-number"
+                        data-target="1200"
+                    >
+                        0
+                    </span>
+
+                    <span class="stat-label">
+                        سیستم اسمبل شده
+                    </span>
+
+                </div>
+
+
+                <div class="stat-item">
+
+                    <span
+                        class="stat-number"
+                        data-target="8"
+                    >
+                        0
+                    </span>
+
+                    <span class="stat-label">
+                        سال تجربه
+                    </span>
+
+                </div>
+
+
+                <div class="stat-item">
+
+                    <span
+                        class="stat-number"
+                        data-target="98"
+                    >
+                        0
+                    </span>
+
+                    <span class="stat-label">
+                        درصد رضایت
+                    </span>
+
+                </div>
+
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- =====================================================
+         CTA
+    ====================================================== -->
+
+    <section class="cta-section">
+
+        <div class="about-container">
+
+            <div class="cta-box reveal">
+
+                <h2 class="cta-title">
+                    آماده ساخت سیستم خودتی؟
+                </h2>
+
+                <p class="cta-text">
+
+                    چه برای گیمینگ، چه برای کار حرفه‌ای،
+                    طراحی، برنامه‌نویسی یا استفاده روزمره؛
+                    سیستم مناسب از یک انتخاب درست شروع می‌شود.
+
+                </p>
+
+
+                <div class="hero-buttons">
+
+                    <a
+                        href="#"
+                        class="hero-btn hero-btn-primary"
+                    >
+                        شروع خرید
+                        <span>←</span>
+                    </a>
+
+                    <a
+                        href="#"
+                        class="hero-btn hero-btn-secondary"
+                    >
+                        دریافت مشاوره
+                    </a>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+</div>
+
+
+
+<script>
+
+document.addEventListener(
+    "DOMContentLoaded",
+    function () {
+
+
+        /* =====================================================
+           MOUSE GLOW
+        ====================================================== */
+
+        const glow =
+            document.getElementById("mouseGlow");
+
+
+        if (glow) {
+
+            document.addEventListener(
+                "mousemove",
+                function (event) {
+
+                    glow.style.left =
+                        event.clientX + "px";
+
+                    glow.style.top =
+                        event.clientY + "px";
+
+                    glow.style.opacity = "1";
+
+                }
+            );
+
+        }
+
+
+
+        /* =====================================================
+           SCROLL REVEAL
+        ====================================================== */
+
+        const revealElements =
+            document.querySelectorAll(".reveal");
+
+
+        const revealObserver =
+            new IntersectionObserver(
+                function (entries) {
+
+                    entries.forEach(
+                        function (entry) {
+
+                            if (entry.isIntersecting) {
+
+                                entry.target
+                                    .classList
+                                    .add("visible");
+
+                                revealObserver
+                                    .unobserve(
+                                        entry.target
+                                    );
+
+                            }
+
+                        }
+                    );
+
+                },
+                {
+                    threshold: 0.12
+                }
+            );
+
+
+        revealElements.forEach(
+            function (element) {
+
+                revealObserver.observe(element);
+
+            }
+        );
+
+
+
+        /* =====================================================
+           ONLINE / OFFLINE SWITCH
+        ====================================================== */
+
+        const modes =
+            document.querySelectorAll(
+                ".availability-option"
+            );
+
+
+        modes.forEach(
+            function (mode) {
+
+                mode.addEventListener(
+                    "click",
+                    function () {
+
+                        modes.forEach(
+                            function (item) {
+
+                                item.classList.remove(
+                                    "active"
+                                );
+
+                            }
+                        );
+
+
+                        mode.classList.add(
+                            "active"
+                        );
+
+                    }
+                );
+
+            }
+        );
+
+
+
+        /* =====================================================
+           COUNTER
+        ====================================================== */
+
+        const counters =
+            document.querySelectorAll(
+                ".stat-number"
+            );
+
+
+        let counterStarted = false;
+
+
+        function startCounters() {
+
+            if (counterStarted) {
+                return;
+            }
+
+
+            counterStarted = true;
+
+
+            counters.forEach(
+                function (counter) {
+
+                    const target =
+                        Number(
+                            counter.dataset.target
+                        );
+
+
+                    let current = 0;
+
+                    const duration = 1600;
+
+                    const increment =
+                        target /
+                        (duration / 16);
+
+
+                    function updateCounter() {
+
+                        current += increment;
+
+
+                        if (current >= target) {
+
+                            counter.textContent =
+                                target.toLocaleString(
+                                    "fa-IR"
+                                );
+
+                            return;
+
+                        }
+
+
+                        counter.textContent =
+                            Math.floor(
+                                current
+                            ).toLocaleString(
+                                "fa-IR"
+                            );
+
+
+                        requestAnimationFrame(
+                            updateCounter
+                        );
+
+                    }
+
+
+                    updateCounter();
+
+                }
+            );
+
+        }
+
+
+
+        const statsSection =
+            document.querySelector(
+                ".stats-section"
+            );
+
+
+        if (statsSection) {
+
+            const statsObserver =
+                new IntersectionObserver(
+                    function (entries) {
+
+                        entries.forEach(
+                            function (entry) {
+
+                                if (
+                                    entry.isIntersecting
+                                ) {
+
+                                    startCounters();
+
+                                    statsObserver
+                                        .disconnect();
+
+                                }
+
+                            }
+                        );
+
+                    },
+                    {
+                        threshold: 0.35
+                    }
+                );
+
+
+            statsObserver.observe(
+                statsSection
+            );
+
+        }
+
+
+
+        /* =====================================================
+           SCROLL BASED PARALLAX
+        ====================================================== */
+
+        const hero =
+            document.querySelector(
+                ".about-hero"
+            );
+
+
+        const visual =
+            document.querySelector(
+                ".hero-visual"
+            );
+
+
+        window.addEventListener(
+            "scroll",
+            function () {
+
+                const scrollY =
+                    window.scrollY;
+
+
+                if (
+                    hero &&
+                    visual &&
+                    scrollY < 700
+                ) {
+
+                    const movement =
+                        scrollY * 0.12;
+
+
+                    visual.style.transform =
+                        `translateY(${movement}px)`;
+
+                }
+
+            },
+            {
+                passive: true
+            }
+        );
+
+
+
+        /* =====================================================
+           SERVICE CARD STAGGER
+        ====================================================== */
+
+        const serviceCards =
+            document.querySelectorAll(
+                ".service-card"
+            );
+
+
+        serviceCards.forEach(
+            function (card, index) {
+
+                card.style.transitionDelay =
+                    `${index * 100}ms`;
+
+            }
+        );
+
+
+
+        /* =====================================================
+           BUTTON RIPPLE
+        ====================================================== */
+
+        const buttons =
+            document.querySelectorAll(
+                ".hero-btn"
+            );
+
+
+        buttons.forEach(
+            function (button) {
+
+                button.addEventListener(
+                    "click",
+                    function (event) {
+
+                        const ripple =
+                            document.createElement(
+                                "span"
+                            );
+
+
+                        ripple.style.position =
+                            "absolute";
+
+                        ripple.style.width =
+                            "10px";
+
+                        ripple.style.height =
+                            "10px";
+
+                        ripple.style.borderRadius =
+                            "50%";
+
+                        ripple.style.background =
+                            "rgba(255,255,255,.35)";
+
+                        ripple.style.left =
+                            event.offsetX + "px";
+
+                        ripple.style.top =
+                            event.offsetY + "px";
+
+                        ripple.style.transform =
+                            "translate(-50%, -50%)";
+
+                        ripple.style.pointerEvents =
+                            "none";
+
+
+                        button.style.position =
+                            "relative";
+
+                        button.style.overflow =
+                            "hidden";
+
+
+                        button.appendChild(
+                            ripple
+                        );
+
+
+                        ripple.animate(
+                            [
+                                {
+                                    width: "10px",
+                                    height: "10px",
+                                    opacity: 1
+                                },
+                                {
+                                    width: "400px",
+                                    height: "400px",
+                                    opacity: 0
+                                }
+                            ],
+                            {
+                                duration: 600,
+                                easing: "ease-out"
+                            }
+                        );
+
+
+                        setTimeout(
+                            function () {
+
+                                ripple.remove();
+
+                            },
+                            650
+                        );
+
+                    }
+                );
+
+            }
+        );
+
+
+    });
+
+</script>
+
+{% endblock %}
+```

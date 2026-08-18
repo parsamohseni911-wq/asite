@@ -1,0 +1,71 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="container py-5">
+
+    <div class="card shadow-sm border-0">
+
+        <div class="card-body text-center py-5">
+
+            <div class="mb-4">
+                <span style="font-size: 60px;">✓</span>
+            </div>
+
+            <h2 class="mb-3">
+                پرداخت با موفقیت انجام شد
+            </h2>
+
+            <p class="text-muted">
+                سفارش شما با موفقیت ثبت شد.
+            </p>
+
+            <hr>
+
+            <div class="mt-4">
+
+                <p>
+                    <strong>شماره سفارش:</strong>
+                    {{ cart.id }}
+                </p>
+
+                <p>
+                    <strong>مبلغ سفارش:</strong>
+                    {{ cart.total_price|floatformat:0 }}
+                    تومان
+                </p>
+
+                {% if ref_id %}
+                <p>
+                    <strong>کد پیگیری:</strong>
+                    {{ ref_id }}
+                </p>
+                {% endif %}
+
+                {% if cart.paid_at %}
+                <p>
+                    <strong>تاریخ پرداخت:</strong>
+                    {{ cart.paid_at }}
+                </p>
+                {% endif %}
+
+            </div>
+
+            <div class="mt-4">
+
+                <a
+                    href="{% url 'accounts:indexone' %}"
+                    class="btn btn-primary px-4"
+                >
+                    بازگشت به صفحه اصلی
+                </a>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}

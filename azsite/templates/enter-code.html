@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html dir="rtl" lang="fa">
+<!--Head::start-->
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="keywords" content="">
+    <title>سوپر قالب فروشگاهی شاپیک</title>
+
+    <!--    Bootstrap 5 RTL-->
+    <link rel="stylesheet" href="{% '/css/vendors/bootstrap/bootstrap.rtl.css'%}">
+    <!--    Fontawesome 5-->
+    <link rel="stylesheet" href="{% '/css/vendors/fontawesome/fontawesome.min.css'%}">
+    <!--    Main Styles-->
+    <link rel="stylesheet" href="{% '/css/style.css'%}">
+</head>
+<!--Head::end-->
+
+<!--Body::start-->
+<body class="body-login">
+<!-- Enter Code Section -->
+<!-- Enter Code Section -->
+<div class="login-wrapper d-flex justify-content-center align-content-center flex-row w-100 vh-100">
+    <!-- ستون فرم -->
+    <div class="col-md-6 col-12 d-flex h-100 bg-white align-items-center justify-content-center p-4">
+        <div class="verification-container">
+            <div class="verification-box">
+                <img src="{% '/img/logo.png'%}" alt="Logo" class="verification-logo">
+                <div class="verification-info">
+                    <h2 class="verification-title">کد تایید را وارد کنید</h2>
+                    <p class="verification-desc">
+                        حساب کاربری با شماره 09305468874 وجود ندارد، برای ساخت حساب جدید کد ارسال شده را وارد نمایید.
+                    </p>
+                </div>
+                <form>
+                    <div class="code-fields" dir="ltr">
+                        <input type="text" class="code-input">
+                        <input type="text" class="code-input">
+                        <input type="text" class="code-input">
+                        <input type="text" class="code-input">
+                        <input type="text" class="code-input">
+                        <input type="text" class="code-input">
+                    </div>
+                    <button type="submit" class="verification-btn">ادامه</button>
+                </form>
+            </div>
+        </div>
+    </div>
+    <!-- ستون تصویر -->
+    <div class="col-md-6 d-none d-md-block p-0">
+        <img src="{% '/img/station.svg'%}" class="w-100 h-100 object-fit-cover" alt="background">
+    </div>
+</div>
+
+
+<!--Confirm Code Script(only for this page-->
+<script src="{% '/js/vendors/jquery/jquery-3.6.0.min.js'%}"></script>
+<script src="{% '/js/confirm-code.js'%}"></script>
+<script src="{% '/js/main.js'%}"></script>
+</body>
+<!--Body::end-->
+
+</html>

@@ -1,0 +1,1070 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+
+<style>
+
+/* =========================================================
+   WISHLIST PAGE
+========================================================= */
+
+.wishlist-page {
+    direction: rtl;
+    width: 100%;
+    padding: 35px 15px 60px;
+    box-sizing: border-box;
+}
+
+
+/* =========================================================
+   MAIN ROW
+========================================================= */
+
+.wishlist-row {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-start;
+
+    width: 100%;
+
+    margin-left: -12px;
+    margin-right: -12px;
+}
+
+
+/* =========================================================
+   COLUMNS
+========================================================= */
+
+.wishlist-page .col-sm-12,
+.wishlist-page .col-md-12,
+.wishlist-page .col-lg-4,
+.wishlist-page .col-xl-3,
+.wishlist-page .col-lg-8,
+.wishlist-page .col-xl-9 {
+
+    box-sizing: border-box;
+
+    padding-left: 12px;
+    padding-right: 12px;
+}
+
+
+/* =========================================================
+   WISHLIST CONTAINER
+========================================================= */
+
+.user-panel-wish-list {
+
+    width: 100%;
+    min-width: 0;
+
+    background: #ffffff;
+
+    border: 1px solid #e8ebef;
+
+    border-radius: 22px;
+
+    padding: 22px;
+
+    box-sizing: border-box;
+
+    box-shadow:
+        0 8px 30px rgba(0, 0, 0, 0.04);
+}
+
+
+/* =========================================================
+   HEADER
+========================================================= */
+
+.wish-list-header {
+
+    display: flex;
+
+    align-items: center;
+    justify-content: space-between;
+
+    padding-bottom: 18px;
+
+    margin-bottom: 22px;
+
+    border-bottom: 1px solid #eef0f3;
+}
+
+
+.wish-list-header-right {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 10px;
+}
+
+
+.wish-list-header-icon {
+
+    width: 42px;
+    height: 42px;
+
+    flex: 0 0 42px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 12px;
+
+    background: #fff5e6;
+
+    color: #d97706;
+
+    font-size: 19px;
+}
+
+
+.wish-list-header p {
+
+    margin: 0;
+
+    color: #252a30;
+
+    font-size: 17px;
+
+    font-weight: 700;
+}
+
+
+.wish-list-header small {
+
+    display: block;
+
+    margin-top: 4px;
+
+    color: #9aa0a7;
+
+    font-size: 10px;
+}
+
+
+/* =========================================================
+   GRID
+========================================================= */
+
+.wishlist-grid {
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(3, minmax(0, 1fr));
+
+    gap: 18px;
+
+    width: 100%;
+}
+
+
+/* =========================================================
+   PRODUCT CARD
+========================================================= */
+
+.wishlist-card {
+
+    position: relative;
+
+    min-width: 0;
+
+    display: flex;
+
+    flex-direction: column;
+
+    box-sizing: border-box;
+
+    padding: 13px;
+
+    background: #ffffff;
+
+    border: 1px solid #e8ebef;
+
+    border-radius: 17px;
+
+    overflow: hidden;
+
+    transition:
+        transform .25s ease,
+        box-shadow .25s ease,
+        border-color .25s ease;
+}
+
+
+.wishlist-card:hover {
+
+    transform: translateY(-5px);
+
+    border-color: #f0c27a;
+
+    box-shadow:
+        0 12px 30px rgba(217, 119, 6, 0.09);
+}
+
+
+/* =========================================================
+   DELETE BUTTON
+========================================================= */
+
+.wishlist-delete {
+
+    position: absolute;
+
+    top: 12px;
+    left: 12px;
+
+    z-index: 5;
+
+    width: 34px;
+    height: 34px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    padding: 0;
+
+    border: 0;
+
+    border-radius: 10px;
+
+    background: rgba(255,255,255,.94);
+
+    color: #9299a3;
+
+    cursor: pointer;
+
+    box-shadow:
+        0 4px 12px rgba(0,0,0,.07);
+
+    transition:
+        background .2s ease,
+        color .2s ease,
+        transform .2s ease;
+}
+
+
+.wishlist-delete:hover {
+
+    background: #fff0f0;
+
+    color: #dc3545;
+
+    transform: scale(1.05);
+}
+
+
+/* =========================================================
+   IMAGE
+========================================================= */
+
+.wishlist-image {
+
+    position: relative;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    width: 100%;
+
+    height: 210px;
+
+    margin-bottom: 14px;
+
+    padding: 15px;
+
+    box-sizing: border-box;
+
+    background: #f8f9fa;
+
+    border-radius: 14px;
+
+    overflow: hidden;
+
+    text-decoration: none;
+}
+
+
+.wishlist-image img {
+
+    display: block;
+
+    width: 100%;
+    height: 100%;
+
+    object-fit: contain;
+
+    transition:
+        transform .35s ease;
+}
+
+
+.wishlist-card:hover
+.wishlist-image img {
+
+    transform: scale(1.06);
+}
+
+
+/* =========================================================
+   NO IMAGE
+========================================================= */
+
+.wishlist-no-image {
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    width: 100%;
+    height: 100%;
+
+    color: #b0b5bb;
+
+    font-size: 42px;
+}
+
+
+/* =========================================================
+   PRODUCT TITLE
+========================================================= */
+
+.wishlist-title {
+
+    display: -webkit-box;
+
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+
+    overflow: hidden;
+
+    min-height: 42px;
+
+    margin-bottom: 10px;
+
+    color: #292e34;
+
+    font-size: 13px;
+
+    font-weight: 700;
+
+    line-height: 1.8;
+
+    text-decoration: none !important;
+
+    transition: color .2s ease;
+}
+
+
+.wishlist-title:hover {
+
+    color: #d97706;
+}
+
+
+/* =========================================================
+   PRICE
+========================================================= */
+
+.wishlist-price {
+
+    display: flex;
+
+    align-items: baseline;
+
+    gap: 5px;
+
+    margin-bottom: 13px;
+
+    direction: rtl;
+}
+
+
+.price-number {
+
+    color: #252a30;
+
+    font-size: 15px;
+
+    font-weight: 800;
+}
+
+
+.price-currency {
+
+    color: #8e959d;
+
+    font-size: 10px;
+}
+
+
+/* =========================================================
+   ADD TO CART
+========================================================= */
+
+.wishlist-add-cart {
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    gap: 7px;
+
+    width: 100%;
+
+    min-height: 42px;
+
+    box-sizing: border-box;
+
+    padding: 8px 10px;
+
+    border-radius: 11px;
+
+    background: #fff4e2;
+
+    color: #c66d00;
+
+    font-size: 11px;
+
+    font-weight: 700;
+
+    text-decoration: none !important;
+
+    transition:
+        background .2s ease,
+        color .2s ease,
+        transform .2s ease;
+}
+
+
+.wishlist-add-cart:hover {
+
+    background: #d97706;
+
+    color: #ffffff;
+
+    transform: translateY(-2px);
+}
+
+
+/* =========================================================
+   CART CONTROLS
+========================================================= */
+
+.wishlist-cart-controls {
+
+    display: flex;
+
+    align-items: center;
+    justify-content: space-between;
+
+    width: 100%;
+
+    min-height: 42px;
+
+    box-sizing: border-box;
+
+    padding: 4px;
+
+    background: #f8f9fa;
+
+    border: 1px solid #e7e9ec;
+
+    border-radius: 11px;
+}
+
+
+.cart-minus,
+.cart-plus {
+
+    width: 32px;
+    height: 32px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 8px;
+
+    color: #555c64;
+
+    background: #ffffff;
+
+    text-decoration: none !important;
+
+    font-size: 18px;
+
+    font-weight: 700;
+
+    transition:
+        background .2s ease,
+        color .2s ease;
+}
+
+
+.cart-minus:hover,
+.cart-plus:hover {
+
+    background: #d97706;
+
+    color: #ffffff;
+}
+
+
+.cart-number {
+
+    color: #292e34;
+
+    font-size: 13px;
+
+    font-weight: 700;
+}
+
+
+/* =========================================================
+   EMPTY WISHLIST
+========================================================= */
+
+.wishlist-empty {
+
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+    justify-content: center;
+
+    min-height: 330px;
+
+    padding: 30px;
+
+    text-align: center;
+
+    background: #fafbfc;
+
+    border: 1px dashed #dfe3e7;
+
+    border-radius: 17px;
+
+    box-sizing: border-box;
+}
+
+
+.empty-heart {
+
+    width: 75px;
+    height: 75px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    margin-bottom: 17px;
+
+    border-radius: 50%;
+
+    background: #fff5e6;
+
+    color: #d97706;
+
+    font-size: 30px;
+}
+
+
+.wishlist-empty h3 {
+
+    margin: 0 0 8px;
+
+    color: #353a40;
+
+    font-size: 16px;
+}
+
+
+.wishlist-empty p {
+
+    margin: 0;
+
+    color: #999fa6;
+
+    font-size: 11px;
+}
+
+
+/* =========================================================
+   TABLET
+========================================================= */
+
+@media (max-width: 1199.98px) {
+
+    .wishlist-grid {
+
+        grid-template-columns:
+            repeat(2, minmax(0, 1fr));
+
+    }
+
+}
+
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media (max-width: 991.98px) {
+
+    .wishlist-page {
+
+        padding-top: 25px;
+
+    }
+
+    .user-panel-wish-list {
+
+        margin-top: 0 !important;
+
+    }
+
+}
+
+
+@media (max-width: 767.98px) {
+
+    .wishlist-page {
+
+        padding: 20px 10px 45px;
+
+    }
+
+
+    .user-panel-wish-list {
+
+        padding: 17px;
+
+        border-radius: 18px;
+
+    }
+
+
+    .wishlist-grid {
+
+        grid-template-columns:
+            repeat(2, minmax(0, 1fr));
+
+        gap: 12px;
+
+    }
+
+
+    .wishlist-image {
+
+        height: 175px;
+
+    }
+
+
+    .wishlist-card {
+
+        padding: 10px;
+
+        border-radius: 14px;
+
+    }
+
+
+    .wishlist-title {
+
+        font-size: 11px;
+
+        min-height: 39px;
+
+    }
+
+
+    .price-number {
+
+        font-size: 13px;
+
+    }
+
+}
+
+
+@media (max-width: 480px) {
+
+    .wishlist-page {
+
+        padding-left: 6px;
+        padding-right: 6px;
+
+    }
+
+
+    .user-panel-wish-list {
+
+        padding: 13px;
+
+    }
+
+
+    .wishlist-grid {
+
+        grid-template-columns: 1fr 1fr;
+
+        gap: 9px;
+
+    }
+
+
+    .wishlist-image {
+
+        height: 145px;
+
+        padding: 10px;
+
+    }
+
+
+    .wishlist-delete {
+
+        top: 8px;
+        left: 8px;
+
+        width: 29px;
+        height: 29px;
+
+        font-size: 11px;
+
+    }
+
+
+    .wishlist-title {
+
+        font-size: 10px;
+
+        line-height: 1.7;
+
+    }
+
+
+    .price-number {
+
+        font-size: 12px;
+
+    }
+
+
+    .price-currency {
+
+        font-size: 9px;
+
+    }
+
+
+    .wishlist-add-cart {
+
+        min-height: 37px;
+
+        font-size: 9px;
+
+    }
+
+
+    .cart-minus,
+    .cart-plus {
+
+        width: 27px;
+        height: 27px;
+
+        font-size: 15px;
+
+    }
+
+}
+
+</style>
+
+
+<!-- =========================================================
+     WISHLIST PAGE
+========================================================= -->
+
+<div class="wishlist-page">
+
+    <div class="wishlist-row">
+
+
+        <!-- =====================================================
+             SIDEBAR
+        ====================================================== -->
+
+        {% include 'sidebar.html' %}
+
+
+        <!-- =====================================================
+             WISHLIST CONTENT
+        ====================================================== -->
+
+        <div class="col-sm-12 col-md-12 col-lg-8 col-xl-9">
+
+            <div class="user-panel-wish-list">
+
+
+                <!-- =================================================
+                     HEADER
+                ================================================== -->
+
+                <div class="wish-list-header">
+
+                    <div class="wish-list-header-right">
+
+                        <div class="wish-list-header-icon">
+
+                            <i
+                                class="far fa-heart"
+                                aria-hidden="true"
+                            ></i>
+
+                        </div>
+
+
+                        <div>
+
+                            <p>
+                                لیست علاقه‌مندی من
+                            </p>
+
+                            <small>
+                                محصولات مورد علاقه شما
+                            </small>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <!-- =================================================
+                     PRODUCTS
+                ================================================== -->
+
+                {% if wishlist_items %}
+
+                    <div class="wishlist-grid">
+
+
+                        {% for item in wishlist_items %}
+
+                            <div class="wishlist-card">
+
+
+                                <!-- =================================================
+                                     DELETE
+                                ================================================== -->
+
+                                <button
+                                    class="wishlist-delete"
+                                    type="button"
+                                    title="حذف از علاقه‌مندی"
+                                    aria-label="حذف از علاقه‌مندی"
+                                >
+
+                                    <i
+                                        class="fa fa-trash-alt"
+                                        aria-hidden="true"
+                                    ></i>
+
+                                </button>
+
+
+                                <!-- =================================================
+                                     PRODUCT IMAGE
+                                ================================================== -->
+
+                                <a
+                                    href="{% url 'products:single_product' item.product.id %}"
+                                    class="wishlist-image"
+                                >
+
+                                    {% if item.product.image %}
+
+                                        <img
+                                            src="{{ item.product.image.url }}"
+                                            alt="{{ item.product.name }}"
+                                            loading="lazy"
+                                        >
+
+                                    {% else %}
+
+                                        <div class="wishlist-no-image">
+
+                                            <i
+                                                class="far fa-image"
+                                                aria-hidden="true"
+                                            ></i>
+
+                                        </div>
+
+                                    {% endif %}
+
+                                </a>
+
+
+                                <!-- =================================================
+                                     PRODUCT NAME
+                                ================================================== -->
+
+                                <a
+                                    href="{% url 'products:single_product' item.product.id %}"
+                                    class="wishlist-title"
+                                    title="{{ item.product.name }}"
+                                >
+
+                                    {{ item.product.name }}
+
+                                </a>
+
+
+                                <!-- =================================================
+                                     PRICE
+                                ================================================== -->
+
+                                <div class="wishlist-price">
+
+                                    <span class="price-number">
+
+                                        {{ item.product.price|default:"0" }}
+
+                                    </span>
+
+                                    <span class="price-currency">
+                                        تومان
+                                    </span>
+
+                                </div>
+
+
+                                <!-- =================================================
+                                     CART
+                                ================================================== -->
+
+                                {% if item.in_cart %}
+
+                                    <div class="wishlist-cart-controls">
+
+
+                                        <a
+                                            href="{% url 'products:decrease' item.product.id %}"
+                                            class="cart-minus"
+                                            title="کاهش تعداد"
+                                        >
+                                            −
+                                        </a>
+
+
+                                        <span class="cart-number">
+
+                                            {{ item.quantity }}
+
+                                        </span>
+
+
+                                        <a
+                                            href="{% url 'products:add_to_cart' item.product.id %}"
+                                            class="cart-plus"
+                                            title="افزایش تعداد"
+                                        >
+                                            +
+                                        </a>
+
+
+                                    </div>
+
+                                {% else %}
+
+                                    <a
+                                        href="{% url 'products:add_to_cart' item.product.id %}"
+                                        class="wishlist-add-cart"
+                                    >
+
+                                        <i
+                                            class="fa fa-shopping-cart"
+                                            aria-hidden="true"
+                                        ></i>
+
+                                        افزودن به سبد خرید
+
+                                    </a>
+
+                                {% endif %}
+
+
+                            </div>
+
+                        {% endfor %}
+
+
+                    </div>
+
+
+                {% else %}
+
+
+                    <!-- =================================================
+                         EMPTY
+                    ================================================== -->
+
+                    <div class="wishlist-empty">
+
+                        <div class="empty-heart">
+
+                            <i
+                                class="far fa-heart"
+                                aria-hidden="true"
+                            ></i>
+
+                        </div>
+
+
+                        <h3>
+                            لیست علاقه‌مندی‌های شما خالی است
+                        </h3>
+
+
+                        <p>
+                            محصولاتی که دوست دارید را به لیست علاقه‌مندی اضافه کنید.
+                        </p>
+
+                    </div>
+
+
+                {% endif %}
+
+
+            </div>
+
+        </div>
+
+
+    </div>
+
+</div>
+
+{% endblock %}

@@ -1,0 +1,178 @@
+{% extends 'base.html' %}
+{% load static %}
+
+
+{% block content %}
+
+<!--Navbar:end--><!--Main:start-->
+<main class="mt-xx-large">
+
+    <!--    Best Selling Section:start-->
+
+<section class="best-selling-page" dir="rtl">
+
+    <div class="best-selling-container">
+
+        <!-- Header -->
+        <div class="best-selling-header">
+            <div>
+                <span class="best-selling-badge">
+                    پرفروش‌ترین‌ها
+                </span>
+
+                <h1>
+                    محصولات پرفروش
+                </h1>
+
+                <p>
+                    محبوب‌ترین محصولاتی که بیشترین تعداد خرید را داشته‌اند
+                </p>
+            </div>
+
+            <div class="best-selling-icon">
+                <i class="fa fa-fire"></i>
+            </div>
+        </div>
+
+
+        <!-- Products -->
+        <div class="best-selling-grid">
+
+            {% for product in products %}
+
+                <article class="best-product-card">
+
+                    <!-- Rank -->
+                    <div class="product-rank">
+                        {{ forloop.counter }}
+                    </div>
+
+
+                    <!-- Image -->
+                    <a href="{% url 'products:single_product' product.id %}"
+                       class="best-product-image">
+
+                        {% if product.image %}
+                            <img
+                                src="{{ product.image.url }}"
+                                alt="{{ product.name }}"
+                            >
+                        {% else %}
+                            <img
+                                src="{% static 'img/suggest-1.jpg' %}"
+                                alt="{{ product.name }}"
+                            >
+                        {% endif %}
+
+                    </a>
+
+
+                    <!-- Content -->
+                    <div class="best-product-content">
+
+                        <a
+                            href="{% url 'products:single_product' product.id %}"
+                            class="best-product-title"
+                        >
+                            {{ product.name }}
+                        </a>
+
+
+                        {% if product.brand %}
+                            <span class="best-product-brand">
+                                {{ product.brand.name }}
+                            </span>
+                        {% endif %}
+
+
+                        <!-- Price -->
+                        <div class="best-product-price">
+
+                            {% if product.discount_percent > 0 %}
+
+                                <div class="price-old">
+                                    {{ product.price|floatformat:0 }}
+                                    <span>تومان</span>
+                                </div>
+
+                                <div class="price-row">
+
+                                    <strong>
+                                        {{ product.discounted_price|floatformat:0 }}
+                                        <span>تومان</span>
+                                    </strong>
+
+                                    <span class="discount-badge">
+                                        {{ product.discount_percent }}٪
+                                    </span>
+
+                                </div>
+
+                            {% else %}
+
+                                <strong>
+                                    {{ product.price|floatformat:0 }}
+                                    <span>تومان</span>
+                                </strong>
+
+                            {% endif %}
+
+                        </div>
+
+
+                        <!-- Sold -->
+                        <div class="sold-info">
+
+                            <div class="sold-icon">
+                                <i class="fa fa-fire"></i>
+                            </div>
+
+                            <span>
+                                {{ product.total_sold }}
+                                عدد فروش
+                            </span>
+
+                        </div>
+
+<!-- Button -->
+                        <a
+                            href="{% url 'products:single_product' product.id %}"
+                            class="view-product-btn"
+                        >
+                            مشاهده محصول
+                            <i class="fa fa-angle-left"></i>
+                        </a>
+
+                    </div>
+
+                </article>
+
+            {% empty %}
+
+                <div class="best-selling-empty">
+
+                    <div class="empty-icon">
+                        <i class="fa fa-shopping-bag"></i>
+                    </div>
+
+                    <h3>
+                        هنوز محصول پرفروشی وجود ندارد
+                    </h3>
+
+                    <p>
+                        بعد از ثبت خرید، محصولات پرفروش اینجا نمایش داده می‌شوند.
+                    </p>
+
+                </div>
+
+            {% endfor %}
+
+        </div>
+
+    </div>
+
+</section>
+</main>
+<!--Main:end-->
+
+{% endblock %}

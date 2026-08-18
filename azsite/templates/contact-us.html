@@ -1,0 +1,117 @@
+{% extends 'base.html' %}
+{% load static %}
+
+
+{% block content %}
+
+<!--Navbar:end--><!--Main:start-->
+<main class="container mt-xxxx-large">
+    <!--    Contact Us:start-->
+    <section class="contact-flat">
+        <!-- Contact Form -->
+        <div class="card-flat">
+            <header class="card-header-flat">
+                <h2>تماس با شاپیک</h2>
+                <div class="divider-flat"></div>
+                <p>قبل از ارسال فرم، لطفاً <a href="#">پرسش‌های متداول</a> را مشاهده کنید.</p>
+            </header>
+            <form class="form-flat">
+                <div class="form-row-flat">
+                    <div class="form-group-flat">
+                        <label for="subject-flat">موضوع <span>*</span></label>
+                        <select id="subject-flat">
+                            <option selected>مدیریت</option>
+                            <option value="1">انتقاد</option>
+                            <option value="2">پیشنهاد</option>
+                        </select>
+                    </div>
+                    <div class="form-group-flat">
+                        <label for="name-flat">نام و نام خانوادگی <span>*</span></label>
+                        <input type="text" id="name-flat">
+                    </div>
+                    <div class="form-group-flat">
+                        <label for="email-flat">ایمیل <span>*</span></label>
+                        <input type="text" id="email-flat">
+                    </div>
+                    <div class="form-group-flat">
+                        <label for="phone-flat">تلفن تماس <span>*</span></label>
+                        <input type="text" id="phone-flat">
+                    </div>
+                    <div class="form-group-flat">
+                        <label for="order-flat">شماره سفارش</label>
+                        <input type="text" id="order-flat">
+                    </div>
+                    <div class="form-group-flat full-width-flat">
+                        <label for="message-flat">متن پیام</label>
+                        <textarea id="message-flat" rows="4"></textarea>
+                    </div>
+                </div>
+                <div class="form-footer-flat">
+                    <button type="submit">ارسال پیام</button>
+                </div>
+            </form>
+        </div>
+
+        <!-- Holidays -->
+        <div class="card-flat holidays-flat">
+            <header class="card-header-flat">
+                <h2>تعطیلات شاپیک</h2>
+                <div class="divider-flat"></div>
+                <p>روزهایی که شاپیک خدمات ارائه نمی‌دهد:</p>
+            </header>
+            <div class="holidays-grid-flat">
+                <div class="holiday-flat">
+                    <strong>13</strong>
+                    <span>فروردین</span>
+                    <small>روز طبیعت</small>
+                </div>
+                <div class="holiday-flat">
+                    <strong>21</strong>
+                    <span>فروردین</span>
+                    <small>روز طبیعت</small>
+                </div>
+                <div class="holiday-flat">
+                    <strong>31</strong>
+                    <span>فروردین</span>
+                    <small>روز طبیعت</small>
+                </div>
+                <div class="holiday-flat">
+                    <strong>12</strong>
+                    <span>فروردین</span>
+                    <small>روز طبیعت</small>
+                </div>
+                <div class="holiday-flat">
+                    <strong>2</strong>
+                    <span>فروردین</span>
+                    <small>روز طبیعت</small>
+                </div>
+            </div>
+        </div>
+
+        <!-- Contact Info -->
+        <div class="card-flat info-flat">
+            <header class="card-header-flat">
+                <h2>اطلاعات شاپیک</h2>
+                <div class="divider-flat"></div>
+            </header>
+            <div class="info-list-flat">
+                <div class="info-item-flat">
+                    <strong>آدرس دفتر مرکزی</strong>
+                    <p>تعران سه راه افسریه خیابان بهار کوچه 30 پلاک 50</p>
+                </div>
+                <div class="info-item-flat">
+                    <strong>شماره تماس</strong>
+                    <p>0930587474</p>
+                </div>
+                <div class="info-item-flat">
+                    <strong>ایمیل</strong>
+                    <p>info@shapik.com</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!--    Contact Us:end-->
+</main>
+<!--Main:end-->
+
+{% endblock %}

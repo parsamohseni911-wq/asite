@@ -1,0 +1,540 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<style>
+
+    .messages-page {
+        direction: rtl;
+
+        min-height: 75vh;
+
+        padding: 60px 20px 100px;
+
+        background:
+            radial-gradient(
+                circle at 85% 0%,
+                rgba(255, 122, 0, .10),
+                transparent 30%
+            );
+
+        font-family:
+            Tahoma,
+            Arial,
+            sans-serif;
+    }
+
+
+    .messages-container {
+        width: min(1000px, 100%);
+
+        margin: auto;
+    }
+
+
+    /* HEADER */
+
+    .messages-header {
+        display: flex;
+
+        align-items: center;
+
+        justify-content: space-between;
+
+        gap: 20px;
+
+        margin-bottom: 35px;
+    }
+
+
+    .messages-title-box h1 {
+        margin: 0 0 10px;
+
+        font-size: 32px;
+
+        color: #151515;
+    }
+
+
+    .messages-title-box p {
+        margin: 0;
+
+        color: #888;
+
+        font-size: 14px;
+    }
+
+
+    .unread-badge {
+        display: inline-flex;
+
+        align-items: center;
+
+        justify-content: center;
+
+        min-width: 38px;
+        height: 30px;
+
+        padding: 0 10px;
+
+        border-radius: 50px;
+
+        background: #fff1e5;
+
+        color: #e56700;
+
+        font-size: 12px;
+
+        font-weight: bold;
+    }
+
+
+    /* MESSAGE LIST */
+
+    .messages-list {
+        display: flex;
+
+        flex-direction: column;
+
+        gap: 12px;
+    }
+
+
+    .message-card {
+        position: relative;
+
+        display: flex;
+
+        align-items: center;
+
+        gap: 18px;
+
+        padding: 22px;
+
+        border-radius: 18px;
+
+        background: #fff;
+
+        border: 1px solid #ececec;
+
+        text-decoration: none;
+
+        color: inherit;
+
+        transition:
+            .3s ease;
+
+        overflow: hidden;
+    }
+
+
+    .message-card:hover {
+        transform:
+            translateY(-3px);
+
+        border-color:
+            rgba(255, 122, 0, .35);
+
+        box-shadow:
+            0 15px 35px
+            rgba(0, 0, 0, .07);
+    }
+
+
+    .message-card.unread {
+        border-right:
+            4px solid #ff7a00;
+
+        background:
+            linear-gradient(
+                90deg,
+                #fff,
+                #fffaf6
+            );
+    }
+
+
+    /* ICON */
+
+    .message-icon {
+        flex-shrink: 0;
+
+        width: 55px;
+        height: 55px;
+
+        display: flex;
+
+        align-items: center;
+
+        justify-content: center;
+
+        border-radius: 16px;
+
+        background:
+            #f4f4f4;
+
+        color:
+            #777;
+
+        font-size: 23px;
+    }
+
+
+    .message-card.unread
+    .message-icon {
+
+        background:
+            #fff0e3;
+
+        color:
+            #ff7a00;
+    }
+
+
+    /* CONTENT */
+
+    .message-content {
+        flex: 1;
+
+        min-width: 0;
+    }
+
+
+    .message-title-row {
+        display: flex;
+
+        align-items: center;
+
+        gap: 10px;
+
+        margin-bottom: 8px;
+    }
+
+
+    .message-title {
+        margin: 0;
+
+        font-size: 16px;
+
+        color: #202020;
+
+        font-weight: bold;
+    }
+
+
+    .new-label {
+        padding:
+            4px 8px;
+
+        border-radius: 50px;
+
+        background:
+            #ff7a00;
+
+        color: white;
+
+        font-size: 9px;
+
+        font-weight: bold;
+    }
+
+
+    .message-preview {
+        margin: 0;
+
+        color: #888;
+
+        font-size: 13px;
+
+        line-height: 1.8;
+
+        white-space: nowrap;
+
+        overflow: hidden;
+
+        text-overflow: ellipsis;
+    }
+
+
+    /* DATE */
+
+    .message-meta {
+        display: flex;
+
+        flex-direction: column;
+
+        align-items: flex-end;
+
+        gap: 10px;
+
+        flex-shrink: 0;
+    }
+
+
+    .message-date {
+        color: #aaa;
+
+        font-size: 11px;
+
+        white-space: nowrap;
+    }
+
+
+    .message-arrow {
+        color:
+            #bbb;
+
+        font-size: 18px;
+
+        transition:
+            .3s ease;
+    }
+
+
+    .message-card:hover
+    .message-arrow {
+
+        color:
+            #ff7a00;
+
+        transform:
+            translateX(-4px);
+    }
+
+
+    /* EMPTY */
+
+    .empty-messages {
+        text-align: center;
+
+        padding:
+            80px 20px;
+
+        border:
+            1px dashed #ddd;
+
+        border-radius: 22px;
+
+        background:
+            #fff;
+    }
+
+
+    .empty-icon {
+        font-size: 45px;
+
+        margin-bottom: 20px;
+    }
+
+
+    .empty-messages h3 {
+        margin:
+            0 0 10px;
+
+        color: #333;
+    }
+
+
+    .empty-messages p {
+        margin: 0;
+
+        color: #999;
+
+        font-size: 13px;
+    }
+
+
+    /* RESPONSIVE */
+
+    @media (max-width: 650px) {
+
+        .messages-page {
+            padding:
+                35px 14px 70px;
+        }
+
+
+        .messages-header {
+            align-items: flex-start;
+        }
+
+
+        .messages-title-box h1 {
+            font-size: 25px;
+        }
+
+
+        .message-card {
+            padding: 17px;
+
+            gap: 12px;
+        }
+
+
+        .message-icon {
+            width: 45px;
+            height: 45px;
+
+            border-radius: 13px;
+
+            font-size: 19px;
+        }
+
+
+        .message-title {
+            font-size: 14px;
+        }
+
+
+        .message-preview {
+            font-size: 11px;
+        }
+
+
+        .message-meta {
+            display: none;
+        }
+
+    }
+
+</style>
+
+
+<div class="messages-page">
+
+    <div class="messages-container">
+
+
+        <!-- HEADER -->
+
+        <div class="messages-header">
+
+            <div class="messages-title-box">
+
+                <h1>
+                    پیام‌های من
+                </h1>
+
+                <p>
+                    پیام‌ها و اطلاعیه‌های ارسال شده برای شما
+                </p>
+
+            </div>
+
+
+            {% if unread_count > 0 %}
+
+                <span class="unread-badge">
+
+                    {{ unread_count }}
+                    پیام جدید
+
+                </span>
+
+            {% endif %}
+
+        </div>
+
+
+
+        <!-- MESSAGES -->
+
+        {% if messages %}
+
+            <div class="messages-list">
+
+                {% for message in messages %}
+
+                    <a
+                        href="{% url 'accounts:message_detail' message.id %}"
+                        class="message-card {% if not message.is_read %}unread{% endif %}"
+                    >
+
+
+                        <div class="message-icon">
+
+                            {% if message.is_read %}
+                                ✉
+                            {% else %}
+                                📩
+                            {% endif %}
+
+                        </div>
+
+
+                        <div class="message-content">
+
+                            <div class="message-title-row">
+
+                                <h3 class="message-title">
+                                    {{ message.title }}
+                                </h3>
+
+
+                                {% if not message.is_read %}
+
+                                    <span class="new-label">
+                                        جدید
+                                    </span>
+
+                                {% endif %}
+
+                            </div>
+
+
+                            <p class="message-preview">
+
+                                {{ message.text }}
+
+                            </p>
+
+                        </div>
+
+
+                        <div class="message-meta">
+
+                            <span class="message-date">
+
+                                {{ message.created_at|date:"Y/m/d - H:i" }}
+
+                            </span>
+
+
+                            <span class="message-arrow">
+                                ←
+                            </span>
+
+                        </div>
+
+
+                    </a>
+
+                {% endfor %}
+
+            </div>
+
+
+        {% else %}
+
+            <div class="empty-messages">
+
+
+                <h3>
+                    هنوز پیامی ندارید
+                </h3>
+
+                <p>
+                    اگر پیامی از طرف فروشگاه برای شما ارسال شود،
+                    در این قسمت نمایش داده خواهد شد.
+                </p>
+
+            </div>
+
+        {% endif %}
+
+
+    </div>
+
+</div>
+
+{% endblock %}

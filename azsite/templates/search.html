@@ -1,0 +1,647 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+
+<style>
+    /* ================================
+       Search Page - Self Contained CSS
+       ================================ */
+
+    .search-page {
+        direction: rtl;
+        width: 100%;
+        max-width: 1400px;
+        margin: 0 auto;
+        padding: 35px 20px 70px;
+        font-family: inherit;
+    }
+
+    /* Header */
+    .search-header {
+        position: relative;
+        margin-bottom: 35px;
+        padding: 28px 30px;
+        border-radius: 22px;
+        background:
+            linear-gradient(135deg, rgba(217,119,6,.10), rgba(245,158,11,.04));
+        border: 1px solid rgba(217,119,6,.12);
+        overflow: hidden;
+    }
+
+    .search-header::before {
+        content: "";
+        position: absolute;
+        width: 180px;
+        height: 180px;
+        left: -70px;
+        top: -90px;
+        border-radius: 50%;
+        background: rgba(217,119,6,.08);
+        pointer-events: none;
+    }
+
+    .search-header::after {
+        content: "";
+        position: absolute;
+        width: 120px;
+        height: 120px;
+        right: -40px;
+        bottom: -70px;
+        border-radius: 50%;
+        background: rgba(245,158,11,.07);
+        pointer-events: none;
+    }
+
+    .search-title {
+        position: relative;
+        z-index: 1;
+        margin: 0;
+        color: #1f2937;
+        font-size: 25px;
+        font-weight: 800;
+        line-height: 1.8;
+    }
+
+    .search-title span {
+        color: #d97706;
+    }
+
+    .search-subtitle {
+        position: relative;
+        z-index: 1;
+        margin: 7px 0 0;
+        color: #6b7280;
+        font-size: 14px;
+    }
+
+
+    /* Product Grid */
+    .search-products-grid {
+        display: grid;
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+        gap: 24px;
+    }
+
+
+    /* Product Card */
+    .search-product-card {
+        position: relative;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        background: #ffffff;
+        border: 1px solid #eeeeee;
+        border-radius: 20px;
+        overflow: hidden;
+        box-shadow: 0 5px 18px rgba(0, 0, 0, .045);
+        transition:
+            transform .3s ease,
+            box-shadow .3s ease,
+            border-color .3s ease;
+    }
+
+    .search-product-card:hover {
+        transform: translateY(-7px);
+        border-color: rgba(217,119,6,.22);
+        box-shadow: 0 16px 35px rgba(0, 0, 0, .10);
+    }
+
+
+    /* Image */
+    .search-product-image {
+        position: relative;
+        width: 100%;
+        height: 270px;
+        padding: 18px;
+        background: #fafafa;
+        overflow: hidden;
+    }
+
+    .search-product-image a {
+        width: 100%;
+        height: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .search-product-image img {
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+        display: block;
+        transition: transform .4s ease;
+    }
+
+    .search-product-card:hover .search-product-image img {
+        transform: scale(1.06);
+    }
+
+
+    /* Image decoration */
+    .image-corner {
+        position: absolute;
+        width: 70px;
+        height: 70px;
+        left: -35px;
+        bottom: -35px;
+        border-radius: 50%;
+        background: rgba(217,119,6,.08);
+        pointer-events: none;
+    }
+
+
+    /* Product Info */
+    .search-product-info {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        padding: 20px;
+    }
+
+    .search-product-name {
+        margin: 0 0 10px;
+        min-height: 48px;
+        font-size: 16px;
+        font-weight: 750;
+        line-height: 1.7;
+    }
+
+    .search-product-name a {
+        color: #1f2937;
+        text-decoration: none;
+        transition: color .25s ease;
+    }
+
+    .search-product-name a:hover {
+        color: #d97706;
+    }
+
+
+    /* Brand */
+    .search-brand {
+        display: flex;
+        align-items: center;
+        gap: 5px;
+        margin: 0 0 9px;
+        color: #6b7280;
+        font-size: 12px;
+    }
+
+    .search-brand strong {
+        color: #374151;
+        font-weight: 700;
+    }
+
+
+    /* Categories */
+    .search-categories {
+        min-height: 25px;
+        margin-bottom: 14px;
+        line-height: 1.8;
+    }
+
+    .search-category {
+        display: inline;
+        color: #9ca3af;
+        font-size: 11px;
+    }
+
+    .search-category:not(:last-child)::after {
+        content: " • ";
+        color: #d1d5db;
+        margin: 0 4px;
+    }
+
+
+    /* Bottom section */
+    .search-card-bottom {
+        margin-top: auto;
+        padding-top: 14px;
+        border-top: 1px solid #f1f1f1;
+    }
+
+
+    /* Price */
+    .search-price {
+        display: flex;
+        align-items: baseline;
+        gap: 6px;
+        margin-bottom: 10px;
+    }
+
+    .search-price-number {
+        color: #111827;
+        font-size: 20px;
+        font-weight: 850;
+        letter-spacing: -.3px;
+    }
+
+    .search-price-unit {
+        color: #6b7280;
+        font-size: 11px;
+    }
+
+
+    /* Inventory */
+    .search-stock {
+        display: inline-flex;
+        align-items: center;
+        gap: 7px;
+        font-size: 12px;
+        font-weight: 600;
+    }
+
+    .search-stock-dot {
+        width: 7px;
+        height: 7px;
+        border-radius: 50%;
+        flex-shrink: 0;
+    }
+
+    .search-stock.available {
+        color: #15803d;
+    }
+
+    .search-stock.available .search-stock-dot {
+        background: #22c55e;
+        box-shadow: 0 0 0 4px rgba(34,197,94,.10);
+    }
+
+    .search-stock.unavailable {
+        color: #9ca3af;
+    }
+
+    .search-stock.unavailable .search-stock-dot {
+        background: #9ca3af;
+    }
+
+
+    /* Empty states */
+    .search-empty {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        min-height: 320px;
+        padding: 45px 25px;
+        text-align: center;
+        border-radius: 24px;
+        background: #ffffff;
+        border: 1px solid #eeeeee;
+        box-shadow: 0 5px 20px rgba(0,0,0,.04);
+    }
+
+    .search-empty-icon {
+        width: 72px;
+        height: 72px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-bottom: 20px;
+        border-radius: 50%;
+        background: rgba(217,119,6,.09);
+        color: #d97706;
+        font-size: 30px;
+    }
+
+    .search-empty-title {
+        margin: 0 0 8px;
+        color: #1f2937;
+        font-size: 19px;
+        font-weight: 750;
+    }
+
+    .search-empty-text {
+        margin: 0;
+        color: #9ca3af;
+        font-size: 14px;
+        line-height: 1.8;
+    }
+
+
+    /* Responsive */
+    @media (max-width: 1200px) {
+        .search-products-grid {
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+        }
+    }
+
+    @media (max-width: 900px) {
+        .search-products-grid {
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 18px;
+        }
+
+        .search-product-image {
+            height: 240px;
+        }
+    }
+
+    @media (max-width: 576px) {
+        .search-page {
+            padding: 22px 12px 50px;
+        }
+
+        .search-header {
+            padding: 22px 20px;
+            margin-bottom: 22px;
+            border-radius: 18px;
+        }
+
+        .search-title {
+            font-size: 20px;
+        }
+
+        .search-subtitle {
+            font-size: 12px;
+        }
+
+        .search-products-grid {
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 12px;
+        }
+
+        .search-product-card {
+            border-radius: 15px;
+        }
+
+        .search-product-image {
+            height: 175px;
+            padding: 12px;
+        }
+
+        .search-product-info {
+            padding: 13px;
+        }
+
+        .search-product-name {
+            min-height: 42px;
+            font-size: 13px;
+            line-height: 1.65;
+        }
+
+        .search-brand {
+            font-size: 10px;
+        }
+
+        .search-category {
+            font-size: 9px;
+        }
+
+        .search-price-number {
+            font-size: 16px;
+        }
+
+        .search-price-unit {
+            font-size: 9px;
+        }
+
+        .search-stock {
+            font-size: 10px;
+        }
+    }
+
+    @media (max-width: 360px) {
+        .search-products-grid {
+            grid-template-columns: 1fr;
+        }
+
+        .search-product-image {
+            height: 240px;
+        }
+
+        .search-product-name {
+            font-size: 14px;
+        }
+    }
+</style>
+
+<div class="search-page">
+
+<div class="search-header">
+
+    {% if query %}
+
+        <h1 class="search-title">
+            نتایج جستجو برای
+            <span>«{{ query }}»</span>
+        </h1>
+
+        <p class="search-subtitle">
+            محصولات مرتبط با عبارت جستجوی شما
+        </p>
+
+    {% else %}
+
+        <h1 class="search-title">
+            جستجوی محصولات
+        </h1>
+
+        <p class="search-subtitle">
+            محصول مورد نظر خود را پیدا کنید
+        </p>
+
+    {% endif %}
+
+</div>
+
+
+<!-- ================================
+     نتایج
+     ================================ -->
+
+{% if products %}
+
+    <div class="search-products-grid">
+
+        {% for kala in products %}
+
+            <div class="search-product-card">
+
+                <!-- عکس -->
+
+                <div class="search-product-image">
+
+                    <a href="{% url 'products:single_product' kala.id %}">
+
+                        {% if kala.image %}
+
+                            <img
+                                src="{{ kala.image.url }}"
+                                alt="{{ kala.name }}"
+                                loading="lazy"
+                            >
+
+                        {% else %}
+
+                            <img
+                                src="{% static 'img/suggest-6.jpg' %}"
+                                alt="{{ kala.name }}"
+                                loading="lazy"
+                            >
+
+                        {% endif %}
+
+                    </a>
+
+                    <div class="image-corner"></div>
+
+                </div>
+
+
+                <!-- اطلاعات -->
+
+                <div class="search-product-info">
+
+                    <h2 class="search-product-name">
+
+                        <a href="{% url 'products:single_product' kala.id %}">
+                            {{ kala.name }}
+                        </a>
+
+                    </h2>
+
+
+                    <!-- برند -->
+
+                    {% if kala.brand %}
+
+                        <p class="search-brand">
+
+                            <span>برند:</span>
+
+                            <strong>
+                                {{ kala.brand.name }}
+                            </strong>
+
+                        </p>
+
+                    {% endif %}
+
+
+                    <!-- دسته بندی -->
+
+                    <div class="search-categories">
+
+                        {% for category in kala.category.all %}
+
+                            <span class="search-category">
+                                {{ category.name }}
+                            </span>
+
+                        {% endfor %}
+
+                    </div>
+
+
+                    <div class="search-card-bottom">
+
+                        <!-- قیمت -->
+
+                        <div class="search-price">
+
+                            <span class="search-price-number">
+                                {{ kala.price }}
+                            </span>
+
+                            <span class="search-price-unit">
+                                تومان
+                            </span>
+
+                        </div>
+
+
+                        <!-- وضعیت موجودی -->
+
+                        {% if kala.inventory > 0 %}
+
+                            <div class="search-stock available">
+
+                                <span class="search-stock-dot"></span>
+
+                                <span>
+                                    موجود است
+                                </span>
+
+                            </div>
+
+                        {% else %}
+
+                            <div class="search-stock unavailable">
+
+                                <span class="search-stock-dot"></span>
+
+                                <span>
+                                    ناموجود
+                                </span>
+
+                            </div>
+
+                        {% endif %}
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        {% endfor %}
+
+    </div>
+
+
+{% elif query %}
+
+    <!-- ================================
+         هیچ نتیجه‌ای پیدا نشده
+         ================================ -->
+
+    <div class="search-empty">
+
+        <div class="search-empty-icon">
+            ⌕
+        </div>
+
+        <h2 class="search-empty-title">
+            محصولی پیدا نشد
+        </h2>
+
+        <p class="search-empty-text">
+            محصولی برای «{{ query }}» پیدا نشد.
+            <br>
+            عبارت دیگری را امتحان کنید.
+        </p>
+
+    </div>
+
+
+{% else %}
+
+    <!-- ================================
+         جستجو انجام نشده
+         ================================ -->
+
+    <div class="search-empty">
+
+        <div class="search-empty-icon">
+            ⌕
+        </div>
+
+        <h2 class="search-empty-title">
+            آماده جستجو هستید؟
+        </h2>
+
+        <p class="search-empty-text">
+            عبارت مورد نظر خود را جستجو کنید.
+        </p>
+
+    </div>
+
+{% endif %}
+
+
+</div>
+
+{% endblock %}

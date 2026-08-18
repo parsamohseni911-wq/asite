@@ -1,0 +1,1040 @@
+{% extends 'base.html' %}
+{% load static %}
+
+
+{% block content %}
+
+<!--Main:start-->
+<main class="container mt-xxxx-large">
+    <!--    BreadCrumb:start-->
+    <nav class="my-4">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item fs-8"><a href="#">شاپیک</a></li>
+            <li class="breadcrumb-item fs-8"><a href="#">کالای دیجیتال</a></li>
+            <li class="breadcrumb-item fs-8"><a href="#">لپ تاپ</a></li>
+        </ol>
+    </nav>
+    <!--    BreadCrumb:end-->
+
+    <!--    Product Details:start-->
+    <section class="product-details">
+        <div class="row">
+            <div class="col-sm-12 col-md-12 col-lg-4 col-xl-4 position-relative">
+
+                <!--                Product Action:start-->
+                <div class="product-action">
+                    <div class="add-to-favourites mb-3" data-bs-toggle="tooltip" data-bs-placement="right"
+                         title="افزودن به علاقه مندی ها">
+                        <a href="" class="gray-700">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                 class="bi bi-heart" viewBox="0 0 16 16">
+                                <path d="m8 2.748-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01L8 2.748zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143c.06.055.119.112.176.171a3.12 3.12 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15z"/>
+                            </svg>
+                        </a>
+                    </div>
+                    <div class="share mb-3" data-bs-toggle="tooltip" data-bs-placement="right" title="اشتراک گذاری">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                             class="bi bi-share" viewBox="0 0 16 16" data-bs-toggle="modal"
+                             data-bs-target="#shareModal">
+                            <path d="M13.5 1a1.5 1.5 0 1 0 0 3 1.5 1.5 0 0 0 0-3zM11 2.5a2.5 2.5 0 1 1 .603 1.628l-6.718 3.12a2.499 2.499 0 0 1 0 1.504l6.718 3.12a2.5 2.5 0 1 1-.488.876l-6.718-3.12a2.5 2.5 0 1 1 0-3.256l6.718-3.12A2.5 2.5 0 0 1 11 2.5zm-8.5 4a1.5 1.5 0 1 0 0 3 1.5 1.5 0 0 0 0-3zm11 5.5a1.5 1.5 0 1 0 0 3 1.5 1.5 0 0 0 0-3z"/>
+                        </svg>
+
+                        <!-- Modal -->
+                        <div class="modal fade" id="shareModal" tabindex="-1">
+                            <div class="modal-dialog modal-dialog-centered">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title fw-bold fs-6" id="exampleModalLabel">اشتراک گذاری</h5>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                aria-label="Close"></button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <p class="text-center fw-bold fs-7">این کالا را با دوستان خود به اشتراک
+                                            گذارید!</p>
+                                        <div class="d-grid gap-2 mt-2">
+                                            <a href="" class="btn btn-outline-secondary border-radius-3xl fs-7">
+                                                <i class="fa fa-copy align-middle pe-2"></i>
+                                                کپی کردن لینک
+                                            </a>
+                                        </div>
+                                        <div class="row mt-3 border-bottom-gray-300 pb-3">
+                                            <div class="col-6">
+                                                <div class="d-grid gap-2 mt-2">
+                                                    <a href=""
+                                                       class="btn custom-btn-success py-2 border-radius-3xl fs-7">
+                                                        <i class="fab fa-whatsapp align-middle pe-2"></i>
+                                                        واتس اپ
+                                                    </a>
+                                                </div>
+                                            </div>
+                                            <div class="col-6">
+                                                <div class="d-grid gap-2 mt-2">
+                                                    <a href=""
+                                                       class="btn custom-btn-primary py-2 border-radius-3xl fs-7">
+                                                        <i class="fab fa-twitter align-middle pe-2"></i>
+                                                        تویتر
+                                                    </a>
+                                                </div>
+                                            </div>
+                                            <div class="col-6">
+                                                <div class="d-grid gap-2 mt-2">
+                                                    <a href="" class="btn custom-btn-info py-2 border-radius-3xl fs-7">
+                                                        <i class="fab fa-facebook align-middle pe-2"></i>
+                                                        فیسبوک
+                                                    </a>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="discount-code d-flex justify-content-between align-items-center p-4">
+                                            <div class="row">
+                                                <div class="col-sm-12 col-md-6 col-lg-6 col-xl-6">
+                                                    <div class="discount-detail">
+                                                        <p class="fw-bold fs-6">کد تخفیف شما</p>
+                                                        <p class="fs-7">
+                                                            کد را برای دوستان خود بفرستید و پس از
+                                                            اولین خرید آنها، کد تخفیف و امتیاز بگیرید!
+                                                        </p>
+                                                        <a href="" class="btn btn-outline-danger mt-3">
+                                                            <i class="fa fa-percent pe-2 fa-xs"></i>
+                                                            دریافت کد تخفیف
+                                                        </a>
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-12 col-md-6 col-lg-6 col-xl-6">
+                                                    <div class="discount-img mt-3 text-center">
+                                                        <img src="{% '/img/share-modal.svg'%}" alt="" title="">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="notification mb-3" data-bs-toggle="tooltip" data-bs-placement="right"
+                         title="اطلاع رسانی شگفت انگیز">
+                        <a href="" class="gray-700">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                 class="bi bi-bell" viewBox="0 0 16 16">
+                                <path d="M8 16a2 2 0 0 0 2-2H6a2 2 0 0 0 2 2zM8 1.918l-.797.161A4.002 4.002 0 0 0 4 6c0 .628-.134 2.197-.459 3.742-.16.767-.376 1.566-.663 2.258h10.244c-.287-.692-.502-1.49-.663-2.258C12.134 8.197 12 6.628 12 6a4.002 4.002 0 0 0-3.203-3.92L8 1.917zM14.22 12c.223.447.481.801.78 1H1c.299-.199.557-.553.78-1C2.68 10.2 3 6.88 3 6c0-2.42 1.72-4.44 4.005-4.901a1 1 0 1 1 1.99 0A5.002 5.002 0 0 1 13 6c0 .88.32 4.2 1.22 6z"/>
+                            </svg>
+                        </a>
+                    </div>
+                    <div class="compare mb-3" data-bs-toggle="tooltip" data-bs-placement="right"
+                         title="افزودن به لیست مقایسه">
+                        <a href="" class="gray-700">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                 class="bi bi-plus" viewBox="0 0 16 16">
+                                <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z"/>
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+                <!--                Product Action:end-->
+
+                <!--            Product Images:start-->
+                <div class="product-images">
+                    <img class="xzoom img-fluid" src="{% '/img/single-product-1.jpg'%}"
+                         xoriginal="{% '/img/single-product-1.jpg'%}"/>
+
+                    <div class="xzoom-thumbs mt-2">
+                        <a href="{% '/img/single-product-1.jpg'%}">
+                            <img class="xzoom-gallery" src="{% '/img/single-product-1.jpg'%}"
+                                 xpreview="{% '/img/single-product-1.jpg'%}">
+                        </a>
+                        <a href="{% '/img/single-product-2.jpg'%}">
+                            <img class="xzoom-gallery" src="{% '/img/single-product-2.jpg'%}">
+                        </a>
+                        <a href="{% '/img/single-product-3.jpg'%}">
+                            <img class="xzoom-gallery" src="{% '/img/single-product-3.jpg'%}">
+                        </a>
+                        <a href="{% '/img/single-product-4.jpg'%}">
+                            <img class="xzoom-gallery" src="{% '/img/single-product-4.jpg'%}">
+                        </a>
+                    </div>
+                </div>
+                <!--            Product Images:end-->
+
+            </div>
+
+            <div class="col-sm-12 col-md-12 col-lg-8 col-xl-8">
+                <!--                Product Details:start-->
+                <div class="product-details ali">
+                    <!--                    Product Title:start-->
+                    <h1 class="fs-5 fw-bold theme-color">لپ تاپ 11 اینچی لنوو مدل IdeaPad 1 11ADA05</h1>
+                    <span class="gray-400 en-title d-block pb-1 fs-7">Lenovo IdeaPad 1 11ADA05 11 inch Laptop</span>
+                    <!--                    Product Title:end-->
+
+
+                    <div class="row mt-1">
+                        <div class="col-sm-12 col-md-12 col-lg-6 col-xl-7">
+                            <!--                            Product Details Right:start-->
+                            <div class="product-details-right">
+                                <div class="product-attr">
+                                    <p class="d-inline"><i class="fa fa-star text-warning pe-1 fa-xs"></i> 4.1 <span
+                                            class="gray-500 ps-1">(100)</span></p>
+                                    <span class="separator px-2"><i class="fa fa-circle gray-300"></i></span>
+                                    <p class="d-inline text-info fs-7">198 دیدگاه</p>
+                                    <span class="separator px-2"><i class="fa fa-circle gray-300"></i></span>
+                                    <p class="d-inline text-info fs-7">260 پرسش</p>
+                                </div>
+                                <div class="product-attr">
+                                    <p class="fs-5 fw-bold my-3">رنگ انتخابی : <span id="selectedColor">آبی</span></p>
+                                    <div class="product-attr-colors">
+                                        <div class="d-inline">
+                                            <input type="radio" value="1" name="color" id="primary" data-color="blue">
+                                            <label class="bg-primary border-radius-circle mx-1" for="primary">
+                                                <span class="color-text" data-color="blue">آبی</span>
+                                            </label>
+                                        </div>
+                                        <div class="d-inline">
+                                            <input type="radio" value="1" name="color" id="danger" data-color="red">
+                                            <label class="bg-danger border-radius-circle mx-1" for="danger">
+                                                <span class="color-text" data-color="red">قرمز</span>
+                                            </label>
+                                        </div>
+                                        <div class="d-inline">
+                                            <input type="radio" value="1" name="color" id="dark" data-color="black">
+                                            <label class="bg-dark border-radius-circle mx-1" for="dark">
+                                                <span class="color-text" data-color="black">سیاه</span>
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="product-attr my-4">
+                                    <p class="fs-5 fw-bold mb-2">ویژگی ها</p>
+                                    <div class="">
+                                        <ul  class="features gap-4 d-flex">
+                                            <li class="fs-6">
+                                                <span class="gray-600">سری پردازنده :</span>
+                                                <span>INTEL</span>
+                                            </li>
+                                            <li class="fs-6">
+                                                <span class="gray-600">ظرفیت حافظه رم :</span>
+                                                <span>16 گیگابایت</span>
+                                            </li>
+                                            <li class="fs-6">
+                                                <span class="gray-600">سازنده پردازنده گرافیکی :</span>
+                                                <span>AMD</span>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                    <div class="mt-4">
+                                        <ul class="features gap-4 d-flex">
+                                            <li class="fs-6">
+                                                <span class="gray-600">سری پردازنده :</span>
+                                                <span>INTEL</span>
+                                            </li>
+                                            <li class="fs-6">
+                                                <span class="gray-600">ظرفیت حافظه رم :</span>
+                                                <span>16 گیگابایت</span>
+                                            </li>
+                                            <li class="fs-6">
+                                                <span class="gray-600">سازنده پردازنده گرافیکی :</span>
+                                                <span>AMD</span>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                    <p class="mt-4 gray-600">کد محصول : <span>sh1213424</span></p>
+                                </div>
+                            </div>
+                            <!--                            Product Details Right:end-->
+                        </div>
+                        <div class="col-sm-12 col-md-12 col-lg-6 col-xl-5">
+                            <!--                            Product Details Right:start-->
+
+                            <div class="product-details-left p-3 border-radius-3xl">
+                                <h3 class="fs-5 fw-bold text-center">ناموجود</h3>
+                                <!--                                Product Price:start-->
+                                <div class="price py-2 d-flex justify-content-between align-items-center">
+                                    <p class="fs-7">
+                                        این کالا فعلا موجود نیست اما می‌توانید زنگوله را بزنید تا به محض موجود شدن، به
+                                        شما خبر دهیم
+                                    </p>
+                                </div>
+                                <!--                                Product Price:end-->
+
+                                <div class="d-grid gap-2 mt-2">
+                                    <a href="" class="btn-auth p-3 text-center border-radius-3xl fs-6">
+                                        <i class="fa fa-bell"></i>
+                                        خبرم کن
+                                    </a>
+                                </div>
+                            </div>
+                            <!--                            Product Details Right:end-->
+                        </div>
+                    </div>
+                </div>
+                <!--                Product Details:end-->
+            </div>
+        </div>
+    </section>
+    <!--    Product Details:end-->
+
+    <!--    Product Attr:start-->
+    <div class="product-attr border-top custom-box-shadow-s-1-bottom my-5">
+        <!--            Slider:start-->
+        <div class="swiper productAttr">
+            <div class="swiper-wrapper">
+
+                <!--            Attr Item:start-->
+                <div class="swiper-slide">
+                    <div class="brands-item d-flex justify-content-center align-items-center">
+                        <p class=" fs-8 gray-500">
+                            <img src="{% '/img/cash-on-delivery%20(1).svg'%}" alt="" title="" class="img-fluid p-3">
+                            امکان پرداخت در محل
+                        </p>
+                    </div>
+                </div>
+                <!--            Attr Item:end-->
+
+                <!--            Attr Item:start-->
+                <div class="swiper-slide">
+                    <div class="brands-item d-flex justify-content-center align-items-center">
+                        <p class=" fs-8 gray-500">
+                            <img src="{% '/img/support%20(1).svg'%}" alt="" title="" class="img-fluid p-3">
+                            24 ساعته، 7 روز هفته
+                        </p>
+                    </div>
+                </div>
+                <!--            Attr Item:end-->
+
+                <!--            Attr Item:start-->
+                <div class="swiper-slide">
+                    <div class="brands-item d-flex justify-content-center align-items-center">
+                        <p class=" fs-8 gray-500">
+                            <img src="{% '/img/days-return%20(1).svg" alt="" title="" class="img-fluid p-3">
+                            هفت روز ضمانت بازگشت کالا
+                        </p>
+                    </div>
+                </div>
+                <!--            Attr Item:end-->
+
+                <!--            Attr Item:start-->
+                <div class="swiper-slide">
+                    <div class="brands-item d-flex justify-content-center align-items-center">
+                        <p class=" fs-8 gray-500">
+                            <img src="{% '/img/express-delivery%20(1).svg'%}" alt="" title="" class="img-fluid p-3">
+                            امکان تحویل اکسپرس
+                        </p>
+                    </div>
+                </div>
+                <!--            Attr Item:end-->
+
+                <!--            Attr Item:start-->
+                <div class="swiper-slide">
+                    <div class="brands-item d-flex justify-content-center align-items-center">
+                        <p class=" fs-8 gray-500">
+                            <img src="{% '/img/original-products%20(1).svg'%}" alt="" title="" class="img-fluid p-3">
+                            ضمانت اصل بودن کالا
+                        </p>
+                    </div>
+                </div>
+                <!--            Attr Item:end-->
+
+            </div>
+        </div>
+        <!--            Slider:end-->
+    </div>
+    <!--    Product Attr:end-->
+
+    <!--    Similar Products:start-->
+    <section class="similar-products border-radius-3xl border border-gray-300 mt-4 pb-4">
+        <!--        Section Title:start-->
+        <h2 class="my-4 section-title fs-5 ms-4">
+            محصولات مشابه
+        </h2>
+        <!--        Section Title:end-->
+
+        <!--            Slider:start-->
+        <div class="swiper similarSlider">
+            <div class="swiper-wrapper">
+
+                <!--            Similar Item:start-->
+                <div class="swiper-slide position-relative">
+                    <div class="similar-item card product-card p-2">
+                        <figure class="product-figure m-0">
+                            <img
+                                    src="{% '/img/single-product-1.jpg'%}"
+                                    alt="خرید لپ تاپ لنوو"
+                                    title="خرید لپ تاپ لنوو"
+                                    class="product-img object-contain"
+                                    loading="lazy"
+                            >
+                        </figure>
+
+                        <div class="product-body p-2 text-start">
+                            <h3 class="product-title mb-1">خرید لپ تاپ لنوو</h3>
+                            <p class="product-price float-end mb-2">۱۸,۰۰۰ تومان</p>
+                            <a href="#" class="product-cta btn btn-sm">مشاهده</a>
+                        </div>
+                    </div>
+                </div>
+                <!--            Similar Item:end-->
+                <!--            Similar Item:start-->
+                <div class="swiper-slide position-relative">
+                    <div class="similar-item card product-card p-2">
+                        <figure class="product-figure m-0">
+                            <img
+                                    src="{% '/img/single-product-1.jpg'%}"
+                                    alt="خرید لپ تاپ لنوو"
+                                    title="خرید لپ تاپ لنوو"
+                                    class="product-img"
+                                    loading="lazy"
+                            >
+                        </figure>
+
+                        <div class="product-body p-2 text-start">
+                            <h3 class="product-title mb-1">خرید لپ تاپ لنوو</h3>
+                            <p class="product-price float-end mb-2">۱۸,۰۰۰ تومان</p>
+                            <a href="#" class="product-cta btn btn-sm">مشاهده</a>
+                        </div>
+                    </div>
+                </div>
+                <!--            Similar Item:end-->
+                <!--            Similar Item:start-->
+                <div class="swiper-slide position-relative">
+                    <div class="similar-item card product-card p-2">
+                        <figure class="product-figure m-0">
+                            <img
+                                    src="{% '/img/single-product-1.jpg'%}"
+                                    alt="خرید لپ تاپ لنوو"
+                                    title="خرید لپ تاپ لنوو"
+                                    class="product-img"
+                                    loading="lazy"
+                            >
+                        </figure>
+
+                        <div class="product-body p-2 text-start">
+                            <h3 class="product-title mb-1">خرید لپ تاپ لنوو</h3>
+                            <p class="product-price float-end mb-2">۱۸,۰۰۰ تومان</p>
+                            <a href="#" class="product-cta btn btn-sm">مشاهده</a>
+                        </div>
+                    </div>
+                </div>
+                <!--            Similar Item:end-->
+                <!--            Similar Item:start-->
+                <div class="swiper-slide position-relative">
+                    <div class="similar-item card product-card p-2">
+                        <figure class="product-figure m-0">
+                            <img
+                                    src="{% '/img/single-product-1.jpg'%}"
+                                    alt="خرید لپ تاپ لنوو"
+                                    title="خرید لپ تاپ لنوو"
+                                    class="product-img"
+                                    loading="lazy"
+                            >
+                        </figure>
+
+                        <div class="product-body p-2 text-start">
+                            <h3 class="product-title mb-1">خرید لپ تاپ لنوو</h3>
+                            <p class="product-price float-end mb-2">۱۸,۰۰۰ تومان</p>
+                            <a href="#" class="product-cta btn btn-sm">مشاهده</a>
+                        </div>
+                    </div>
+                </div>
+                <!--            Similar Item:end-->
+                <!--            Similar Item:start-->
+                <div class="swiper-slide position-relative">
+                    <div class="similar-item card product-card p-2">
+                        <figure class="product-figure m-0">
+                            <img
+                                    src="{% '/img/single-product-1.jpg'%}"
+                                    alt="خرید لپ تاپ لنوو"
+                                    title="خرید لپ تاپ لنوو"
+                                    class="product-img"
+                                    loading="lazy"
+                            >
+                        </figure>
+
+                        <div class="product-body p-2 text-start">
+                            <h3 class="product-title mb-1">خرید لپ تاپ لنوو</h3>
+                            <p class="product-price float-end mb-2">۱۸,۰۰۰ تومان</p>
+                            <a href="#" class="product-cta btn btn-sm">مشاهده</a>
+                        </div>
+                    </div>
+                </div>
+                <!--            Similar Item:end-->
+                <!--            Similar Item:start-->
+                <div class="swiper-slide position-relative">
+                    <div class="similar-item card product-card p-2">
+                        <figure class="product-figure m-0">
+                            <img
+                                    src="{% '/img/single-product-1.jpg'%}"
+                                    alt="خرید لپ تاپ لنوو"
+                                    title="خرید لپ تاپ لنوو"
+                                    class="product-img"
+                                    loading="lazy"
+                            >
+                        </figure>
+
+                        <div class="product-body p-2 text-start">
+                            <h3 class="product-title mb-1">خرید لپ تاپ لنوو</h3>
+                            <p class="product-price float-end mb-2">۱۸,۰۰۰ تومان</p>
+                            <a href="#" class="product-cta btn btn-sm">مشاهده</a>
+                        </div>
+                    </div>
+                </div>
+                <!--            Similar Item:end-->
+            </div>
+            <div class="swiper-button-next bg-light border-radius-circle"></div>
+            <div class="swiper-button-prev bg-light border-radius-circle"></div>
+        </div>
+        <!--            Slider:end-->
+    </section>
+    <!--    Similar Products:end-->
+
+    <!--    Product Tabs:start-->
+    <section class="product-tabs mt-5">
+        <ul class="nav nav-tabs">
+            <li class="nav-item fs-7"><a class="nav-link active custom-link" href="#productInfo" data-bs-toggle="tab">
+                معرفی
+            </a></li>
+            <li class="nav-item fs-7"><a class="nav-link custom-link" href="#productCheckExpert" data-bs-toggle="tab">
+                بررسی تخصصی
+            </a></li>
+            <li class="nav-item fs-7"><a class="nav-link custom-link" href="#attributes" data-bs-toggle="tab">
+                مشخصات
+            </a></li>
+            <li class="nav-item fs-7"><a class="nav-link custom-link" href="#comments" data-bs-toggle="tab">
+                دیدگاه ها
+            </a></li>
+            <li class="nav-item fs-7"><a class="nav-link custom-link" href="#questions" data-bs-toggle="tab">
+                پرسش ها
+            </a></li>
+        </ul>
+        <div class="tab-content p-3">
+            <!--            Product Info:start-->
+            <div class="tab-pane fade show active" id="productInfo">
+                <h2 class="fs-5 mb-3">معرفی</h2>
+
+                <p>
+                    نوکیا G21 یکی از گوشی‌های هوشمند میان‌رده و مقرون به‌صرفه شرکت نوکیا است که با توجه به قیمت در نظر
+                    گرفته شده، از مشخصات فنی مناسب و قابل قبولی بهره برده است. در نمای رو‌به‌رویی صفحه‌نمایش یکدست و
+                    زیبایی با ابعاد 6.5 اینچ و رزولوشن 720×1600 پیکسل از نوع IPS LCD را شاهد هستیم که به لطف بهره بردن
+                    از نرخ بروزرسانی 90 هرتز و تراکم پیکسل 270ppi، توانایی ارائه عملکرد خوب و کاملا قابل قبولی را دارد.
+                    در قسمت پشتی هم یک سنسور دروبین اصلی با رزولوشن 50 مگاپیکسل در کنار دو سنسور با رزولوشن 2 مگاپیکسل
+                    از نوع سنجش عمق و ماکرو، سنسور‌های دوربین سه‌گانه این گوشی میان‌رده را تشکیل می‌دهند. بریدگی قطره‌ای
+                    شکل ناچ در قسمت بالایی و مرکزی صفحه‌نمایش هم سنسور دوربین سلفی با رزولوشن 8 مگاپیکسل را در خود جای
+                    داده است. پردازنده میان‌رده Unisoc T606 هم این گوشی را همراهی می‌کند که سبب شده نوکیا G21 توانایی
+                    ارائه عملکرد مناسبی در اجرای نرم‌افزار‌های محبوب و بازی‌های نه‌چندان سنگین داشته باشد. اما یکی از
+                    معیار‌ها برای خرید یک گوشی میان‌رده، بهره بردن از باتری قدرتمند است. نوکیا G21 هم از باتری قدرتمندی
+                    با میزان ظرفیت 5050 میلی‌آمپر‌ساعت بهره برده که به ازای هر بار شارژ صد درصدی، طول عمر مفید (زمان
+                    آماده به‌کار) بسیار خوب و قابل قبولی را ارائه می‌کند. قابلیت امنیتی و بسیار پرکاربرد حسگر اثر انگشت
+                    هم در قسمت کناری روی دکمه پاور قرار گرفته است.
+                </p>
+            </div>
+            <!--            Product Info:end-->
+
+            <!--            Product Check Expert:start-->
+            <div class="tab-pane fade" id="productCheckExpert">
+                <div class="product-check-item border-bottom-gray-300 mb-3">
+                    <h2 class="fs-5">طراحی آشنا و مناسب</h2>
+                    <div class="product-check-item-img">
+                        <p class="fs-7">
+                            نوکیا مدتی است که در عرصه گوشی‌های هوشمند میان‌رده عملکرد مناسب و قابل قبولی را از خود
+                            به‌نمایش گذاشته است. نوکیا G21 هم یکی از گوشی های هوشمند میان‌رده مقرون به‌صرفه و با‌کیفیت
+                            این برند است که در جایگاه یک گوشی میان‌رده، توانایی ارائه عملکرد مناسب و قابل قبولی را دارد.
+                            از نظر طراحی باید بگوییم که مشابه با طراحی در نظر گرفته شده برای نوکیا G21 را در بسیاری از
+                            گوشی‌های هوشمند میان‌رده دیگر دیده بودیم که البته نوکیا سعی داشته تا طراحی کمی متفاوت‌تری را
+                            برای قرار‌گیری سنسور‌های دوربین پشتی در نظر بگیرد. در نمای رو‌به‌رویی صفحه‌نمایش یکدستی را
+                            شاهد هستیم که به طراحی ناچ واتردراپ هم مجهز شده است. بریدگی قطره‌ای شکل ناچ همانطور که در
+                            تصویر مشاهده می‌کنید، در قسمت بالایی و مرکزی صفحه‌نمایش، سنسور دوربین سلفی را در خود جای
+                            داده است.
+                        </p>
+                        <div class="text-center">
+                            <img class="img-fluid" src="{% '/img/single-product-1.jpg'%}" alt="">
+                        </div>
+                    </div>
+                </div>
+                <div class="product-check-item border-bottom-gray-300 mb-3">
+                    <h2 class="fs-5">طراحی آشنا و مناسب</h2>
+                    <div class="product-check-item-img">
+                        <p class="fs-7">
+                            نوکیا مدتی است که در عرصه گوشی‌های هوشمند میان‌رده عملکرد مناسب و قابل قبولی را از خود
+                            به‌نمایش گذاشته است. نوکیا G21 هم یکی از گوشی های هوشمند میان‌رده مقرون به‌صرفه و با‌کیفیت
+                            این برند است که در جایگاه یک گوشی میان‌رده، توانایی ارائه عملکرد مناسب و قابل قبولی را دارد.
+                            از نظر طراحی باید بگوییم که مشابه با طراحی در نظر گرفته شده برای نوکیا G21 را در بسیاری از
+                            گوشی‌های هوشمند میان‌رده دیگر دیده بودیم که البته نوکیا سعی داشته تا طراحی کمی متفاوت‌تری را
+                            برای قرار‌گیری سنسور‌های دوربین پشتی در نظر بگیرد. در نمای رو‌به‌رویی صفحه‌نمایش یکدستی را
+                            شاهد هستیم که به طراحی ناچ واتردراپ هم مجهز شده است. بریدگی قطره‌ای شکل ناچ همانطور که در
+                            تصویر مشاهده می‌کنید، در قسمت بالایی و مرکزی صفحه‌نمایش، سنسور دوربین سلفی را در خود جای
+                            داده است.
+                        </p>
+                        <div class="text-center">
+                            <img class="img-fluid" src="{% '/img/single-product-1.jpg'%}" alt="">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--            Product Check Expert:end-->
+
+            <!--            Product Attributes:start-->
+            <div class="tab-pane fade" id="attributes">
+                <h2 class="fs-5">مشخصات</h2>
+                <div class="attrs">
+                    <div class="col-sm-12 col-md-12 col-lg-8 col-xl-8 offset-lg-2 offset-xl-2">
+                        <ul>
+                            <li class="d-flex justify-content-between align-items-center mb-4">
+                                <p class="gray-600">وزن</p>
+                                <p class="pb-1 fs-7">۱.۲ کیلوگرم</p>
+                            </li>
+                            <li class="d-flex justify-content-between align-items-center mb-4">
+                                <p class="gray-600">ابعاد</p>
+                                <p class="pb-1 fs-7">
+                                    ۲۸۸x۲۰۰x۱۹.۹</p>
+                            </li>
+                            <li class="d-flex justify-content-between align-items-center mb-4">
+                                <p class="gray-600">سازنده پردازنده</p>
+                                <p class="pb-1 fs-7">AMD</p>
+                            </li>
+                            <li class="d-flex justify-content-between align-items-center mb-4">
+                                <p class="gray-600">سری پردازنده</p>
+                                <p class="pb-1 fs-7">ATHLON</p>
+                            </li>
+                            <li class="d-flex justify-content-between align-items-center mb-4">
+                                <p class="gray-600">مدل پردازنده</p>
+                                <p class="pb-1 fs-7">
+                                    Athlon Silver ۳۰۵۰e</p>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <!--            Product Attributes:end-->
+
+            <!--            Product Comments:start-->
+            <div class="tab-pane fade" id="comments">
+                <h2 class="fs-5">امتیازات و نظرات کاربران</h2>
+                <div class="row mt-4">
+                    <div class="col-sm-12 col-md-12 col-lg-3 col-xl-3 mb-3">
+                        <div class="product-score">
+                            <!--                            Product Stars:start-->
+                            <div class="stars">
+                                <div>
+                                    <span class="fs-4">4.1 <span class="fs-7 gray-600">از 5</span></span>
+                                </div>
+                                <div>
+                                    <i class="fa fa-star text-warning"></i>
+                                    <i class="fa fa-star text-warning"></i>
+                                    <i class="fa fa-star text-warning"></i>
+                                    <i class="fa fa-star text-warning"></i>
+                                    <i class="fa fa-star gray-300"></i>
+                                    <span class="fs-8 gray-600 ps-2">از مجموع 120 امتیاز</span>
+                                </div>
+
+                                <div class="mt-4 border-bottom-gray-300 pb-3">
+                                    <p>موضوع دیدگاه</p>
+                                    <!--                                    Product Quantity Score:start-->
+                                    <div class="border border-radius-3xl mt-2 p-2">
+                                        <div class="d-flex justify-content-between align-items-center mb-2">
+                                            <p class="fs-8">کیفیت و کارایی</p>
+                                            <p class="fs-8 gray-500">140 دیدگاه</p>
+                                        </div>
+                                        <div class="progress">
+                                            <div class="progress-bar bg-success" role="progressbar"
+                                                 style="width: 80%"></div>
+                                            <div class="progress-bar bg-danger" role="progressbar"
+                                                 style="width: 10%"></div>
+                                            <div class="progress-bar bg-gray-200" role="progressbar"
+                                                 style="width: 10%"></div>
+                                        </div>
+                                    </div>
+                                    <!--                                    Product Quantity Score:end-->
+
+                                    <!--                                    Product Cost Score:start-->
+                                    <div class="border border-radius-3xl mt-2 p-2">
+                                        <div class="d-flex justify-content-between align-items-center mb-2">
+                                            <p class="fs-8">قیمت و ارزش خرید</p>
+                                            <p class="fs-8 gray-500">43 دیدگاه</p>
+                                        </div>
+                                        <div class="progress">
+                                            <div class="progress-bar bg-success" role="progressbar"
+                                                 style="width: 40%"></div>
+                                            <div class="progress-bar bg-danger" role="progressbar"
+                                                 style="width: 50%"></div>
+                                            <div class="progress-bar bg-gray-200" role="progressbar"
+                                                 style="width: 10%"></div>
+                                        </div>
+                                    </div>
+                                    <!--                                    Product Cost Score:end-->
+
+                                    <!--                                    Product Size Score:start-->
+                                    <div class="border border-radius-3xl mt-2 p-2">
+                                        <div class="d-flex justify-content-between align-items-center mb-2">
+                                            <p class="fs-8">ابعاد یا سایز</p>
+                                            <p class="fs-8 gray-500">13 دیدگاه</p>
+                                        </div>
+                                        <div class="progress">
+                                            <div class="progress-bar bg-success" role="progressbar"
+                                                 style="width: 60%"></div>
+                                            <div class="progress-bar bg-danger" role="progressbar"
+                                                 style="width: 30%"></div>
+                                            <div class="progress-bar bg-gray-200" role="progressbar"
+                                                 style="width: 10%"></div>
+                                        </div>
+                                    </div>
+                                    <!--                                    Product Size Score:end-->
+
+                                    <!--                                    Product Alike Score:start-->
+                                    <div class="border border-radius-3xl mt-2 p-2">
+                                        <div class="d-flex justify-content-between align-items-center mb-2">
+                                            <p class="fs-8">شباهت یا مغایرت</p>
+                                            <p class="fs-8 gray-500">2 دیدگاه</p>
+                                        </div>
+                                        <div class="progress">
+                                            <div class="progress-bar bg-success" role="progressbar"
+                                                 style="width: 80%"></div>
+                                            <div class="progress-bar bg-danger" role="progressbar"
+                                                 style="width: 10%"></div>
+                                            <div class="progress-bar bg-gray-200" role="progressbar"
+                                                 style="width: 10%"></div>
+                                        </div>
+                                    </div>
+                                    <!--                                    Product Alike Score:end-->
+
+                                    <!--                                    Product Warranty Score:start-->
+                                    <div class="border border-radius-3xl mt-2 p-2">
+                                        <div class="d-flex justify-content-between align-items-center mb-2">
+                                            <p class="fs-8">گارانتی</p>
+                                            <p class="fs-8 gray-500">2 دیدگاه</p>
+                                        </div>
+                                        <div class="progress">
+                                            <div class="progress-bar bg-success" role="progressbar"
+                                                 style="width: 40%"></div>
+                                            <div class="progress-bar bg-danger" role="progressbar"
+                                                 style="width: 10%"></div>
+                                            <div class="progress-bar bg-gray-200" role="progressbar"
+                                                 style="width: 50%"></div>
+                                        </div>
+                                    </div>
+                                    <!--                                    Product Warranty Score:end-->
+                                </div>
+
+                                <!--                                Product Insert New Comment:start-->
+                                <div class="mt-2 customer-comment">
+                                    <p class="fs-8">شما هم دیدگاه خود را ثبت کنید</p>
+                                    <div class="d-grid gap-2 mt-3">
+                                        <a href="" class="btn btn-outline-danger fs-8" data-bs-toggle="modal"
+                                           data-bs-target="#insertCommentModal">ثبت دیدگاه</a>
+                                        <!-- Modal -->
+                                        <div class="modal fade" id="insertCommentModal" tabindex="-1"
+                                             aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                            <div class="modal-dialog modal-dialog-centered modal-lg">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <h5 class="modal-title">دیدگاه شما
+                                                            <span class="d-block fs-7">در مورد لپ تاپ 11 اینچی لنوو مدل IdeaPad 1 11ADA05</span>
+                                                        </h5>
+
+                                                        <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                                aria-label="Close"></button>
+                                                    </div>
+                                                    <div class="modal-body">
+                                                        <form>
+                                                            <p>امتیاز شما به این محصول :</p>
+                                                            <div class="rating my-2 d-flex justify-content-end align-items-center position-relative overflow-hidden w-100 flex-row-reverse">
+                                                                <input type="radio" name="rating" id="rating-5">
+                                                                <label for="rating-5"></label>
+                                                                <input type="radio" name="rating" id="rating-4">
+                                                                <label for="rating-4"></label>
+                                                                <input type="radio" name="rating" id="rating-3">
+                                                                <label for="rating-3"></label>
+                                                                <input type="radio" name="rating" id="rating-2">
+                                                                <label for="rating-2"></label>
+                                                                <input type="radio" name="rating" id="rating-1">
+                                                                <label for="rating-1"></label>
+                                                            </div>
+                                                            <div class="row">
+                                                                <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12">
+                                                                    <div class="mb-3">
+                                                                        <label class="form-label">عنوان نظر :</label>
+                                                                        <input type="text" class="form-control">
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-sm-12 col-md-12 col-lg-6 col-xl-6">
+                                                                    <div class="mb-3">
+                                                                        <label class="form-label">نکات مثبت :</label>
+                                                                        <input type="text" class="form-control">
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-sm-12 col-md-12 col-lg-6 col-xl-6">
+                                                                    <div class="mb-3">
+                                                                        <label class="form-label">نکات منفی :</label>
+                                                                        <input type="text" class="form-control">
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12">
+                                                                    <div class="mb-3">
+                                                                        <label class="form-label">متن نظر :</label>
+                                                                        <textarea type="text"
+                                                                                  class="form-control"></textarea>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="d-grid gap-2 border-top pt-2">
+                                                                <button class="btn custom-btn-danger" type="submit">ثبت
+                                                                </button>
+                                                            </div>
+                                                        </form>
+                                                        <div class="row">
+                                                            <p class="fs-8 text-center my-2">
+                                                                ثبت دیدگاه به معنای پذیرش
+                                                                <a href="" class="text-info">قوانین</a>
+                                                                شاپیک میباشد.
+                                                            </p>
+                                                        </div>
+                                                    </div>
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!--                                Product Insert New Comment:end-->
+                            </div>
+                            <!--                            Product Stars:end-->
+                        </div>
+                    </div>
+                    <div class="col-sm-12 col-md-12 col-lg-9 col-xl-9">
+                        <!--                        Comments Order:start-->
+                        <div class="d-flex justify-content-between align-items-center mb-4">
+                            <div>
+                                <p class="d-inline fs-7">
+                                    <i class="fa fa-sort-amount-down pe-1"></i>
+                                    مرتب سازی:
+                                </p>
+                                <a href="" class="fs-8 gray-600 mx-1 text-danger">جدیدترین</a>
+                                <a href="" class="fs-8 gray-600 mx-1">دیدگاه خریداران</a>
+                                <a href="" class="fs-8 gray-600 mx-1">مفیدترین</a>
+                            </div>
+                            <p class="fs-8 count-of-comments">
+                                190 دیدگاه
+                            </p>
+                        </div>
+                        <!--                        Comments Order:end-->
+
+                        <!--                        Comments:start-->
+                        <div class="comment-box mb-3">
+                            <div class="comment-title">
+                                <p class="fw-bold">
+                                    <span class="badge bg-success">4.0</span>
+                                    به قیمتش می ارزد
+                                </p>
+                            </div>
+                            <div class="comment-details my-3 border-bottom-gray-150 pb-3 mx-5">
+                                <span class="fs-8 gray-600">1 فروردین 1402</span>
+                                <i class="fa fa-circle fs-11 gray-400"></i>
+                                <span class="fs-8 gray-600">علی رضا ملکی</span>
+                                <span class="badge bg-gray-400">خریدار</span>
+                            </div>
+                            <div class="comment-text border-bottom-gray-150 mx-5">
+                                <p class="text-success fs-7">
+                                    <i class="fa fa-thumbs-up pe-1"></i>
+                                    پیشنهاد میکنم
+                                </p>
+
+                                <!--                                Comment Text:start-->
+                                <p class="my-2 comment">
+                                    کاربرد خوبی نسبت به قیمت دارد.
+                                </p>
+                                <!--                                Comment Text:end-->
+                            </div>
+                            <div class="border-bottom-gray-300 mt-3 pb-2">
+                                <p class="text-end fs-8 gray-600">
+                                    آیا این دیدگاه مفید بود؟
+                                    <span class="px-1 c-pointer">0<i class="fa fa-thumbs-up ps-1"></i></span>
+                                    <span class="px-1 c-pointer">0<i class="fa fa-thumbs-down ps-1"></i></span>
+                                </p>
+                            </div>
+                        </div>
+                        <div class="comment-box mb-3">
+                            <div class="comment-title">
+                                <p class="fw-bold">
+                                    <span class="badge bg-success">4.0</span>
+                                    به قیمتش می ارزد
+                                </p>
+                            </div>
+                            <div class="comment-details my-3 border-bottom-gray-150 pb-3 mx-5">
+                                <span class="fs-8 gray-600">1 فروردین 1402</span>
+                                <i class="fa fa-circle fs-11 gray-400"></i>
+                                <span class="fs-8 gray-600">علی رضا ملکی</span>
+                                <span class="badge bg-gray-400">خریدار</span>
+                            </div>
+                            <div class="comment-text border-bottom-gray-150 mx-5">
+                                <p class="text-success fs-7">
+                                    <i class="fa fa-thumbs-up pe-1"></i>
+                                    پیشنهاد میکنم
+                                </p>
+
+                                <!--                                Comment Text:start-->
+                                <p class="my-2 comment">
+                                    کاربرد خوبی نسبت به قیمت دارد.
+                                </p>
+                                <!--                                Comment Text:end-->
+                            </div>
+                            <div class="border-bottom-gray-300 mt-3 pb-2">
+                                <p class="text-end fs-8 gray-600">
+                                    آیا این دیدگاه مفید بود؟
+                                    <span class="px-1 c-pointer">0<i class="fa fa-thumbs-up ps-1"></i></span>
+                                    <span class="px-1 c-pointer">0<i class="fa fa-thumbs-down ps-1"></i></span>
+                                </p>
+                            </div>
+                        </div>
+
+                        <!--                        Comments:end-->
+                    </div>
+                </div>
+            </div>
+            <!--            Product Comments:end-->
+
+            <!--            Product Questions:start-->
+            <div class="tab-pane fade" id="questions">
+                <div class="row">
+                    <div class="col-sm-12 col-md-12 col-lg-3 col-xl-3 mb-3">
+                        <div class="product-score">
+                            <!--                            Product Stars:start-->
+                            <div class="stars">
+                                <!--                                Product Insert New Comment:start-->
+                                <div class="mt-2">
+                                    <p class="fs-8">ثبت پرسش جدید</p>
+                                    <div class="d-grid gap-2 mt-3">
+                                        <a href="" class="btn btn-outline-danger fs-8" data-bs-toggle="modal"
+                                           data-bs-target="#questionModal">ثبت پرسش</a>
+
+                                        <!-- Modal -->
+                                        <div class="modal fade" id="questionModal" tabindex="-1"
+                                             aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                            <div class="modal-dialog modal-dialog-centered">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <h5 class="modal-title">پرسش خود را درباره این کالا ثبت
+                                                            کنید</h5>
+                                                        <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                                aria-label="Close"></button>
+                                                    </div>
+                                                    <div class="modal-body">
+                                                        <textarea class="form-control border-radius-3xl"
+                                                                  rows="4"></textarea>
+                                                        <div class="row">
+                                                            <div class="col-sm-12 col-md-12 col-lg-6 col-xl-6 my-3">
+                                                                <div class="d-grid gap-2">
+                                                                    <button class="btn custom-btn-danger" type="button">
+                                                                        ثبت
+                                                                    </button>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-sm-12 col-md-12 col-lg-6 col-xl-6">
+                                                                <p class="fs-8 text-center my-2">
+                                                                    ثبت پرسش به معنای پذیرش
+                                                                    <a href="" class="text-info">قوانین</a>
+                                                                    شاپیک میباشد.
+                                                                </p>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!--                                Product Insert New Comment:end-->
+                            </div>
+                            <!--                            Product Stars:end-->
+                        </div>
+                    </div>
+                    <div class="col-sm-12 col-md-12 col-lg-9 col-xl-9">
+                        <!--                        Comments Order:start-->
+                        <div class="d-flex justify-content-between align-items-center mb-4">
+                            <div>
+                                <p class="d-inline fs-7">
+                                    <i class="fa fa-sort-amount-down pe-1"></i>
+                                    مرتب سازی:
+                                </p>
+                                <a href="" class="fs-8 gray-600 mx-1 text-danger">جدیدترین</a>
+                                <a href="" class="fs-8 gray-600 mx-1">مفیدترین</a>
+                            </div>
+                        </div>
+                        <!--                        Comments Order:end-->
+
+                        <!--                        Comments:start-->
+                        <div class="comment-box mb-3">
+                            <div class="comment-title">
+                                <p class="fw-bold">
+                                    <i class="fa fa-question-circle text-info pe-2"></i>
+                                    آیا هارد قابل ارتقاس؟
+                                </p>
+                            </div>
+                            <div class="comment-details my-3 pb-3 mx-5">
+                                <span class="fs-8 gray-600">پاسخ : </span>
+                                <span class="badge bg-info">آیتی صنف</span>
+                                <p class="my-2">
+                                    بله قابل ارتقا میباشد.
+                                </p>
+                            </div>
+                            <div class="border-bottom-gray-150 mt-3 pb-2 mx-5">
+                                <p class="text-end fs-8 gray-600">
+                                    آیا این پرسش مفید بود؟
+                                    <span class="px-1 c-pointer">0<i class="fa fa-thumbs-up ps-1"></i></span>
+                                    <span class="px-1 c-pointer">0<i class="fa fa-thumbs-down ps-1"></i></span>
+                                </p>
+                            </div>
+                            <div class="put-answer mt-2 border-bottom-gray-300 pb-3">
+                                <a href="" class="text-info fs-7" data-bs-toggle="modal"
+                                   data-bs-target="#answerModal">
+                                    ثبت پاسخ جدید
+                                    <i class="fa fa-angle-left ps-2"></i>
+                                </a>
+
+                                <!-- Modal -->
+                                <div class="modal fade" id="answerModal" tabindex="-1"
+                                     aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                    <div class="modal-dialog modal-dialog-centered">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title">به این پرسش پاسخ دهید</h5>
+                                                <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                        aria-label="Close"></button>
+                                            </div>
+                                            <div class="modal-body">
+                                                <p class="my-3">آیا هاردش قابل ارتقاس؟</p>
+                                                <p class="mb-1">پاسخ شما:</p>
+                                                <textarea class="form-control border-radius-3xl" rows="4"></textarea>
+                                                <div class="row">
+                                                    <div class="col-sm-12 col-md-12 col-lg-6 col-xl-6 my-3">
+                                                        <div class="d-grid gap-2">
+                                                            <button class="btn custom-btn-danger" type="button">ثبت
+                                                            </button>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-sm-12 col-md-12 col-lg-6 col-xl-6">
+                                                        <p class="fs-8 text-center my-2">
+                                                            ثبت پاسخ به معنای پذیرش
+                                                            <a href="" class="text-info">قوانین</a>
+                                                            شاپیک میباشد.
+                                                        </p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!--                        Comments:end-->
+                    </div>
+                </div>
+            </div>
+            <!--            Product Questions:end-->
+        </div>
+    </section>
+    <!--    Product Tabs:end-->
+
+
+</main>
+<!--Main:end-->
+
+
+{% endblock %}

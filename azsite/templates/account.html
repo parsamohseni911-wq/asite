@@ -1,0 +1,805 @@
+> Parsa.:
+{% extends 'base.html' %}
+
+{% block content %}
+
+<style>
+
+/* =========================================================
+   ACCOUNT INFO
+========================================================= */
+
+.account-info-page {
+    direction: rtl;
+    width: 100%;
+    padding: 35px 15px 60px;
+    box-sizing: border-box;
+}
+
+.account-info-row {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-start;
+    width: 100%;
+    margin-left: -12px;
+    margin-right: -12px;
+}
+
+.account-info-page .col-sm-12,
+.account-info-page .col-md-12,
+.account-info-page .col-lg-4,
+.account-info-page .col-xl-3,
+.account-info-page .col-lg-8,
+.account-info-page .col-xl-9 {
+    box-sizing: border-box;
+    padding-left: 12px;
+    padding-right: 12px;
+}
+
+/* =========================================================
+   CONTENT
+========================================================= */
+
+.account-info-content {
+    width: 100%;
+    min-width: 0;
+    box-sizing: border-box;
+
+    background: #ffffff;
+    border: 1px solid #f0e4d6;
+    border-radius: 22px;
+
+    padding: 25px;
+
+    box-shadow:
+        0 8px 30px rgba(0, 0, 0, 0.04);
+}
+
+/* =========================================================
+   HEADER
+========================================================= */
+
+.account-info-header {
+    display: flex;
+    align-items: center;
+
+    padding-bottom: 20px;
+    margin-bottom: 24px;
+
+    border-bottom: 1px solid #f1e8df;
+}
+
+.account-info-header-inner {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.account-info-header-icon {
+    width: 46px;
+    height: 46px;
+    flex: 0 0 46px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 14px;
+
+    background: #fff7ed;
+    color: #ea8a24;
+
+    font-size: 20px;
+}
+
+.account-info-header h3 {
+    margin: 0;
+
+    color: #292929;
+
+    font-size: 19px;
+    font-weight: 700;
+}
+
+.account-info-header p {
+    margin: 5px 0 0;
+
+    color: #999;
+
+    font-size: 11px;
+}
+
+/* =========================================================
+   INFORMATION GRID
+========================================================= */
+
+.account-information-list {
+    display: grid;
+
+    grid-template-columns:
+        repeat(2, minmax(0, 1fr));
+
+    gap: 16px;
+
+    width: 100%;
+}
+
+/* =========================================================
+   ITEM
+========================================================= */
+
+.account-information-item {
+    min-width: 0;
+    box-sizing: border-box;
+
+    padding: 17px;
+
+    background: #fffdfb;
+
+    border: 1px solid #eee6de;
+
+    border-radius: 15px;
+
+    transition:
+        transform .22s ease,
+        border-color .22s ease,
+        background .22s ease,
+        box-shadow .22s ease;
+}
+
+.account-information-item:hover {
+    transform: translateY(-3px);
+
+    background: #fff9f2;
+
+    border-color: #efc99f;
+
+    box-shadow:
+        0 8px 22px rgba(234, 138, 36, 0.08);
+}
+
+.account-information-item.full-width {
+    grid-column: 1 / -1;
+}
+
+/* =========================================================
+   TOP
+========================================================= */
+
+.account-information-top {
+    display: flex;
+    align-items: center;
+
+    gap: 10px;
+
+    margin-bottom: 11px;
+}
+
+/* =========================================================
+   ICON
+========================================================= */
+
+.account-information-icon {
+    width: 34px;
+    height: 34px;
+    flex: 0 0 34px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 10px;
+
+    background: #ffffff;
+
+    border: 1px solid #eee5dc;
+
+    color: #ea8a24;
+
+    font-size: 14px;
+
+    transition:
+        background .22s ease,
+        color .22s ease,
+        border-color .22s ease;
+}
+
+.account-information-item:hover
+.account-information-icon {
+    background: #ea8a24;
+    border-color: #ea8a24;
+    color: #ffffff;
+}
+
+/* =========================================================
+   LABEL
+========================================================= */
+
+.account-information-label {
+    color: #777;
+
+    font-size: 11px;
+
+    font-weight: 600;
+
+    transition: color
+
+
+    
+ .22s ease;
+}
+
+.account-information-item:hover
+.account-information-label {
+    color: #df7817;
+}
+
+/* =========================================================
+   VALUE
+========================================================= */
+
+.account-information-value {
+    color: #292929;
+
+    font-size: 14px;
+
+    font-weight: 600;
+
+    line-height: 1.9;
+
+    overflow-wrap: anywhere;
+}
+
+.account-information-value .empty {
+    color: #aaa;
+
+    font-weight: 400;
+}
+
+/* =========================================================
+   PHONE WARNING
+========================================================= */
+
+.account-phone-warning {
+    display: flex;
+
+    align-items: center;
+
+    gap: 15px;
+
+    width: 100%;
+
+    box-sizing: border-box;
+
+    margin-top: 20px;
+
+    padding: 15px 17px;
+
+    border-radius: 14px;
+
+    border: 1px solid #f3dfc7;
+
+    background: #fffaf4;
+}
+
+.account-phone-warning-icon {
+    width: 40px;
+    height: 40px;
+
+    flex: 0 0 40px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 11px;
+
+    background: #fff1df;
+
+    color: #ea8a24;
+
+    font-size: 17px;
+}
+
+.account-phone-warning-text strong {
+    display: block;
+
+    margin-bottom: 3px;
+
+    color: #353535;
+
+    font-size: 12px;
+}
+
+.account-phone-warning-text span {
+    color: #999;
+
+    font-size: 10px;
+}
+
+/* =========================================================
+   ACTIONS
+========================================================= */
+
+.account-info-actions {
+    display: flex;
+
+    justify-content: center;
+    align-items: center;
+
+    gap: 12px;
+
+    margin-top: 24px;
+}
+
+.account-info-button {
+    min-width: 180px;
+    min-height: 47px;
+
+    display: inline-flex;
+
+    align-items: center;
+    justify-content: center;
+
+    gap: 8px;
+
+    padding: 10px 20px;
+
+    border-radius: 12px;
+
+    text-decoration: none !important;
+
+    font-size: 12px;
+
+    font-weight: 600;
+
+    transition:
+        transform .2s ease,
+        box-shadow .2s ease;
+}
+
+.account-info-button:hover {
+    transform: translateY(-2px);
+}
+
+/* =========================================================
+   VERIFY BUTTON
+========================================================= */
+
+.account-verify-button {
+    background: #f6b84b;
+
+    color: #ffffff;
+
+    box-shadow:
+        0 6px 18px rgba(246, 184, 75, .16);
+}
+
+.account-verify-button:hover {
+    color: #ffffff;
+
+    box-shadow:
+        0 9px 22px rgba(246, 184, 75, .24);
+}
+
+/* =========================================================
+   EDIT BUTTON
+========================================================= */
+
+.account-edit-button {
+    background: #ea8a24;
+
+    color: #ffffff;
+
+    box-shadow:
+        0 6px 18px rgba(234, 138, 36, .16);
+}
+
+.account-edit-button:hover {
+    color: #ffffff;
+
+    box-shadow:
+        0 9px 22px rgba(234, 138, 36, .24);
+}
+
+/* =========================================================
+   TABLET
+========================================================= */
+
+@media (max-width: 991.98px) {
+
+    .account-info-page {
+        padding-top: 25px;
+    }
+
+}
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media (max-width: 767.98px) {
+
+    .account-info-page {
+        padding: 20px 10px 45px;
+    }
+
+    .account-info-content {
+        padding: 18px;
+        border-radius: 18px;
+    }
+
+    .account-information-list {
+        grid-template-columns: 1fr;
+        gap: 13px;
+    }
+
+    .account-information-item.full-width {
+        grid-column: auto;
+    }
+
+    .account-info-header h3 {
+        font-size: 16px;
+    }
+
+    .account-info-header p {
+        font-size: 10px;
+    }
+
+    .account-phone-warning {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+
+    .account-info-actions {
+        flex-direction: column;
+        width: 100%;
+    }
+
+    .account-info-button {
+        width: 100%;
+        min-width: 0;
+    }
+
+}
+
+/* =========================================================
+   SMALL MOBILE
+========================================================= */
+
+@media (max-width: 480px) {
+
+ 
+
+
+    
+   .account-info-page {
+        padding-left: 7px;
+        padding-right: 7px;
+    }
+
+    .account-info-content {
+        padding: 15px;
+        border-radius: 16px;
+    }
+
+    .account-info-header {
+        margin-bottom: 18px;
+        padding-bottom: 16px;
+    }
+
+    .account-info-header-icon {
+        width: 40px;
+        height: 40px;
+        flex-basis: 40px;
+        font-size: 17px;
+    }
+
+    .account-info-header h3 {
+        font-size: 15px;
+    }
+
+    .account-information-item {
+        padding: 14px;
+    }
+
+    .account-information-value {
+        font-size: 13px;
+    }
+
+    .account-information-label {
+        font-size: 10px;
+    }
+
+}
+
+</style>
+<!-- =========================================================
+     ACCOUNT INFO PAGE
+========================================================= -->
+<div class="account-info-page"><div class="account-info-row">
+
+    <!-- SIDEBAR -->
+    {% include 'sidebar.html' %}
+
+
+    <!-- CONTENT -->
+
+    <div class="col-sm-12 col-md-12 col-lg-8 col-xl-9">
+
+        <div class="account-info-content">
+
+            <!-- HEADER -->
+
+            <div class="account-info-header">
+
+                <div class="account-info-header-inner">
+
+                    <div class="account-info-header-icon">
+                        <i class="fa fa-user" aria-hidden="true"></i>
+                    </div>
+
+                    <div>
+
+                        <h3>
+                            اطلاعات حساب کاربری
+                        </h3>
+
+                        <p>
+                            اطلاعات حساب خود را مشاهده و مدیریت کنید
+                        </p>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- INFORMATION -->
+
+            <div class="account-information-list">
+
+
+                <!-- USERNAME -->
+
+                <div class="account-information-item">
+
+                    <div class="account-information-top">
+
+                        <div class="account-information-icon">
+                            <i class="fa fa-user" aria-hidden="true"></i>
+                        </div>
+
+                        <span class="account-information-label">
+                            نام کاربری
+                        </span>
+
+                    </div>
+
+                    <div class="account-information-value">
+
+                        {{ request.user.username }}
+
+                    </div>
+
+                </div>
+
+
+                <!-- EMAIL -->
+
+                <div class="account-information-item">
+
+                    <div class="account-information-top">
+
+                        <div class="account-information-icon">
+                            <i class="fa fa-envelope" aria-hidden="true"></i>
+                        </div>
+
+                        <span class="account-information-label">
+                            ایمیل
+                        </span>
+
+                    </div>
+
+                    <div class="account-information-value">
+
+                        {% if request.user.email %}
+
+                            {{ request.user.email }}
+
+                        {% else %}
+
+                            <span class="empty">
+                                ثبت نشده
+                            </span>
+
+                        {% endif %}
+
+                    </div>
+
+                </div>
+
+
+                <!-- PHONE -->
+
+                <div class="account-information-item">
+
+                    <div class="account-information-top">
+
+                        <div class="account-information-icon">
+                            <i class="fa fa-mobile-alt" aria-hidden="true"></i>
+                        </div>
+
+                        <span class="account-information-label">
+                            شماره موبایل
+                        </span>
+
+                    </div>
+
+                    <div class="account-information-value">
+
+                        {% if account.number %}
+
+                            {{ account.number }}
+
+                        {% else %}
+
+                            <span class="empty">
+                                ثبت نشده
+    
+
+> Parsa.:
+                        </span>
+
+                        {% endif %}
+
+                    </div>
+
+                </div>
+
+
+                <!-- POSTCODE -->
+
+                <div class="account-information-item">
+
+                    <div class="account-information-top">
+
+                        <div class="account-information-icon">
+                            <i class="fa fa-mail-bulk" aria-hidden="true"></i>
+                        </div>
+
+                        <span class="account-information-label">
+                            کد پستی
+                        </span>
+
+                    </div>
+
+                    <div class="account-information-value">
+
+                        {% if account.postcode %}
+
+                            {{ account.postcode }}
+
+                        {% else %}
+
+                            <span class="empty">
+                                ثبت نشده
+                            </span>
+
+                        {% endif %}
+
+                    </div>
+
+                </div>
+
+
+                <!-- ADDRESS -->
+
+                <div class="account-information-item full-width">
+
+                    <div class="account-information-top">
+
+                        <div class="account-information-icon">
+                            <i class="fa fa-map-marker-alt" aria-hidden="true"></i>
+                        </div>
+
+                        <span class="account-information-label">
+                            آدرس
+                        </span>
+
+                    </div>
+
+                    <div class="account-information-value">
+
+                        {% if account.adress %}
+
+                            {{ account.adress }}
+
+                        {% else %}
+
+                            <span class="empty">
+                                ثبت نشده
+                            </span>
+
+                        {% endif %}
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- PHONE VERIFICATION -->
+
+            {% if not account.is_phone_verified %}
+
+                <div class="account-phone-warning">
+
+                    <div class="account-phone-warning-icon">
+
+                        <i class="fa fa-mobile-alt" aria-hidden="true"></i>
+
+                    </div>
+
+                    <div class="account-phone-warning-text">
+
+                        <strong>
+                            شماره موبایل تایید نشده است
+                        </strong>
+
+                        <span>
+                            برای تکمیل حساب، شماره موبایل خود را تایید کنید.
+                        </span>
+
+                    </div>
+
+                </div>
+
+            {% endif %}
+
+
+            <!-- BUTTONS -->
+
+            <div class="account-info-actions">
+
+
+                {% if not account.is_phone_verified %}
+
+                    <a
+                        href="{% url 'accounts:verify-phone' %}"
+                        class="account-info-button account-verify-button"
+                    >
+
+                        <i class="fa fa-mobile-alt" aria-hidden="true"></i>
+
+                        تایید شماره
+
+                    </a>
+
+                {% endif %}
+
+
+                <a
+                    href="{% url 'accounts:complete' %}"
+                    class="account-info-button account-edit-button"
+                >
+
+                    <i class="fa fa-edit" aria-hidden="true"></i>
+
+                    تغییر اطلاعات
+
+                </a>
+
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+</div>
+{% endblock %}

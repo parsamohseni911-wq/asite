@@ -1,0 +1,60 @@
+{% extends 'base.html' %}
+{% load static %}
+
+
+{% block content %}
+
+<div class="container mt-xxxx-large">
+    <div class="row row justify-content-center align-content-center">
+        <div class="col-12 col-md-8">
+            <div class="payment-status failed">
+                <div class="payment-header">
+                    <div class="row">
+                        <div class="col-12 col-lg-8 order-2 order-lg-1">
+                            <h2>
+                                <span class="status-text ">متاسفانه پرداخت شما ناموفق بود!</span>
+                                <span>شماره سفارش: 9875987264</span>
+                            </h2>
+                        </div>
+                        <div class="col-12 col-lg-4 order-1 order-lg-2 payment-status-img">
+                            <img src="{% '/img/Fail.svg'%}" alt="Fail">
+                        </div>
+                    </div>
+                </div>
+                <div class="payment-details">
+                    <a href="#" class="main-btn">پرداخت دوباره</a>
+                    <a href="#">تغییر روش پرداخت</a>
+                </div>
+            </div>
+
+
+            <!-- Payment Info -->
+            <div class="payment-info-box">
+                <p class="info-title">جزئیات پرداخت</p>
+                <div class="payment-table">
+                    <table>
+                        <thead>
+                        <tr>
+                            <th>درگاه</th>
+                            <th>شماره پیگیری</th>
+                            <th>تاریخ</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <th>سامان</th>
+                            <td>1586378</td>
+                            <td>14 فروردین 1401</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+
+        </div>
+    </div>
+</div>
+
+
+{% endblock %}

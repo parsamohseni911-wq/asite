@@ -1,0 +1,134 @@
+{% extends 'base.html' %}
+{% load static %}
+
+
+{% block content %}
+
+<!--Main:start-->
+<main class="container">
+    <div class="payment2">
+        <!-- Payment Header:start -->
+        <div class="payment-header-alt my-3 rounded-sm ">
+            <a href="#"><img src="{% '/img/logo.png'%}" alt="Logo" class="logo-img d-block mx-auto my-3"></a>
+
+            <div class="payment-progress d-flex justify-content-center align-items-center my-3">
+                <a href="cart.html" class="step basket mx-3 text-muted">
+                   <p class="text-center w-100">
+                       <i class="fa fa-shopping-cart"></i>
+                       <span>سبد خرید</span>
+                   </p>
+                </a>
+                <a href="shipping.html" class="step shipping mx-3 d-flex justify-content-between align-items-center">
+                    <p class="fs-6 mb-0 text-center w-100">
+                        <i class="fa fa-truck"></i>
+                        <span>زمان و نحوه ارسال</span>
+                    </p>
+                </a>
+                <a href="payment.html" class="step payment mx-3 d-flex justify-content-between align-items-center">
+                 <p class="text-center w-100">
+                     <i class="fa fa-credit-card pe-2"></i>
+                     <span>پرداخت</span>
+                 </p>
+                </a>
+            </div>
+        </div>
+        <!-- Payment Header:end -->
+
+        <!-- Payment Details:start -->
+        <div class="payment-details-alt cart mt-3">
+            <div class="row">
+                <div class="col-lg-8 col-xl-9">
+                    <!-- Payment Method:start -->
+                    <div class="payment-methods-alt p-3 mb-3">
+                        <h2 class="fs-5 fw-bold">انتخاب روش پرداخت</h2>
+                        <form class="mt-4">
+                            <div class="payment-option mb-3 pb-3 border-bottom">
+                                <input type="radio" name="payMethodAlt" id="walletAlt" class="radio-btn">
+                                <label for="walletAlt" class="fw-bold">
+                                    <i class="fa fa-wallet fs-3 px-2"></i>
+                                    کیف پول
+                                    <span class="d-block mt-2 ms-3 fs-7 fw-lighter"> 100,000 تومان</span>
+                                </label>
+                            </div>
+                            <div class="payment-option mb-3 pb-3 border-bottom">
+                                <input type="radio" name="payMethodAlt" id="netPurchaseAlt" class="radio-btn">
+                                <label for="netPurchaseAlt" class="fw-bold">
+                                    <i class="fa fa-credit-card fs-3 px-2"></i>
+                                    کارت بانکی
+                                    <span class="d-block mt-2 ms-3 fs-7 fw-lighter">100,000 تومان</span>
+                                </label>
+                            </div>
+                        </form>
+                    </div>
+                    <!-- Payment Method:end -->
+
+                    <!-- Discount Code:start -->
+                    <div class="discount-section p-3 mb-3 ">
+                        <h2 class="fs-5 fw-bold">کد تخفیف</h2>
+                        <form class="position-relative mt-4">
+                            <input type="text" class="form-control py-2 rounded" placeholder="اگر کد تخفیف دارید وارد کنید ...">
+                            <button type="submit" class="btn position-absolute fs-7">ثبت</button>
+                        </form>
+                    </div>
+                    <!-- Discount Code:end -->
+
+                    <!-- Gift Code:start -->
+                    <div class="discount-section p-3 mb-3">
+                        <h2 class="fs-5 fw-bold">کد هدیه</h2>
+                        <form class="position-relative mt-4">
+                            <input type="text" class="form-control py-2 rounded" placeholder="اگر کد هدیه دارید وارد کنید ...">
+                            <button type="submit" class="btn position-absolute fs-7">ثبت</button>
+                        </form>
+                    </div>
+                    <!-- Gift Code:end -->
+
+                    <!-- Order Summary:start -->
+                    <div class="order-summary p-3 mb-4">
+                        <h2 class="fs-5 fw-bold mb-3">خلاصه سفارش</h2>
+                        <p class="fw-bold my-2">
+                            <i class="fa fa-truck text-muted"></i>
+                            <span class="px-1">یک شنبه 20 فروردین -</span>
+                            <span class="px-1">بازه 9 - 11</span>
+                            <span class="badge bg-secondary">2 کالا</span>
+                        </p>
+                        <span class="fs-7 text-muted">ارسال عادی - 39,000 تومان</span>
+                    </div>
+                    <!-- Order Summary:end -->
+                </div>
+
+                <!-- Prices:start -->
+                <div class="col-lg-4 col-xl-3 mt-3">
+                    <div class="cart-summary">
+                        <div class="price-row d-flex justify-content-between px-3 py-3 border-bottom">
+                            <p class="fs-7 fw-bold">قیمت کالاها (2)</p>
+                            <p class="fs-7 fw-bold text-muted">19,200,000 تومان</p>
+                        </div>
+                        <div class="price-row d-flex justify-content-between px-3 py-3 border-bottom">
+                            <p class="fs-7 fw-bold">هزینه ارسال</p>
+                            <p class="fs-7 fw-bold text-muted">39,000 تومان</p>
+                        </div>
+                        <div class="price-row d-flex justify-content-between px-3 py-3 border-bottom">
+                            <p class="fs-7 fw-bold text-danger">قابل پرداخت</p>
+                            <p class="fs-6 fw-bold text-danger">19,250,000 تومان</p>
+                        </div>
+                        <div class="d-grid p-3">
+                            <a href="#" class="btn-auth2 text-center p-1 rounded">پرداخت</a>
+                        </div>
+                        <div class="cart-points d-flex justify-content-between p-3 bg-light">
+                            <div>
+                                <img src="{% '/img/club-point.svg'%}" alt="">
+                                <span class="fs-7">شاپیک کلاب</span>
+                            </div>
+                            <p><span class="fw-bold">150</span> <span class="fs-8">امتیاز</span></p>
+                        </div>
+                    </div>
+                </div>
+                <!-- Prices:end -->
+            </div>
+        </div>
+        <!-- Payment Details:end -->
+    </div>
+</main>
+<!--Main:end-->
+
+{% endblock %}
