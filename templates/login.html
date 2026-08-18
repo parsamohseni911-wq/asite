@@ -1,0 +1,2502 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>ورود | حساب کاربری</title>
+
+
+    <!-- Bootstrap -->
+    <link
+        rel="stylesheet"
+        href="{% static 'css/vendors/bootstrap/bootstrap.rtl.css' %}"
+    >
+
+
+    <!-- FontAwesome -->
+    <link
+        rel="stylesheet"
+        href="{% static 'css/vendors/fontawesome/fontawesome.min.css' %}"
+    >
+
+
+    <!-- سایت اصلی -->
+    <link
+        rel="stylesheet"
+        href="{% static 'css/style.css' %}"
+    >
+
+
+    <!-- Cloudflare Turnstile -->
+
+    <script
+        src="https://challenges.cloudflare.com/turnstile/v0/api.js"
+        async
+        defer>
+    </script>
+
+
+    <style>
+
+        /* =====================================================
+           RESET
+        ===================================================== */
+
+        * {
+            box-sizing: border-box;
+        }
+
+
+        html,
+        body {
+            width: 100%;
+            min-height: 100%;
+            margin: 0;
+            padding: 0;
+        }
+
+
+        body {
+            font-family:
+                Tahoma,
+                Arial,
+                sans-serif;
+
+            overflow-x: hidden;
+
+            background: #050505;
+        }
+
+
+        /* =====================================================
+           PAGE
+        ===================================================== */
+
+        .loginx-page {
+
+            position: fixed;
+
+            inset: 0;
+
+            width: 100vw;
+            height: 100vh;
+
+            overflow-y: auto;
+            overflow-x: hidden;
+
+            display: flex;
+
+            align-items: center;
+            justify-content: center;
+
+            padding: 25px;
+
+            direction: rtl;
+
+            background:
+
+                radial-gradient(
+                    circle at 10% 10%,
+                    rgba(255, 115, 0, .25),
+                    transparent 28%
+                ),
+
+                radial-gradient(
+                    circle at 90% 85%,
+                    rgba(255, 55, 0, .18),
+                    transparent 30%
+                ),
+
+                radial-gradient(
+                    circle at 50% 50%,
+                    rgba(255, 160, 40, .07),
+                    transparent 38%
+                ),
+
+                linear-gradient(
+                    135deg,
+                    #050505 0%,
+                    #100b07 45%,
+                    #050505 100%
+                );
+
+            color: #fff;
+
+            z-index: 9999;
+        }
+
+
+        /* =====================================================
+           GRID BACKGROUND
+        ===================================================== */
+
+        .loginx-page::before {
+
+            content: "";
+
+            position: absolute;
+
+            inset: 0;
+
+            background-image:
+
+                linear-gradient(
+                    rgba(255, 140, 30, .035) 1px,
+                    transparent 1px
+                ),
+
+                linear-gradient(
+                    90deg,
+                    rgba(255, 140, 30, .035) 1px,
+                    transparent 1px
+                );
+
+            background-size: 48px 48px;
+
+            pointer-events: none;
+
+            mask-image:
+                linear-gradient(
+                    to bottom,
+                    black,
+                    transparent
+                );
+        }
+
+
+        /* =====================================================
+           MOVING LIGHTS
+        ===================================================== */
+
+        .loginx-glow {
+
+            position: absolute;
+
+            border-radius: 50%;
+
+            pointer-events: none;
+
+            filter: blur(8px);
+
+            will-change: transform;
+        }
+
+
+        .loginx-glow-1 {
+
+            width: 480px;
+            height: 480px;
+
+            top: -260px;
+            right: -150px;
+
+            background:
+
+                radial-gradient(
+                    circle,
+                    rgba(255, 115, 0, .35),
+                    transparent 70%
+                );
+
+            animation:
+                loginx-glow-one
+                9s
+                ease-in-out
+                infinite;
+        }
+
+
+        .loginx-glow-2 {
+
+            width: 520px;
+            height: 520px;
+
+            bottom: -300px;
+            left: -180px;
+
+            background:
+
+                radial-gradient(
+                    circle,
+                    rgba(255, 70, 0, .24),
+                    transparent 70%
+                );
+
+            animation:
+                loginx-glow-two
+                11s
+                ease-in-out
+                infinite;
+        }
+
+
+        .loginx-glow-3 {
+
+            width: 260px;
+            height: 260px;
+
+            left: 45%;
+            top: 45%;
+
+            background:
+
+                radial-gradient(
+                    circle,
+                    rgba(255, 170, 50, .12),
+                    transparent 70%
+                );
+
+            animation:
+                loginx-glow-three
+                7s
+                ease-in-out
+                infinite;
+        }
+
+
+        @keyframes loginx-glow-one {
+
+            0%,
+            100% {
+                transform:
+                    translate(0, 0)
+                    scale(1);
+            }
+
+            50% {
+                transform:
+                    translate(-80px, 90px)
+                    scale(1.15);
+            }
+        }
+
+
+        @keyframes loginx-glow-two {
+
+            0%,
+            100% {
+                transform:
+                    translate(0, 0)
+                    scale(1);
+            }
+
+            50% {
+                transform:
+                    translate(100px, -80px)
+                    scale(1.18);
+            }
+        }
+
+
+        @keyframes loginx-glow-three {
+
+            0%,
+            100% {
+                transform:
+                    translate(0, 0);
+            }
+
+            50% {
+                transform:
+                    translate(50px, -40px);
+            }
+        }
+
+
+        /* =====================================================
+           MAIN CARD
+        ===================================================== */
+
+        .loginx-card {
+
+            position: relative;
+
+            z-index: 10;
+
+            width: 100%;
+
+            max-width: 1080px;
+
+            min-height: 650px;
+
+            display: grid;
+
+            grid-template-columns:
+                1fr 1fr;
+
+            overflow: hidden;
+
+            border-radius: 30px;
+
+            border:
+                1px solid
+                rgba(255, 140, 30, .20);
+
+            background:
+                rgba(12, 12, 12, .94);
+
+            box-shadow:
+
+                0 40px 100px
+                rgba(0, 0, 0, .75),
+
+                0 0 80px
+                rgba(255, 100, 0, .08),
+
+                inset 0 1px 0
+                rgba(255,255,255,.04);
+
+            backdrop-filter:
+                blur(20px);
+
+            transition:
+                transform .25s ease,
+                border-color .3s ease;
+        }
+
+
+        .loginx-card:hover {
+
+            border-color:
+                rgba(255, 130, 20, .35);
+        }
+
+
+        /* =====================================================
+           FORM SIDE
+        ===================================================== */
+
+        .loginx-form-side {
+
+            display: flex;
+
+            align-items: center;
+            justify-content: center;
+
+            padding:
+                50px 55px;
+
+            background:
+
+                linear-gradient(
+                    145deg,
+                    rgba(255,255,255,.025),
+                    rgba(255,115,0,.015),
+                    transparent
+                );
+        }
+
+
+        .loginx-form-content {
+
+            width: 100%;
+
+            max-width: 420px;
+        }
+
+
+        /* =====================================================
+           BRAND
+        ===================================================== */
+
+        .loginx-brand {
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 13px;
+
+            margin-bottom: 28px;
+        }
+
+
+        .loginx-brand-icon {
+
+            width: 52px;
+            height: 52px;
+
+            flex-shrink: 0;
+
+            display: flex;
+
+            align-items: center;
+            justify-content: center;
+
+            border-radius: 16px;
+
+            color: #fff;
+
+            font-size: 25px;
+
+            background:
+
+                linear-gradient(
+                    135deg,
+                    #ff9d2e,
+                    #ff5a00
+                );
+
+            box-shadow:
+
+                0 12px 35px
+                rgba(255, 100, 0, .28);
+
+            animation:
+                loginx-icon-pulse
+                3s
+                ease-in-out
+                infinite;
+        }
+
+
+        @keyframes loginx-icon-pulse {
+
+            0%,
+            100% {
+                box-shadow:
+                    0 12px 35px
+                    rgba(255,100,0,.25);
+            }
+
+            50% {
+                box-shadow:
+                    0 15px 45px
+                    rgba(255,100,0,.42);
+            }
+        }
+
+
+        .loginx-brand-title {
+
+            font-size: 16px;
+
+            font-weight: 900;
+
+            color: #fff;
+        }
+
+
+        .loginx-brand-subtitle {
+
+            margin-top: 4px;
+
+            color:
+                rgba(255,255,255,.40);
+
+            font-size: 11px;
+        }
+
+
+        /* =====================================================
+           TITLE
+        ===================================================== */
+
+        .loginx-title {
+
+            margin: 0 0 9px;
+
+            font-size: 34px;
+
+            line-height: 1.5;
+
+            font-weight: 900;
+
+            background:
+
+                linear-gradient(
+                    90deg,
+                    #ffffff,
+                    #ffbd75,
+                    #ff6a00
+                );
+
+            -webkit-background-clip: text;
+
+            background-clip: text;
+
+            -webkit-text-fill-color: transparent;
+        }
+
+
+        .loginx-description {
+
+            margin: 0 0 24px;
+
+            color:
+                rgba(255,255,255,.50);
+
+            font-size: 13px;
+
+            line-height: 2;
+        }
+
+
+        .loginx-hello {
+
+            margin: 0 0 20px;
+
+            color:
+                rgba(255,255,255,.78);
+
+            font-size: 14px;
+
+            line-height: 2;
+        }
+
+
+        /* =====================================================
+           GENERAL DJANGO ERRORS
+        ===================================================== */
+
+        .loginx-form-errors {
+
+            margin-bottom: 15px;
+
+            padding: 12px 14px;
+
+            border:
+                1px solid
+                rgba(255, 80, 60, .25);
+
+            border-radius: 13px;
+
+            background:
+                rgba(255, 60, 40, .07);
+
+            color:
+                #ff9d91;
+
+            font-size: 11px;
+
+            line-height: 2;
+
+            text-align: right;
+        }
+
+
+        /* =====================================================
+           INPUT
+        ===================================================== */
+
+        .loginx-input {
+
+            position: relative;
+
+            margin-bottom: 17px;
+        }
+
+
+        .loginx-input input {
+
+            width: 100%;
+
+            height: 59px;
+
+            padding:
+                18px 50px 4px 18px;
+
+            border:
+                1px solid
+                rgba(255,255,255,.10);
+
+            border-radius: 15px;
+
+            outline: none;
+
+            background:
+                rgba(0,0,0,.32);
+
+            color: #fff;
+
+            font-family: inherit;
+
+            font-size: 13px;
+
+            transition:
+                .25s ease;
+        }
+
+
+        .loginx-input input:hover {
+
+            border-color:
+                rgba(255,140,40,.22);
+
+            background:
+                rgba(255,255,255,.035);
+        }
+
+
+        .loginx-input input:focus {
+
+            border-color:
+                rgba(255,130,30,.85);
+
+            background:
+                rgba(35,20,10,.60);
+
+            box-shadow:
+
+                0 0 0 4px
+                rgba(255,110,0,.09),
+
+                0 8px 30px
+                rgba(255,100,0,.08);
+        }
+
+
+        .loginx-input label {
+
+            position: absolute;
+
+            right: 49px;
+
+            top: 19px;
+
+            color:
+                rgba(255,255,255,.40);
+
+            font-size: 13px;
+
+            pointer-events: none;
+
+            transition:
+                .22s ease;
+        }
+
+
+        .loginx-input input:focus + label,
+
+        .loginx-input input:not(:placeholder-shown) + label {
+
+            top: 7px;
+
+            font-size: 10px;
+
+            color:
+                #ff9a3c;
+        }
+
+
+        /* =====================================================
+           INPUT ICON
+        ===================================================== */
+
+        .loginx-icon {
+
+            position: absolute;
+
+            right: 16px;
+
+            top: 19px;
+
+            width: 20px;
+            height: 20px;
+
+            color:
+                rgba(255,160,70,.42);
+
+            pointer-events: none;
+
+            z-index: 2;
+
+            transition:
+                .2s ease;
+        }
+
+
+        .loginx-input:focus-within .loginx-icon {
+
+            color:
+                #ff8a20;
+
+            filter:
+                drop-shadow(
+                    0 0 7px
+                    rgba(255,110,0,.45)
+                );
+        }
+
+
+        /* =====================================================
+           DJANGO ERROR
+        ===================================================== */
+
+        .loginx-input .errorlist {
+
+            list-style: none;
+
+            margin: 6px 0 0;
+
+            padding: 0;
+
+            color:
+                #ff8585;
+
+            font-size: 11px;
+
+            line-height: 1.8;
+
+            text-align: right;
+        }
+
+
+        /* =====================================================
+           LINKS
+        ===================================================== */
+
+        .loginx-actions {
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: space-between;
+
+            gap: 10px;
+
+            margin:
+                5px 0 12px;
+        }
+
+
+        .loginx-link {
+
+            display: inline-flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            min-height: 39px;
+
+            padding:
+                8px 13px;
+
+            border:
+                1px solid
+                rgba(255,255,255,.08);
+
+            border-radius: 11px;
+
+            background:
+                rgba(255,255,255,.035);
+
+            color:
+                rgba(255,255,255,.65);
+
+            font-family: inherit;
+
+            font-size: 11px;
+
+            text-decoration: none;
+
+            transition:
+                .22s ease;
+        }
+
+
+        .loginx-link:hover {
+
+            color: #fff;
+
+            border-color:
+                rgba(255,125,20,.40);
+
+            background:
+                rgba(255,100,0,.09);
+
+            transform:
+                translateY(-2px);
+
+            box-shadow:
+                0 8px 25px
+                rgba(255,100,0,.08);
+        }
+
+
+        .loginx-link-primary {
+
+            color:
+                #ffad5c;
+
+            border-color:
+                rgba(255,120,20,.18);
+        }
+
+
+        /* =====================================================
+           TURNSTILE
+        ===================================================== */
+
+        .loginx-turnstile {
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            width: 100%;
+
+            min-height: 70px;
+
+            margin:
+                12px 0 15px;
+
+            padding: 3px;
+
+            overflow: hidden;
+
+            border-radius: 13px;
+
+            background:
+                rgba(255,255,255,.018);
+        }
+
+
+        /* =====================================================
+           SUBMIT
+        ===================================================== */
+
+        .loginx-submit {
+
+            position: relative;
+
+            width: 100%;
+
+            height: 58px;
+
+            border: none;
+
+            border-radius: 15px;
+
+            outline: none;
+
+            overflow: hidden;
+
+            color: #fff;
+
+            background:
+
+                linear-gradient(
+                    110deg,
+                    #ff9d2e,
+                    #ff7200,
+                    #f04b00
+                );
+
+            font-family: inherit;
+
+            font-size: 14px;
+
+            font-weight: 900;
+
+            cursor: pointer;
+
+            box-shadow:
+
+                0 13px 35px
+                rgba(255,95,0,.25);
+
+            transition:
+                .22s ease;
+        }
+
+
+        .loginx-submit::before {
+
+            content: "";
+
+            position: absolute;
+
+            top: 0;
+
+            left: -120%;
+
+            width: 70%;
+
+            height: 100%;
+
+            background:
+
+                linear-gradient(
+                    90deg,
+                    transparent,
+                    rgba(255,255,255,.25),
+                    transparent
+                );
+
+            transform:
+                skewX(-20deg);
+
+            transition:
+                left .7s ease;
+        }
+
+
+        .loginx-submit:hover::before {
+
+            left: 130%;
+        }
+
+
+        .loginx-submit:hover {
+
+            transform:
+                translateY(-2px);
+
+            filter:
+                brightness(1.08);
+
+            box-shadow:
+
+                0 18px 42px
+                rgba(255,95,0,.38);
+        }
+
+
+        .loginx-submit:active {
+
+            transform:
+                translateY(0);
+        }
+
+
+        .loginx-submit:disabled {
+
+            cursor: wait;
+
+            opacity: .65;
+
+            transform: none;
+        }
+
+
+        /* =====================================================
+           TERMS
+        ===================================================== */
+
+        .loginx-terms {
+
+            margin-top: 18px;
+
+            text-align: center;
+
+            color:
+                rgba(255,255,255,.27);
+
+            font-size: 10px;
+
+            line-height: 2;
+        }
+
+
+        /* =====================================================
+           USER LOGGED IN
+        ===================================================== */
+
+        .loginx-user-box {
+
+            margin-bottom: 23px;
+
+            padding: 22px;
+
+            border-radius: 19px;
+
+            border:
+                1px solid
+                rgba(255,130,20,.13);
+
+            background:
+
+                linear-gradient(
+                    145deg,
+                    rgba(255,100,0,.07),
+                    rgba(255,255,255,.025)
+                );
+
+            text-align: center;
+        }
+
+
+        .loginx-user-avatar {
+
+            width: 66px;
+            height: 66px;
+
+            margin:
+                0 auto 14px;
+
+            display: flex;
+
+            align-items: center;
+            justify-content: center;
+
+            border-radius: 50%;
+
+            background:
+
+                linear-gradient(
+                    135deg,
+                    #ff9d2e,
+                    #f04b00
+                );
+
+            font-size: 25px;
+
+            box-shadow:
+                0 12px 30px
+                rgba(255,90,0,.22);
+        }
+
+
+        .loginx-user-name {
+
+            margin: 0;
+
+            color: #fff;
+
+            font-size: 17px;
+
+            font-weight: 900;
+        }
+
+
+        .loginx-user-message {
+
+            margin: 7px 0 0;
+
+            color:
+                rgba(255,255,255,.48);
+
+            font-size: 11px;
+
+            line-height: 2;
+        }
+
+
+        .loginx-user-actions {
+
+            display: grid;
+
+            grid-template-columns:
+                1fr 1fr;
+
+            gap: 10px;
+
+            margin-top: 15px;
+        }
+
+
+        .loginx-user-actions
+        .loginx-link:last-child {
+
+            grid-column:
+                1 / -1;
+        }
+
+
+        .loginx-logout {
+
+            color:
+                #ff9898;
+
+            border-color:
+                rgba(255,90,90,.14);
+        }
+
+
+        .loginx-logout:hover {
+
+            color: #fff;
+
+            background:
+                rgba(255,60,60,.10);
+
+            border-color:
+                rgba(255,90,90,.32);
+        }
+
+
+        /* =====================================================
+           VISUAL SIDE
+        ===================================================== */
+
+        .loginx-visual {
+
+            position: relative;
+
+            min-height: 650px;
+
+            overflow: hidden;
+
+            background:
+
+                radial-gradient(
+                    circle at 15% 20%,
+                    rgba(255,145,30,.55),
+                    transparent 30%
+                ),
+
+                radial-gradient(
+                    circle at 85% 80%,
+                    rgba(255,65,0,.35),
+                    transparent 32%
+                ),
+
+                radial-gradient(
+                    circle at 55% 45%,
+                    rgba(255,180,60,.12),
+                    transparent 35%
+                ),
+
+                linear-gradient(
+                    145deg,
+                    #241306,
+                    #120b06 50%,
+                    #050505
+                );
+        }
+
+
+        /* =====================================================
+           VISUAL MOVING LIGHT
+        ===================================================== */
+
+        .loginx-visual::before {
+
+            content: "";
+
+            position: absolute;
+
+            width: 500px;
+            height: 500px;
+
+            top: -190px;
+            left: -180px;
+
+            border-radius: 50%;
+
+            background:
+
+                radial-gradient(
+                    circle,
+                    rgba(255,130,20,.42),
+                    transparent 68%
+                );
+
+            animation:
+                loginx-visual-light
+                8s
+                ease-in-out
+                infinite;
+        }
+
+
+        @keyframes loginx-visual-light {
+
+            0%,
+            100% {
+                transform:
+                    translate(0,0)
+                    scale(1);
+            }
+
+            50% {
+                transform:
+                    translate(120px,90px)
+                    scale(1.15);
+            }
+        }
+
+
+        .loginx-visual::after {
+
+            content: "";
+
+            position: absolute;
+
+            inset: 0;
+
+            background:
+
+                linear-gradient(
+                    135deg,
+                    rgba(255,110,0,.10),
+                    transparent 50%
+                ),
+
+                linear-gradient(
+                    to top,
+                    rgba(0,0,0,.90),
+                    transparent 72%
+                );
+
+            pointer-events: none;
+
+            z-index: 2;
+        }
+
+
+        /* =====================================================
+           DECORATIVE CIRCLES
+        ===================================================== */
+
+        .loginx-circle {
+
+            position: absolute;
+
+            border:
+                1px solid
+                rgba(255,160,70,.14);
+
+            border-radius: 50%;
+
+            pointer-events: none;
+
+            z-index: 3;
+        }
+
+
+        .loginx-circle-1 {
+
+            width: 520px;
+            height: 520px;
+
+            top: -250px;
+            right: -230px;
+        }
+
+
+        .loginx-circle-2 {
+
+            width: 380px;
+            height: 380px;
+
+            top: -170px;
+            right: -160px;
+        }
+
+
+        .loginx-circle-3 {
+
+            width: 250px;
+            height: 250px;
+
+            bottom: -120px;
+            left: -100px;
+        }
+
+
+        .loginx-circle-4 {
+
+            width: 120px;
+            height: 120px;
+
+            bottom: 110px;
+            right: 80px;
+
+            border-color:
+                rgba(255,150,40,.20);
+
+            animation:
+                loginx-float
+                5s
+                ease-in-out
+                infinite;
+        }
+
+
+        @keyframes loginx-float {
+
+            0%,
+            100% {
+                transform:
+                    translateY(0)
+                    rotate(0deg);
+            }
+
+            50% {
+                transform:
+                    translateY(-18px)
+                    rotate(8deg);
+            }
+        }
+
+
+        /* =====================================================
+           VISUAL CONTENT
+        ===================================================== */
+
+        .loginx-visual-content {
+
+            position: absolute;
+
+            z-index: 10;
+
+            right: 48px;
+            left: 48px;
+
+            bottom: 50px;
+
+            direction: rtl;
+
+            animation:
+                loginx-content-in
+                .8s
+                ease
+                both;
+
+            transition:
+                transform .35s ease;
+        }
+
+
+        .loginx-visual:hover
+        .loginx-visual-content {
+
+            transform:
+                translateY(-6px);
+        }
+
+
+        @keyframes loginx-content-in {
+
+            from {
+                opacity: 0;
+
+                transform:
+                    translateY(25px);
+            }
+
+            to {
+                opacity: 1;
+
+                transform:
+                    translateY(0);
+            }
+        }
+
+
+        /* =====================================================
+           BADGE
+        ===================================================== */
+
+        .loginx-badge {
+
+            display: inline-flex;
+
+            align-items: center;
+
+            gap: 7px;
+
+            margin-bottom: 17px;
+
+            padding:
+                8px 15px;
+
+            border:
+                1px solid
+                rgba(255,180,90,.20);
+
+            border-radius: 50px;
+
+            background:
+                rgba(255,130,30,.09);
+
+            backdrop-filter:
+                blur(12px);
+
+            color:
+                rgba(255,220,185,.88);
+
+            font-size: 11px;
+
+            font-weight: 600;
+
+            box-shadow:
+                0 8px 30px
+                rgba(255,100,0,.08);
+        }
+
+
+        /* =====================================================
+           VISUAL TITLE
+        ===================================================== */
+
+        .loginx-visual-title {
+
+            margin: 0 0 14px;
+
+            max-width: 450px;
+
+            color: #fff;
+
+            font-size: 37px;
+
+            line-height: 1.55;
+
+            font-weight: 900;
+
+            letter-spacing: -1px;
+
+            text-shadow:
+                0 5px 30px
+                rgba(0,0,0,.40);
+        }
+
+
+        .loginx-visual-title span {
+
+            color:
+                #ff8a25;
+        }
+
+
+        .loginx-visual-description {
+
+            margin: 0;
+
+            max-width: 430px;
+
+            color:
+                rgba(255,255,255,.60);
+
+            font-size: 13px;
+
+            line-height: 2.3;
+        }
+
+
+        /* =====================================================
+           VISUAL FEATURES
+        ===================================================== */
+
+        .loginx-visual-feature {
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 10px;
+
+            margin-top: 20px;
+
+            color:
+                rgba(255,255,255,.70);
+
+            font-size: 11px;
+        }
+
+
+        .loginx-feature-dot {
+
+            width: 9px;
+            height: 9px;
+
+            flex-shrink: 0;
+
+            border-radius: 50%;
+
+            background:
+                #ff8a25;
+
+            box-shadow:
+                0 0 15px
+                rgba(255,120,20,.80);
+        }
+
+
+        /* =====================================================
+           MOBILE
+        ===================================================== */
+
+        @media (max-width: 850px) {
+
+            .loginx-page {
+
+                position: relative;
+
+                min-height: 100vh;
+
+                height: auto;
+
+                padding: 15px;
+            }
+
+
+            .loginx-card {
+
+                max-width: 540px;
+
+                min-height: auto;
+
+                display: block;
+
+                border-radius: 25px;
+            }
+
+
+            .loginx-visual {
+
+                display: none;
+            }
+
+
+            .loginx-form-side {
+
+                padding:
+                    42px 30px;
+            }
+        }
+
+
+        @media (max-width: 500px) {
+
+            .loginx-page {
+
+                padding: 9px;
+            }
+
+
+            .loginx-card {
+
+                border-radius: 21px;
+            }
+
+
+            .loginx-form-side {
+
+                padding:
+                    32px 18px;
+            }
+
+
+            .loginx-brand {
+
+                margin-bottom: 23px;
+            }
+
+
+            .loginx-brand-icon {
+
+                width: 46px;
+                height: 46px;
+
+                border-radius: 14px;
+
+                font-size: 21px;
+            }
+
+
+            .loginx-title {
+
+                font-size: 27px;
+            }
+
+
+            .loginx-description {
+
+                font-size: 12px;
+
+                line-height: 2.1;
+            }
+
+
+            .loginx-actions {
+
+                flex-direction: column;
+
+                align-items: stretch;
+            }
+
+
+            .loginx-actions
+            .loginx-link {
+
+                width: 100%;
+            }
+
+
+            .loginx-user-actions {
+
+                grid-template-columns:
+                    1fr;
+            }
+
+
+            .loginx-user-actions
+            .loginx-link:last-child {
+
+                grid-column:
+                    auto;
+            }
+
+
+            .loginx-input input {
+
+                height: 56px;
+            }
+
+
+            .loginx-submit {
+
+                height: 55px;
+            }
+
+
+            .loginx-turnstile {
+
+                transform-origin:
+                    center;
+            }
+        }
+
+
+        @media (max-width: 350px) {
+
+            .loginx-form-side {
+
+                padding:
+                    28px 14px;
+            }
+
+
+            .loginx-title {
+
+                font-size: 24px;
+            }
+
+
+            .loginx-brand-title {
+
+                font-size: 14px;
+            }
+        }
+
+
+        /* =====================================================
+           REDUCE MOTION
+        ===================================================== */
+
+        @media (prefers-reduced-motion: reduce) {
+
+            *,
+            *::before,
+            *::after {
+
+                animation-duration:
+                    .01ms !important;
+
+                animation-iteration-count:
+                    1 !important;
+
+                transition-duration:
+                    .01ms !important;
+            }
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<div class="loginx-page">
+
+
+    <!-- =================================================
+         BACKGROUND
+    ================================================== -->
+
+    <div class="loginx-glow loginx-glow-1"></div>
+
+    <div class="loginx-glow loginx-glow-2"></div>
+
+    <div class="loginx-glow loginx-glow-3"></div>
+
+
+    <!-- =================================================
+         MAIN CARD
+    ================================================== -->
+
+    <main class="loginx-card">
+
+
+        <!-- =================================================
+             FORM SIDE
+        ================================================== -->
+
+        <section class="loginx-form-side">
+
+
+            <div class="loginx-form-content">
+
+
+                <!-- BRAND -->
+
+                <div class="loginx-brand">
+
+
+                    <div class="loginx-brand-icon">
+
+                        ✦
+
+                    </div>
+
+
+                    <div>
+
+                        <div class="loginx-brand-title">
+
+                            حساب کاربری
+
+                        </div>
+
+
+                        <div class="loginx-brand-subtitle">
+
+                            ورود امن و سریع
+
+                        </div>
+
+                    </div>
+
+
+                </div>
+
+
+                {% if request.user.is_authenticated %}
+
+
+                    <!-- =================================================
+                         LOGGED IN
+                    ================================================== -->
+
+                    <h1 class="loginx-title">
+
+                        خوش آمدید!
+
+                    </h1>
+
+
+                    <div class="loginx-user-box">
+
+
+                        <div class="loginx-user-avatar">
+
+                            👤
+
+                        </div>
+
+
+                        <p class="loginx-user-name">
+
+                            {{ user.username }}
+
+                        </p>
+
+
+                        <p class="loginx-user-message">
+
+                            شما در حال حاضر وارد حساب کاربری خود هستید.
+
+                        </p>
+
+
+                    </div>
+
+
+                    <div class="loginx-user-actions">
+
+
+                        <a
+                            href="{% url 'accounts:logout_user' %}"
+                            class="loginx-link loginx-logout"
+                        >
+
+                            خروج از حساب
+
+                        </a>
+
+
+                        <a
+                            href="{% url 'accounts:complete' %}"
+                            class="loginx-link loginx-link-primary"
+                        >
+
+                            تکمیل اطلاعات
+
+                        </a>
+
+
+                        <a
+                            href="{% url 'accounts:indexone' %}"
+                            class="loginx-link"
+                        >
+
+                            ← برگشت به خانه
+
+                        </a>
+
+
+                    </div>
+
+
+                {% else %}
+
+
+                    <!-- =================================================
+                         LOGIN
+                    ================================================== -->
+
+                    <h1 class="loginx-title">
+
+                        خوش آمدید!
+
+                    </h1>
+
+
+                    <p class="loginx-description">
+
+                        برای ورود به حساب کاربری خود،
+                        نام کاربری و رمز عبور را وارد کنید.
+
+                    </p>
+
+
+                    <p class="loginx-hello">
+
+                        سلام! 👋
+
+                    </p>
+
+
+                    <form
+                        method="post"
+                        id="loginx-form"
+                        autocomplete="on"
+                    >
+
+
+                        {% csrf_token %}
+
+
+                        <!-- GENERAL ERRORS -->
+
+                        {% if form.non_field_errors %}
+
+                            <div class="loginx-form-errors">
+
+                                {{ form.non_field_errors }}
+
+                            </div>
+
+                        {% endif %}
+
+
+                        <!-- =================================================
+                             USERNAME
+                        ================================================== -->
+
+                        <div class="loginx-input">
+
+
+                            <svg
+                                class="loginx-icon"
+                                viewBox="0 0 24 24"
+                                fill="none"
+                                stroke="currentColor"
+                                stroke-width="1.8"
+                            >
+
+                                <circle
+                                    cx="12"
+                                    cy="7"
+                                    r="4"
+                                />
+
+                                <path
+                                    d="M4 21a8 8 0 0 1 16 0"
+                                />
+
+                            </svg>
+
+
+                            {{ form.username }}
+
+
+                            <label
+                                for="{{ form.username.id_for_label }}"
+                            >
+
+                                نام کاربری
+
+                            </label>
+
+
+                            {{ form.username.errors }}
+
+
+                        </div>
+
+
+                        <!-- =================================================
+                             PASSWORD
+                        ================================================== -->
+
+                        <div class="loginx-input">
+
+
+                            <svg
+                                class="loginx-icon"
+                                viewBox="0 0 24 24"
+                                fill="none"
+                                stroke="currentColor"
+                                stroke-width="1.8"
+                            >
+
+                                <rect
+                                    x="3"
+                                    y="10"
+                                    width="18"
+                                    height="11"
+                                    rx="2"
+                                />
+
+                                <path
+                                    d="M7 10V7a5 5 0 0 1 10 0v3"
+                                />
+
+                            </svg>
+
+
+                            {{ form.password }}
+
+
+                            <label
+                                for="{{ form.password.id_for_label }}"
+                            >
+
+                                رمز عبور
+
+                            </label>
+
+
+                            {{ form.password.errors }}
+
+
+                        </div>
+
+
+                        <!-- =================================================
+                             LINKS
+                        ================================================== -->
+
+                        <div class="loginx-actions">
+
+
+                            <a
+                                href="{% url 'accounts:forgot_password' %}"
+                                class="loginx-link loginx-link-primary"
+                            >
+
+                                🔑 رمز عبور خود را فراموش کرده‌ام
+
+                            </a>
+
+
+                            <a
+                                href="{% url 'accounts:signup_user' %}"
+                                class="loginx-link"
+                            >
+
+                                ساخت حساب کاربری
+
+                            </a>
+
+
+                        </div>
+
+
+                        <!-- HOME -->
+
+                        <a
+                            href="{% url 'accounts:indexone' %}"
+                            class="loginx-link"
+                            style="
+                                width:100%;
+                                margin-bottom:12px;
+                            "
+                        >
+
+                            ← برگشت به خانه
+
+                        </a>
+
+
+                        <!-- =================================================
+                             CLOUDFLARE TURNSTILE
+                        ================================================== -->
+
+                        <div class="loginx-turnstile">
+
+
+                            <div
+                                class="cf-turnstile"
+                                data-sitekey="{{ turnstile_site_key }}"
+                                data-theme="dark"
+                            >
+                            </div>
+
+
+                        </div>
+
+
+                        <!-- =================================================
+                             SUBMIT
+                        ================================================== -->
+
+                        <button
+                            type="submit"
+                            class="loginx-submit"
+                            id="loginx-submit"
+                        >
+
+                            <span id="loginx-submit-text">
+
+                                ورود
+
+                            </span>
+
+                        </button>
+
+
+                    </form>
+
+
+                    <div class="loginx-terms">
+
+                        ورود به حساب به معنای پذیرش
+                        شرایط و قوانین سایت است.
+
+                    </div>
+
+
+                {% endif %}
+
+
+            </div>
+
+
+        </section>
+
+
+        <!-- =================================================
+             VISUAL SIDE
+        ================================================== -->
+
+        <section class="loginx-visual">
+
+
+            <!-- Decorative circles -->
+
+            <div
+                class="loginx-circle loginx-circle-1">
+            </div>
+
+
+            <div
+                class="loginx-circle loginx-circle-2">
+            </div>
+
+
+            <div
+                class="loginx-circle loginx-circle-3">
+            </div>
+
+
+            <div
+                class="loginx-circle loginx-circle-4">
+            </div>
+
+
+            <!-- Content -->
+
+            <div class="loginx-visual-content">
+
+
+                <div class="loginx-badge">
+
+                    ✦ ورود امن به حساب
+
+                </div>
+
+
+                <h2 class="loginx-visual-title">
+
+                    دوباره به
+                    <span>دنیای خودت</span>
+                    برگرد.
+
+                </h2>
+
+
+                <p class="loginx-visual-description">
+
+                    وارد حساب کاربری خود شوید و
+                    به سفارش‌ها، علاقه‌مندی‌ها،
+                    اطلاعات شخصی و امکانات اختصاصی
+                    خود دسترسی پیدا کنید.
+
+                </p>
+
+
+                <div class="loginx-visual-feature">
+
+                    <span class="loginx-feature-dot"></span>
+
+                    ورود سریع و ساده
+
+                </div>
+
+
+                <div class="loginx-visual-feature">
+
+                    <span class="loginx-feature-dot"></span>
+
+                    محافظت از اطلاعات حساب
+
+                </div>
+
+
+                <div class="loginx-visual-feature">
+
+                    <span class="loginx-feature-dot"></span>
+
+                    دسترسی به امکانات اختصاصی
+
+                </div>
+
+
+            </div>
+
+
+        </section>
+
+
+    </main>
+
+
+</div>
+
+
+<!-- =========================================================
+     JAVASCRIPT
+========================================================= -->
+
+<script>
+
+
+    /* =====================================================
+       FORM
+    ===================================================== */
+
+    const loginForm =
+        document.getElementById(
+            "loginx-form"
+        );
+
+
+    const loginButton =
+        document.getElementById(
+            "loginx-submit"
+        );
+
+
+    const loginButtonText =
+        document.getElementById(
+            "loginx-submit-text"
+        );
+
+
+    if (loginForm) {
+
+
+        loginForm.addEventListener(
+            "submit",
+            function () {
+
+
+                if (
+                    !loginForm.checkValidity()
+                ) {
+
+                    return;
+
+                }
+
+
+                if (loginButton) {
+
+                    loginButton.disabled = true;
+
+                    loginButton.style.cursor =
+                        "wait";
+
+                    loginButton.style.opacity =
+                        ".7";
+
+                }
+
+
+                if (loginButtonText) {
+
+                    loginButtonText.textContent =
+                        "در حال ورود...";
+
+                }
+
+            }
+        );
+
+    }
+
+
+    /* =====================================================
+       CARD 3D MOUSE EFFECT
+    ===================================================== */
+
+    const loginCard =
+        document.querySelector(
+            ".loginx-card"
+        );
+
+
+    const loginPage =
+        document.querySelector(
+            ".loginx-page"
+        );
+
+
+    if (
+        loginCard &&
+        loginPage
+    ) {
+
+
+        loginPage.addEventListener(
+            "mousemove",
+            function (event) {
+
+
+                if (
+                    window.innerWidth <= 850
+                ) {
+
+                    return;
+
+                }
+
+
+                const x =
+                    (
+                        event.clientX /
+                        window.innerWidth
+                    ) - .5;
+
+
+                const y =
+                    (
+                        event.clientY /
+                        window.innerHeight
+                    ) - .5;
+
+
+                loginCard.style.transform =
+
+                    "perspective(1400px)" +
+
+                    " rotateY(" +
+                    (x * -1.3) +
+                    "deg)" +
+
+                    " rotateX(" +
+                    (y * 1.1) +
+                    "deg)";
+
+            }
+        );
+
+
+        loginPage.addEventListener(
+            "mouseleave",
+            function () {
+
+
+                loginCard.style.transform =
+
+                    "perspective(1400px)" +
+
+                    " rotateY(0deg)" +
+
+                    " rotateX(0deg)";
+
+            }
+        );
+
+    }
+
+
+    /* =====================================================
+       INPUT GLOW
+    ===================================================== */
+
+    const inputs =
+        document.querySelectorAll(
+            ".loginx-input input"
+        );
+
+
+    inputs.forEach(
+        function (input) {
+
+
+            input.addEventListener(
+                "focus",
+                function () {
+
+                    this.parentElement.classList
+                        .add("is-focused");
+
+                }
+            );
+
+
+            input.addEventListener(
+                "blur",
+                function () {
+
+                    this.parentElement.classList
+                        .remove("is-focused");
+
+                }
+            );
+
+        }
+    );
+
+
+    /* =====================================================
+       PARALLAX BACKGROUND
+    ===================================================== */
+
+    const glow1 =
+        document.querySelector(
+            ".loginx-glow-1"
+        );
+
+
+    const glow2 =
+        document.querySelector(
+            ".loginx-glow-2"
+        );
+
+
+    const glow3 =
+        document.querySelector(
+            ".loginx-glow-3"
+        );
+
+
+    if (loginPage) {
+
+
+        loginPage.addEventListener(
+            "mousemove",
+            function (event) {
+
+
+                if (
+                    window.innerWidth <= 850
+                ) {
+
+                    return;
+
+                }
+
+
+                const x =
+                    (
+                        event.clientX /
+                        window.innerWidth
+                    ) - .5;
+
+
+                const y =
+                    (
+                        event.clientY /
+                        window.innerHeight
+                    ) - .5;
+
+
+                if (glow1) {
+
+                    glow1.style.transform =
+                        "translate(" +
+                        (x * -35) +
+                        "px," +
+                        (y * -35) +
+                        "px)";
+
+                }
+
+
+                if (glow2) {
+
+                    glow2.style.transform =
+                        "translate(" +
+                        (x * 25) +
+                        "px," +
+                        (y * 25) +
+                        "px)";
+
+                }
+
+
+                if (glow3) {
+
+                    glow3.style.transform =
+                        "translate(" +
+                        (x * 45) +
+                        "px," +
+                        (y * 45) +
+                        "px)";
+
+                }
+
+            }
+        );
+
+    }
+
+
+</script>
+
+
+</body>
+
+</html>

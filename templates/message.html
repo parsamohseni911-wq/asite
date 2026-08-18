@@ -1,0 +1,51 @@
+{% extends 'user/base.html' %}
+
+{% block title %}
+    پیام‌ها
+{% endblock %}
+
+{% block user_content %}
+
+<div class="user-messages-page" dir="rtl">
+
+    <div class="mb-4">
+        <h4 class="fw-bold mb-2">
+            پیام‌ها
+        </h4>
+
+        <p class="gray-500 mb-0">
+            پیام‌های ارسال شده از طرف سایت
+        </p>
+    </div>
+
+
+{% if user.is_authenticated %}
+
+    {% if messages %}
+        {% for message in messages %}
+
+            <div class="message-item">
+                <h5>{{ message.title }}</h5>
+
+                <p>
+                    {{ message.text }}
+                </p>
+
+                <small>
+                    {{ message.created_at }}
+                </small>
+            </div>
+
+        {% endfor %}
+    {% else %}
+
+        <p>پیامی برای شما وجود ندارد.</p>
+
+    {% endif %}
+
+{% endif %}
+
+
+</div>
+
+{% endblock %}

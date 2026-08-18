@@ -1,0 +1,2855 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+
+<style>
+
+/* =========================================================
+   PRODUCT PAGE
+   LIGHT ORANGE / SHOPPING THEME
+   ========================================================= */
+
+.product-page {
+    --orange: #f97316;
+    --orange-dark: #ea580c;
+    --orange-light: #fff7ed;
+    --orange-soft: #ffedd5;
+    --orange-border: #fed7aa;
+
+    --text: #252525;
+    --text-soft: #6b7280;
+    --text-muted: #9ca3af;
+
+    --white: #ffffff;
+    --cream: #fffaf5;
+    --border: #eee5dc;
+
+    direction: rtl;
+    width: 100%;
+    min-height: 100vh;
+
+    padding: 25px 0 60px;
+
+    background:
+        radial-gradient(
+            circle at 5% 5%,
+            rgba(249,115,22,.08),
+            transparent 28%
+        ),
+        radial-gradient(
+            circle at 95% 35%,
+            rgba(251,146,60,.08),
+            transparent 30%
+        ),
+        linear-gradient(
+            180deg,
+            #fffdfb 0%,
+            #fffaf6 50%,
+            #ffffff 100%
+        );
+
+    color: var(--text);
+
+    font-family:
+        Tahoma,
+        Arial,
+        sans-serif;
+}
+
+
+/* =========================================================
+   GLOBAL
+   ========================================================= */
+
+.product-page *,
+.product-page *::before,
+.product-page *::after {
+    box-sizing: border-box;
+}
+
+.product-page a {
+    text-decoration: none;
+}
+
+.product-page img {
+    max-width: 100%;
+}
+
+
+/* =========================================================
+   CONTAINER
+   ========================================================= */
+
+.product-page-container {
+    width: min(1250px, calc(100% - 30px));
+    margin: 0 auto;
+}
+
+
+/* =========================================================
+   BREADCRUMB
+   ========================================================= */
+
+.product-breadcrumb {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+
+    gap: 9px;
+
+    margin-bottom: 20px;
+
+    padding: 13px 17px;
+
+    border: 1px solid var(--border);
+    border-radius: 14px;
+
+    background: rgba(255,255,255,.88);
+
+    box-shadow:
+        0 5px 25px rgba(72,40,15,.04);
+
+    font-size: 12px;
+
+    color: var(--text-muted);
+}
+
+.product-breadcrumb a {
+    color: #b45309;
+
+    transition: .2s ease;
+}
+
+.product-breadcrumb a:hover {
+    color: var(--orange);
+
+    transform: translateY(-1px);
+}
+
+.product-breadcrumb span {
+    color: #d1d5db;
+}
+
+.product-breadcrumb .active {
+    color: #555;
+    font-weight: 700;
+}
+
+
+/* =========================================================
+   MAIN CARD
+   ========================================================= */
+
+.product-main-card {
+
+    position: relative;
+
+    padding: 24px;
+
+    border: 1px solid var(--border);
+    border-radius: 26px;
+
+    background:
+        rgba(255,255,255,.96);
+
+    box-shadow:
+        0 18px 55px rgba(80,45,15,.07);
+
+    overflow: hidden;
+}
+
+.product-main-card::before {
+
+    content: "";
+
+    position: absolute;
+
+    top: -120px;
+    left: -120px;
+
+    width: 300px;
+    height: 300px;
+
+    border-radius: 50%;
+
+    background:
+        radial-gradient(
+            circle,
+            rgba(249,115,22,.08),
+            transparent 70%
+        );
+
+    pointer-events: none;
+}
+
+
+/* =========================================================
+   PRODUCT GALLERY
+   ========================================================= */
+
+.product-gallery {
+
+    position: relative;
+
+    height: 100%;
+
+    min-height: 560px;
+
+    padding: 22px;
+
+    border: 1px solid #f0e6dc;
+
+    border-radius: 22px;
+
+    background:
+        linear-gradient(
+            145deg,
+            #fffdfa,
+            #fff8f1
+        );
+
+    display: flex;
+
+    flex-direction: column;
+
+    justify-content: space-between;
+
+    overflow: hidden;
+}
+
+
+/* subtle orange glow */
+
+.product-gallery::before {
+
+    content: "";
+
+    position: absolute;
+
+    width: 260px;
+    height: 260px;
+
+    top: -150px;
+    right: -100px;
+
+    border-radius: 50%;
+
+    background:
+        radial-gradient(
+            circle,
+            rgba(249,115,22,.13),
+            transparent 70%
+        );
+
+    pointer-events: none;
+}
+
+
+/* =========================================================
+   OFFER
+   ========================================================= */
+
+.offer-badge {
+
+    position: absolute;
+
+    top: 18px;
+    right: 18px;
+
+    z-index: 8;
+
+    padding: 8px 14px;
+
+    border-radius: 50px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #f97316,
+            #ea580c
+        );
+
+    color: #fff;
+
+    font-size: 11px;
+
+    font-weight: 800;
+
+    box-shadow:
+        0 8px 20px rgba(249,115,22,.22);
+}
+
+
+/* =========================================================
+   FAVORITE
+   ========================================================= */
+
+.favorite-wrapper {
+
+    position: absolute;
+
+    top: 17px;
+    left: 17px;
+
+    z-index: 10;
+}
+
+.favorite-form {
+    margin: 0;
+}
+
+.modern-favorite-btn {
+
+    width: 44px;
+    height: 44px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    border: 1px solid #eadfd5;
+
+    border-radius: 50%;
+
+    background:
+        rgba(255,255,255,.92);
+
+    color: #9ca3af;
+
+    cursor: pointer;
+
+    box-shadow:
+        0 7px 20px rgba(60,35,15,.07);
+
+    transition:
+        transform .2s ease,
+        color .2s ease,
+        background .2s ease,
+        border-color .2s ease;
+}
+
+.modern-favorite-btn svg {
+
+    width: 19px;
+    height: 19px;
+
+    fill: currentColor;
+}
+
+.modern-favorite-btn:hover {
+
+    color: var(--orange);
+
+    border-color: var(--orange-border);
+
+    background: var(--orange-light);
+
+    transform: translateY(-2px);
+}
+
+.modern-favorite-btn.active {
+
+    color: #f97316;
+
+    background: #fff1e8;
+
+    border-color: #fdba74;
+}
+
+
+/* =========================================================
+   IMAGE
+   ========================================================= */
+
+.product-image-wrapper {
+
+    position: relative;
+
+    width: 100%;
+
+    min-height: 405px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    padding: 35px 20px 15px;
+}
+
+.product-image-wrapper::after {
+
+    content: "";
+
+    position: absolute;
+
+    width: 230px;
+    height: 230px;
+
+    border-radius: 50%;
+
+    background:
+        radial-gradient(
+            circle,
+            rgba(249,115,22,.08),
+            transparent 68%
+        );
+
+    z-index: 0;
+}
+
+.product-main-image {
+
+    position: relative;
+
+    z-index: 1;
+
+    width: 100%;
+    max-width: 420px;
+
+    height: 400px;
+
+    object-fit: contain;
+
+    mix-blend-mode: multiply;
+
+    filter:
+        drop-shadow(
+            0 18px 25px rgba(70,40,15,.10)
+        );
+
+    transition:
+        transform .35s ease;
+}
+
+.product-main-image:hover {
+
+    transform:
+        scale(1.035);
+}
+
+
+/* =========================================================
+   THUMBNAILS
+   ========================================================= */
+
+.product-thumbnails {
+
+    position: relative;
+
+    z-index: 3;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    flex-wrap: wrap;
+
+    gap: 10px;
+
+    padding-top: 14px;
+}
+
+.product-thumbnail {
+
+    width: 65px;
+    height: 65px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    padding: 5px;
+
+    border:
+        1px solid
+        #eadfd5;
+
+    border-radius: 13px;
+
+    background: #fff;
+
+    transition:
+        .2s ease;
+
+    overflow: hidden;
+}
+
+.product-thumbnail:hover {
+
+    border-color: #fb923c;
+
+    transform:
+        translateY(-2px);
+
+    box-shadow:
+        0 8px 20px rgba(249,115,22,.10);
+}
+
+.product-thumbnail img {
+
+    width: 100%;
+    height: 100%;
+
+    object-fit: contain;
+}
+
+
+/* =========================================================
+   PRODUCT INFORMATION
+   ========================================================= */
+
+.product-info {
+
+    height: 100%;
+
+    display: flex;
+
+    flex-direction: column;
+
+    padding: 8px 5px;
+}
+
+
+/* =========================================================
+   TITLE
+   ========================================================= */
+
+.product-title {
+
+    margin: 5px 0 13px;
+
+    color: #252525;
+
+    font-size: clamp(24px, 3vw, 34px);
+
+    line-height: 1.7;
+
+    font-weight: 900;
+
+    letter-spacing: -.5px;
+}
+
+
+/* =========================================================
+   BRAND
+   ========================================================= */
+
+.product-brand {
+
+    display: inline-flex;
+
+    align-items: center;
+
+    gap: 8px;
+
+    width: fit-content;
+
+    margin-bottom: 16px;
+
+    padding: 8px 13px;
+
+    border:
+        1px solid
+        #f1dfce;
+
+    border-radius: 10px;
+
+    background:
+        #fff9f3;
+
+    color: #9a6b43;
+
+    font-size: 11px;
+}
+
+.product-brand strong {
+    color: #c2410c;
+}
+
+
+/* =========================================================
+   DESCRIPTION
+   ========================================================= */
+
+.product-description {
+
+    margin-bottom: 18px;
+
+    color: #6b7280;
+
+    font-size: 13px;
+
+    line-height: 2.25;
+
+    white-space: pre-line;
+}
+
+
+/* =========================================================
+   META
+   ========================================================= */
+
+.product-meta {
+
+    display: flex;
+
+    align-items: center;
+
+    flex-wrap: wrap;
+
+    gap: 8px;
+
+    margin-bottom: 18px;
+}
+
+.meta-item {
+
+    display: inline-flex;
+
+    align-items: center;
+
+    min-height: 32px;
+
+    padding: 6px 11px;
+
+    border:
+        1px solid
+        #eee3d8;
+
+    border-radius: 9px;
+
+    background: #fff;
+
+    color: #777;
+
+    font-size: 10px;
+
+    font-weight: 700;
+}
+
+.meta-item:nth-child(2) {
+
+    color: #15803d;
+
+    background: #f0fdf4;
+
+    border-color: #bbf7d0;
+}
+
+
+/* =========================================================
+   BUY CARD
+   ========================================================= */
+
+.buy-card {
+
+    margin-top: auto;
+
+    padding: 20px;
+
+    border:
+        1px solid
+        #f0dfd0;
+
+    border-radius: 20px;
+
+    background:
+        linear-gradient(
+            145deg,
+            #fffdfa,
+            #fff7ef
+        );
+
+    box-shadow:
+        0 10px 35px rgba(80,45,15,.05);
+}
+
+
+/* =========================================================
+   SELLER
+   ========================================================= */
+
+.seller-row {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 12px;
+
+    padding-bottom: 16px;
+
+    margin-bottom: 16px;
+
+    border-bottom:
+        1px solid
+        #eee3d8;
+}
+
+.seller-icon {
+
+    width: 43px;
+    height: 43px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    flex-shrink: 0;
+
+    border-radius: 12px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #fff0e3,
+            #ffe4cc
+        );
+
+    color: var(--orange);
+}
+
+.seller-icon svg {
+
+    width: 20px;
+    height: 20px;
+}
+
+.seller-title {
+
+    color: #333;
+
+    font-size: 12px;
+
+    font-weight: 900;
+}
+
+.seller-subtitle {
+
+    margin-top: 4px;
+
+    color: #9a9a9a;
+
+    font-size: 10px;
+}
+
+
+/* =========================================================
+   SERVICES
+   ========================================================= */
+
+.product-services {
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(3, 1fr);
+
+    gap: 8px;
+
+    margin-bottom: 18px;
+}
+
+.service-item {
+
+    min-height: 76px;
+
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+
+    justify-content: center;
+
+    gap: 7px;
+
+    padding: 8px;
+
+    border:
+        1px solid
+        #eee4da;
+
+    border-radius: 13px;
+
+    background: rgba(255,255,255,.72);
+
+    color: #777;
+
+    text-align: center;
+
+    font-size: 9px;
+
+    line-height: 1.8;
+}
+
+.service-item i {
+
+    color: var(--orange);
+
+    font-size: 15px;
+}
+
+.service-item strong {
+    color: #444;
+}
+
+
+/* =========================================================
+   PRICE
+   ========================================================= */
+
+.price-section {
+
+    display: flex;
+
+    align-items: flex-end;
+
+    justify-content: space-between;
+
+    gap: 15px;
+
+    padding: 17px 0;
+
+    border-top:
+        1px solid
+        #eee3d8;
+
+    border-bottom:
+        1px solid
+        #eee3d8;
+}
+
+.price-label {
+
+    color: #999;
+
+    font-size: 11px;
+}
+
+.price-value {
+
+    display: flex;
+
+    align-items: baseline;
+
+    gap: 7px;
+
+    direction: rtl;
+}
+
+.price-number {
+
+    color: #c2410c;
+
+    font-size: clamp(24px, 3vw, 31px);
+
+    font-weight: 900;
+
+    letter-spacing: -.5px;
+}
+
+.price-currency {
+
+    color: #8b5e3c;
+
+    font-size: 11px;
+
+    font-weight: 700;
+}
+
+
+/* =========================================================
+   CART BUTTON
+   ========================================================= */
+
+.modern-cart-btn {
+
+    width: 100%;
+
+    min-height: 55px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    margin-top: 16px;
+
+    padding: 12px 20px;
+
+    border: none;
+
+    border-radius: 14px;
+
+    background:
+        linear-gradient(
+            110deg,
+            #f97316,
+            #fb7c25,
+            #ea580c
+        );
+
+    color: #fff !important;
+
+    font-family: inherit;
+
+    font-size: 13px;
+
+    font-weight: 900;
+
+    cursor: pointer;
+
+    box-shadow:
+        0 12px 28px rgba(249,115,22,.23);
+
+    transition:
+        .2s ease;
+}
+
+.modern-cart-btn:hover {
+
+    transform:
+        translateY(-2px);
+
+    filter:
+        brightness(1.04);
+
+    box-shadow:
+        0 16px 34px rgba(249,115,22,.30);
+}
+
+.modern-cart-btn:disabled {
+
+    cursor: not-allowed;
+
+    opacity: .65;
+
+    transform: none;
+
+    background: #c9c9c9;
+
+    box-shadow: none;
+}
+
+
+/* =========================================================
+   CART COUNTER
+   ========================================================= */
+
+.cart-counter-modern {
+
+    display: grid;
+
+    grid-template-columns:
+        50px 1fr 50px;
+
+    align-items: center;
+
+    height: 55px;
+
+    margin-top: 16px;
+
+    overflow: hidden;
+
+    border:
+        1px solid
+        #fdba74;
+
+    border-radius: 14px;
+
+    background: #fff7ed;
+}
+
+.cart-action {
+
+    height: 100%;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    color: #c2410c;
+
+    font-size: 22px;
+
+    font-weight: 500;
+
+    transition:
+        .2s ease;
+}
+
+.cart-action:hover {
+
+    background: #ffedd5;
+
+    color: #ea580c;
+}
+
+.cart-quantity {
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    height: 100%;
+
+    border-right:
+        1px solid
+        #fed7aa;
+
+    border-left:
+        1px solid
+        #fed7aa;
+
+    color: #7c2d12;
+
+    font-size: 15px;
+
+    font-weight: 900;
+}
+
+
+/* =========================================================
+   FEATURES
+   ========================================================= */
+
+.features-section {
+
+    margin-top: 25px;
+}
+
+.features-card {
+
+    height: 100%;
+
+    padding: 25px;
+
+    border:
+        1px solid
+        var(--border);
+
+    border-radius: 21px;
+
+    background: rgba(255,255,255,.96);
+
+    box-shadow:
+        0 12px 35px rgba(80,45,15,.045);
+}
+
+.section-heading {
+
+    position: relative;
+
+    margin: 0 0 20px;
+
+    padding-right: 13px;
+
+    color: #333;
+
+    font-size: 18px;
+
+    font-weight: 900;
+}
+
+.section-heading::before {
+
+    content: "";
+
+    position: absolute;
+
+    right: 0;
+
+    top: 4px;
+
+    width: 4px;
+
+    height: 22px;
+
+    border-radius: 10px;
+
+    background:
+        linear-gradient(
+            180deg,
+            #f97316,
+            #fb923c
+        );
+}
+
+
+/* =========================================================
+   FEATURES GRID
+   ========================================================= */
+
+.features-grid {
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(2, 1fr);
+
+    gap: 10px;
+}
+
+.feature-item {
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    gap: 12px;
+
+    min-height: 50px;
+
+    padding: 10px 13px;
+
+    border:
+        1px solid
+        #eee5dc;
+
+    border-radius: 11px;
+
+    background: #fffaf6;
+
+    font-size: 10px;
+}
+
+.feature-name {
+
+    color: #999;
+
+    font-weight: 700;
+}
+
+.feature-value {
+
+    color: #444;
+
+    font-weight: 900;
+
+    text-align: left;
+}
+
+
+/* =========================================================
+   INTRODUCTION
+   ========================================================= */
+
+.introduction {
+
+    margin: 0;
+
+    color: #707070;
+
+    font-size: 13px;
+
+    line-height: 2.4;
+
+    white-space: pre-line;
+}
+
+
+/* =========================================================
+   TABS
+   ========================================================= */
+
+.product-tabs-modern {
+
+    margin-top: 25px;
+
+    border:
+        1px solid
+        var(--border);
+
+    border-radius: 21px;
+
+    background: rgba(255,255,255,.97);
+
+    box-shadow:
+        0 12px 35px rgba(80,45,15,.045);
+
+    overflow: hidden;
+}
+
+
+/* =========================================================
+   TAB NAV
+   ========================================================= */
+
+.modern-tabs {
+
+    display: flex;
+
+    gap: 5px;
+
+    margin: 0;
+
+    padding: 10px;
+
+    border-bottom:
+        1px solid
+        #eee5dc;
+
+    background:
+        #fffaf6;
+}
+
+.modern-tabs .nav-item {
+    margin: 0;
+}
+
+.modern-tabs .nav-link {
+
+    position: relative;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    min-width: 130px;
+
+    padding: 12px 18px;
+
+    border: none !important;
+
+    border-radius: 11px;
+
+    color: #888;
+
+    background: transparent;
+
+    font-family: inherit;
+
+    font-size: 12px;
+
+    font-weight: 800;
+
+    transition:
+        .2s ease;
+}
+
+.modern-tabs .nav-link:hover {
+
+    color: #c2410c;
+
+    background: #fff1e6;
+}
+
+.modern-tabs .nav-link.active {
+
+    color: #c2410c;
+
+    background:
+        #fff;
+
+    box-shadow:
+        0 4px 15px rgba(90,50,15,.06);
+}
+
+.modern-tabs .nav-link.active::after {
+
+    content: "";
+
+    position: absolute;
+
+    bottom: -10px;
+
+    right: 50%;
+
+    transform:
+        translateX(50%);
+
+    width: 34px;
+
+    height: 3px;
+
+    border-radius: 5px;
+
+    background: var(--orange);
+}
+
+
+/* =========================================================
+   TAB CONTENT
+   ========================================================= */
+
+.tab-content-modern {
+
+    padding: 27px;
+}
+
+.tab-title {
+
+    margin: 0 0 18px;
+
+    color: #333;
+
+    font-size: 19px;
+
+    font-weight: 900;
+}
+
+
+/* =========================================================
+   COMMENTS
+   ========================================================= */
+
+.comments-summary {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 8px;
+
+    width: fit-content;
+
+    margin-bottom: 18px;
+
+    padding: 9px 13px;
+
+    border:
+        1px solid
+        #fed7aa;
+
+    border-radius: 10px;
+
+    background: #fff7ed;
+
+    color: #9a3412;
+
+    font-size: 11px;
+
+    font-weight: 700;
+}
+
+.comments-summary i {
+    color: var(--orange);
+}
+
+
+/* =========================================================
+   COMMENT
+   ========================================================= */
+
+.comments-list {
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 12px;
+}
+
+.comment {
+
+    padding: 18px;
+
+    border:
+        1px solid
+        #eee5dc;
+
+    border-radius: 15px;
+
+    background:
+        linear-gradient(
+            145deg,
+            #fff,
+            #fffaf6
+        );
+
+    transition:
+        .2s ease;
+}
+
+.comment:hover {
+
+    border-color:
+        #fed7aa;
+
+    box-shadow:
+        0 7px 22px rgba(80,45,15,.05);
+}
+
+.comment-header {
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    gap: 15px;
+
+    margin-bottom: 12px;
+}
+
+.comment-user {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 9px;
+
+    color: #444;
+
+    font-size: 11px;
+}
+
+.comment-avatar {
+
+    width: 35px;
+    height: 35px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 50%;
+
+    background:
+        #fff1e6;
+
+    color: var(--orange);
+}
+
+.comment-date {
+
+    color: #aaa;
+
+    font-size: 9px;
+}
+
+.comment-message {
+
+    color: #666;
+
+    font-size: 12px;
+
+    line-height: 2.2;
+
+    white-space: pre-line;
+}
+
+
+/* =========================================================
+   COMMENT FORM
+   ========================================================= */
+
+.comment-form {
+
+    margin-top: 25px;
+
+    padding: 20px;
+
+    border:
+        1px solid
+        #f0dfd0;
+
+    border-radius: 17px;
+
+    background:
+        #fffaf5;
+}
+
+.comment-form-title {
+
+    margin-bottom: 13px;
+
+    color: #444;
+
+    font-size: 13px;
+
+    font-weight: 900;
+}
+
+.comment-textarea {
+
+    width: 100%;
+
+    min-height: 125px;
+
+    resize: vertical;
+
+    padding: 13px;
+
+    border:
+        1px solid
+        #eadfd5;
+
+    border-radius: 12px;
+
+    outline: none;
+
+    background: #fff;
+
+    color: #444;
+
+    font-family: inherit;
+
+    font-size: 12px;
+
+    line-height: 2;
+
+    transition:
+        .2s ease;
+}
+
+.comment-textarea::placeholder {
+    color: #b5b5b5;
+}
+
+.comment-textarea:focus {
+
+    border-color:
+        #fb923c;
+
+    box-shadow:
+        0 0 0 4px
+        rgba(249,115,22,.08);
+}
+
+.comment-submit {
+
+    min-height: 45px;
+
+    padding: 9px 24px;
+
+    border: none;
+
+    border-radius: 11px;
+
+    background:
+        linear-gradient(
+            110deg,
+            #f97316,
+            #ea580c
+        );
+
+    color: #fff;
+
+    font-family: inherit;
+
+    font-size: 11px;
+
+    font-weight: 900;
+
+    cursor: pointer;
+
+    box-shadow:
+        0 8px 20px rgba(249,115,22,.18);
+
+    transition:
+        .2s ease;
+}
+
+.comment-submit:hover {
+
+    transform:
+        translateY(-1px);
+
+    box-shadow:
+        0 11px 25px rgba(249,115,22,.25);
+}
+
+
+/* =========================================================
+   EMPTY
+   ========================================================= */
+
+.empty-message {
+
+    padding: 25px;
+
+    border:
+        1px dashed
+        #e5d8cc;
+
+    border-radius: 13px;
+
+    background: #fffaf6;
+
+    color: #999;
+
+    text-align: center;
+
+    font-size: 11px;
+
+    line-height: 2;
+}
+
+
+/* =========================================================
+   LARGE RESPONSIVE
+   ========================================================= */
+
+@media (max-width: 991px) {
+
+    .product-page {
+        padding-top: 15px;
+    }
+
+    .product-main-card {
+        padding: 17px;
+    }
+
+    .product-gallery {
+        min-height: 520px;
+    }
+
+    .product-image-wrapper {
+        min-height: 390px;
+    }
+
+    .product-info {
+        padding: 5px 0 0;
+    }
+
+    .product-title {
+        font-size: 27px;
+    }
+
+    .buy-card {
+        margin-top: 15px;
+    }
+}
+
+
+/* =========================================================
+   TABLET
+   ========================================================= */
+
+@media (max-width: 767px) {
+
+    .product-page-container {
+        width: min(100% - 20px, 600px);
+    }
+
+    .product-main-card {
+        padding: 12px;
+
+        border-radius: 20px;
+    }
+
+    .product-gallery {
+        min-height: 480px;
+
+        padding: 17px;
+
+        border-radius: 18px;
+    }
+
+    .product-image-wrapper {
+        min-height: 350px;
+
+        padding-top: 45px;
+    }
+
+    .product-main-image {
+        height: 330px;
+    }
+
+    .product-title {
+        font-size: 25px;
+    }
+
+    .product-services {
+        grid-template-columns:
+            repeat(3, 1fr);
+    }
+
+    .features-card {
+        padding: 19px;
+    }
+
+    .features-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .tab-content-modern {
+        padding: 20px;
+    }
+}
+
+
+/* =========================================================
+   MOBILE
+   ========================================================= */
+
+@media (max-width: 520px) {
+
+    .product-page {
+        padding:
+            10px 0 35px;
+    }
+
+    .product-page-container {
+        width: calc(100% - 14px);
+    }
+
+    .product-breadcrumb {
+
+        margin-bottom: 12px;
+
+        padding: 10px 12px;
+
+        border-radius: 11px;
+
+        gap: 6px;
+
+        font-size: 9px;
+    }
+
+    .product-main-card {
+        padding: 8px;
+
+        border-radius: 17px;
+
+        box-shadow:
+            0 8px 25px rgba(80,45,15,.05);
+    }
+
+    .product-gallery {
+
+        min-height: 415px;
+
+        padding: 12px;
+
+        border-radius: 15px;
+    }
+
+    .offer-badge {
+
+        top: 12px;
+        right: 12px;
+
+        padding: 7px 10px;
+
+        font-size: 9px;
+    }
+
+    .favorite-wrapper {
+
+        top: 11px;
+        left: 11px;
+    }
+
+    .modern-favorite-btn {
+
+        width: 38px;
+        height: 38px;
+    }
+
+    .modern-favorite-btn svg {
+
+        width: 16px;
+        height: 16px;
+    }
+
+    .product-image-wrapper {
+
+        min-height: 300px;
+
+        padding:
+            45px 5px 5px;
+    }
+
+    .product-main-image {
+
+        height: 285px;
+    }
+
+    .product-thumbnails {
+        gap: 7px;
+    }
+
+    .product-thumbnail {
+
+        width: 53px;
+        height: 53px;
+
+        border-radius: 10px;
+    }
+
+    .product-info {
+
+        padding: 3px 2px;
+    }
+
+    .product-title {
+
+        margin-top: 12px;
+
+        font-size: 22px;
+
+        line-height: 1.65;
+    }
+
+    .product-brand {
+
+        margin-bottom: 12px;
+
+        font-size: 9px;
+    }
+
+    .product-description {
+
+        font-size: 11px;
+
+        line-height: 2;
+    }
+
+    .product-meta {
+        margin-bottom: 12px;
+    }
+
+    .meta-item {
+
+        min-height: 29px;
+
+        font-size: 9px;
+    }
+
+    .buy-card {
+
+        padding: 13px;
+
+        border-radius: 15px;
+    }
+
+    .seller-row {
+
+        padding-bottom: 12px;
+
+        margin-bottom: 12px;
+    }
+
+    .seller-icon {
+
+        width: 38px;
+        height: 38px;
+    }
+
+    .seller-title {
+        font-size: 10px;
+    }
+
+    .seller-subtitle {
+        font-size: 8px;
+    }
+
+    .product-services {
+
+        gap: 5px;
+
+        margin-bottom: 12px;
+    }
+
+    .service-item {
+
+        min-height: 70px;
+
+        padding: 5px;
+
+        font-size: 7.5px;
+    }
+
+    .service-item i {
+        font-size: 13px;
+    }
+
+    .price-section {
+
+        padding: 13px 0;
+    }
+
+    .price-label {
+        font-size: 9px;
+    }
+
+    .price-number {
+        font-size: 23px;
+    }
+
+    .price-currency {
+        font-size: 9px;
+    }
+
+    .modern-cart-btn {
+
+        min-height: 49px;
+
+        margin-top: 12px;
+
+        font-size: 11px;
+
+        border-radius: 11px;
+    }
+
+    .cart-counter-modern {
+
+        height: 49px;
+
+        margin-top: 12px;
+
+        grid-template-columns:
+            45px 1fr 45px;
+
+        border-radius: 11px;
+    }
+
+    .cart-action {
+        font-size: 19px;
+    }
+
+    .cart-quantity {
+        font-size: 12px;
+    }
+
+    .features-section {
+        margin-top: 13px;
+    }
+
+    .features-card {
+
+        padding: 16px;
+
+        border-radius: 16px;
+    }
+
+    .section-heading {
+
+        margin-bottom: 15px;
+
+        font-size: 15px;
+    }
+
+    .section-heading::before {
+
+        height: 18px;
+    }
+
+    .feature-item {
+
+        min-height: 46px;
+
+        padding: 8px 10px;
+
+        font-size: 9px;
+    }
+
+    .product-tabs-modern {
+
+        margin-top: 13px;
+
+        border-radius: 16px;
+    }
+
+    .modern-tabs {
+
+        overflow-x: auto;
+
+        scrollbar-width: none;
+
+        padding: 7px;
+    }
+
+    .modern-tabs::-webkit-scrollbar {
+        display: none;
+    }
+
+    .modern-tabs .nav-link {
+
+        min-width: 105px;
+
+        padding: 10px 13px;
+
+        font-size: 10px;
+
+        white-space: nowrap;
+    }
+
+    .tab-content-modern {
+        padding: 16px;
+    }
+
+    .tab-title {
+        font-size: 16px;
+    }
+
+    .introduction {
+        font-size: 11px;
+
+        line-height: 2.2;
+    }
+
+    .comments-summary {
+        font-size: 9px;
+    }
+
+    .comment {
+        padding: 13px;
+    }
+
+    .comment-user {
+        font-size: 9px;
+    }
+
+    .comment-avatar {
+
+        width: 30px;
+        height: 30px;
+    }
+
+    .comment-date {
+        font-size: 8px;
+    }
+
+    .comment-message {
+        font-size: 10px;
+    }
+
+    .comment-form {
+        padding: 14px;
+    }
+
+    .comment-submit {
+
+        width: 100%;
+
+        min-height: 44px;
+    }
+}
+
+
+/* =========================================================
+   VERY SMALL MOBILE
+   ========================================================= */
+
+@media (max-width: 360px) {
+
+    .product-services {
+        grid-template-columns: 1fr;
+    }
+
+    .service-item {
+
+        min-height: 45px;
+
+        flex-direction: row;
+
+        justify-content: flex-start;
+
+        padding: 8px 12px;
+
+        text-align: right;
+    }
+
+    .product-image-wrapper {
+        min-height: 270px;
+    }
+
+    .product-main-image {
+        height: 250px;
+    }
+
+    .product-title {
+        font-size: 20px;
+    }
+
+    .price-number {
+        font-size: 21px;
+    }
+}
+
+
+/* =========================================================
+   ACCESSIBILITY / MOTION
+   ========================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+
+    .product-page *,
+    .product-page *::before,
+    .product-page *::after {
+
+        transition: none !important;
+
+        animation: none !important;
+    }
+}
+
+</style>
+
+
+<!-- =========================================================
+     PRODUCT PAGE WRAPPER
+     ========================================================= -->
+
+<div class="product-page">
+
+    <div class="product-page-container">
+
+
+        <!-- =====================================================
+             BREADCRUMB
+             ===================================================== -->
+
+        <nav class="product-breadcrumb">
+
+            <a href="{% url 'accounts:indexone' %}">
+                شاپیک
+            </a>
+
+            {% for category in kala.category.all %}
+
+                <span>/</span>
+
+                <a href="#">
+                    {{ category.name }}
+                </a>
+
+            {% endfor %}
+
+            <span>/</span>
+
+            <span class="active">
+                {{ kala.name }}
+            </span>
+
+        </nav>
+
+
+        <!-- =====================================================
+             MAIN PRODUCT
+             ===================================================== -->
+
+        <section class="product-main-card">
+
+            <div class="row g-4 align-items-stretch">
+
+
+                <!-- =================================================
+                     PRODUCT IMAGE
+                     ================================================= -->
+
+                <div class="col-12 col-lg-5">
+
+                    <div class="product-gallery">
+
+
+                        {% if kala.offer %}
+
+                            <div class="offer-badge">
+                                پیشنهاد ویژه
+                            </div>
+
+                        {% endif %}
+
+
+                        <!-- FAVORITE -->
+
+                        <div class="favorite-wrapper">
+
+                            <form
+                                method="POST"
+                                action="{% url 'accounts:like_product' kala.id %}"
+                                class="favorite-form"
+                            >
+
+                                {% csrf_token %}
+
+                                <button
+                                    type="submit"
+                                    class="modern-favorite-btn {% if kala in liked_products %}active{% endif %}"
+                                    title="{% if kala in liked_products %}حذف از علاقه‌مندی‌ها{% else %}افزودن به علاقه‌مندی‌ها{% endif %}"
+                                    aria-label="{% if kala in liked_products %}حذف از علاقه‌مندی‌ها{% else %}افزودن به علاقه‌مندی‌ها{% endif %}"
+                                >
+
+                                    <svg
+                                        xmlns="http://www.w3.org/2000/svg"
+                                        viewBox="0 0 16 16"
+                                        aria-hidden="true"
+                                    >
+
+                                        <path
+                                            d="m8 2.748-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01L8 2.748zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143c.06.055.119.112.176.171C12.72-3.042 23.333 4.867 8 15z"
+                                        />
+
+                                    </svg>
+
+                                </button>
+
+                            </form>
+
+                        </div>
+
+
+                        <!-- MAIN IMAGE -->
+
+                        <div class="product-image-wrapper">
+
+                            {% if kala.image %}
+
+                                <img
+                                    class="product-main-image xzoom"
+                                    src="{{ kala.image.url }}"
+                                    xoriginal="{{ kala.image.url }}"
+                                    alt="{{ kala.name }}"
+                                    loading="eager"
+                                >
+
+                            {% else %}
+
+                                <img
+                                    class="product-main-image xzoom"
+                                    src="{% static 'img/suggest-6.jpg' %}"
+                                    xoriginal="{% static 'img/suggest-6.jpg' %}"
+                                    alt="{{ kala.name }}"
+                                    loading="eager"
+                                >
+
+                            {% endif %}
+
+                        </div>
+
+
+                        <!-- THUMBNAILS -->
+
+                        <div class="product-thumbnails">
+
+                            {% if kala.image %}
+
+                                <a
+                                    href="{{ kala.image.url }}"
+                                    class="product-thumbnail"
+                                >
+
+                                    <img
+                                        class="xzoom-gallery"
+                                        src="{{ kala.image.url }}"
+                                        xpreview="{{ kala.image.url }}"
+                                        alt="{{ kala.name }}"
+                                        loading="lazy"
+                                    >
+
+                                </a>
+
+                            {% endif %}
+
+
+                            {% for img in kala.images.all %}
+
+                                <a
+                                    href="{{ img.image.url }}"
+                                    class="product-thumbnail"
+                                >
+
+                                    <img
+                                        class="xzoom-gallery"
+                                        src="{{ img.image.url }}"
+                                        xpreview="{{ img.image.url }}"
+                                        alt="{{ kala.name }}"
+                                        loading="lazy"
+                                    >
+
+                                </a>
+
+                            {% endfor %}
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <!-- =================================================
+                     PRODUCT INFORMATION
+                     ================================================= -->
+
+                <div class="col-12 col-lg-7">
+
+                    <div class="product-info">
+
+                        <h1 class="product-title">
+                            {{ kala.name }}
+                        </h1>
+
+
+                        {% if kala.brand %}
+
+                            <div class="product-brand">
+
+                                <span>
+                                    برند:
+                                </span>
+
+                                <strong>
+                                    {{ kala.brand }}
+                                </strong>
+
+                            </div>
+
+                        {% endif %}
+
+
+                        {% if kala.information %}
+
+                            <div class="product-description">
+
+                                {{ kala.information }}
+
+                            </div>
+
+                        {% endif %}
+
+
+                        <!-- META -->
+
+                        <div class="product-meta">
+
+                            <span class="meta-item">
+
+                                {{ kala.comments.count }}
+                                دیدگاه
+
+                            </span>
+
+
+                            {% if kala.inventory > 0 %}
+
+                                <span class="meta-item">
+                                    موجود
+                                </span>
+
+                            {% else %}
+
+                                <span
+                                    class="meta-item"
+                                    style="
+                                        color:#dc2626;
+                                        background:#fff1f2;
+                                        border-color:#fecdd3;
+                                    "
+                                >
+                                    ناموجود
+                                </span>
+
+                            {% endif %}
+
+                        </div>
+
+
+                        <!-- =================================================
+                             BUY CARD
+                             ================================================= -->
+
+                        <div class="buy-card">
+
+
+                            <!-- SELLER -->
+
+                            <div class="seller-row">
+
+                                <div class="seller-icon">
+
+                                    <svg
+                                        xmlns="http://www.w3.org/2000/svg"
+                                        viewBox="0 0 16 16"
+                                        aria-hidden="true"
+                                    >
+
+                                        <path
+                                            fill="currentColor"
+                                            d="M2.97 1.35A1 1 0 0 1 3.73 1h8.54a1 1 0 0 1 .76.35l2.609 3.044A1.5 1.5 0 0 1 16 5.37v.255a2.375 2.375 0 0 1-4.25 1.458A2.371 2.371 0 0 1 9.875 8 2.37 2.37 0 0 1 8 7.083 2.37 2.37 0 0 1 6.125 8a2.375 2.375 0 0 1-1.875-.917A2.375 2.375 0 0 1 0 5.625V5.37a1.5 1.5 0 0 1 .361-.976l2.61-3.045z"
+                                        />
+
+                                    </svg>
+
+                                </div>
+
+                                <div>
+
+                                    <div class="seller-title">
+                                        فروشنده محصول
+                                    </div>
+
+                                    <div class="seller-subtitle">
+                                        خرید مستقیم از فروشنده
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+
+                            <!-- SERVICES -->
+
+                            <div class="product-services">
+
+
+                                <div class="service-item">
+
+                                    <i class="fa fa-shield-alt"></i>
+
+                                    <span>
+
+                                        {% if kala.waranty %}
+
+                                            {{ kala.waranty }}
+
+                                        {% else %}
+
+                                            گارانتی برای این محصول ثبت نشده
+
+                                        {% endif %}
+
+                                    </span>
+
+                                </div>
+
+
+                                <div class="service-item">
+
+                                    <i class="fa fa-truck"></i>
+
+                                    <span>
+                                        ارسال به سراسر کشور
+                                    </span>
+
+                                </div>
+
+
+                                <div class="service-item">
+
+                                    <i class="fa fa-box"></i>
+
+                                    <span>
+
+                                        {% if kala.inventory > 0 %}
+
+                                            موجودی:
+                                            <strong>
+                                                {{ kala.inventory }} عدد
+                                            </strong>
+
+                                        {% else %}
+
+                                            <strong
+                                                style="color:#dc2626;"
+                                            >
+                                                این کالا ناموجود است
+                                            </strong>
+
+                                        {% endif %}
+
+                                    </span>
+
+                                </div>
+
+                            </div>
+
+
+                            <!-- PRICE -->
+
+                            <div class="price-section">
+
+                                <div class="price-label">
+                                    قیمت فروشنده
+                                </div>
+
+                                <div class="price-value">
+
+                                    <span class="price-number">
+                                        {{ kala.price }}
+                                    </span>
+
+                                    <span class="price-currency">
+                                        تومان
+                                    </span>
+
+                                </div>
+
+                            </div>
+
+
+                            <!-- CART -->
+
+                            {% if cart_quantity > 0 %}
+
+                                <div class="cart-counter-modern">
+
+                                    <a
+                                        href="{% url 'products:decrease' kala.id %}"
+                                        class="cart-action"
+                                        aria-label="کاهش تعداد"
+                                    >
+                                        −
+                                    </a>
+
+                                    <span class="cart-quantity">
+                                        {{ cart_quantity }}
+                                    </span>
+
+                                    <a
+                                        href="{% url 'products:add_to_cart' kala.id %}"
+                                        class="cart-action"
+                                        aria-label="افزایش تعداد"
+                                    >
+                                        +
+                                    </a>
+
+                                </div>
+
+                            {% else %}
+
+                                {% if kala.inventory > 0 %}
+
+                                    <a
+                                        href="{% url 'products:add_to_cart' kala.id %}"
+                                        class="modern-cart-btn"
+                                    >
+                                        افزودن به سبد خرید
+                                    </a>
+
+                                {% else %}
+
+                                    <button
+                                        class="modern-cart-btn"
+                                        disabled
+                                    >
+                                        کالا ناموجود است
+                                    </button>
+
+                                {% endif %}
+
+                            {% endif %}
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- =====================================================
+             FEATURES
+             ===================================================== -->
+
+        <section class="features-section">
+
+            <div class="row g-4">
+
+
+                <div class="col-12 col-lg-6">
+
+                    <div class="features-card">
+
+                        <h2 class="section-heading">
+                            ویژگی‌های محصول
+                        </h2>
+
+
+                        <div class="features-grid">
+
+                            {% for feature in kala.features.all %}
+
+                                <div class="feature-item">
+
+                                    <span class="feature-name">
+                                        {{ feature.name }}
+                                    </span>
+
+                                    <span class="feature-value">
+                                        {{ feature.value }}
+                                    </span>
+
+                                </div>
+
+                            {% empty %}
+
+                                <div
+                                    class="empty-message"
+                                    style="grid-column:1/-1;"
+                                >
+                                    ویژگی برای این محصول ثبت نشده
+                                </div>
+
+                            {% endfor %}
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <div class="col-12 col-lg-6">
+
+                    <div class="features-card">
+
+                        <h2 class="section-heading">
+                            خلاصه محصول
+                        </h2>
+
+                        <p class="introduction">
+
+                            {% if kala.information %}
+
+                                {{ kala.information }}
+
+                            {% else %}
+
+                                توضیحی برای این محصول ثبت نشده است.
+
+                            {% endif %}
+
+                        </p>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- =====================================================
+             TABS
+             ===================================================== -->
+
+        <section class="product-tabs-modern">
+
+
+            <ul class="nav modern-tabs">
+
+                <li class="nav-item">
+
+                    <a
+                        class="nav-link active"
+                        href="#productInfo"
+                        data-bs-toggle="tab"
+                    >
+                        مشخصات
+                    </a>
+
+                </li>
+
+
+                <li class="nav-item">
+
+                    <a
+                        class="nav-link"
+                        href="#comments"
+                        data-bs-toggle="tab"
+                    >
+                        دیدگاه‌ها
+                    </a>
+
+                </li>
+
+            </ul>
+
+
+            <div class="tab-content tab-content-modern">
+
+
+                <!-- =================================================
+                     PRODUCT INFO
+                     ================================================= -->
+
+                <div
+                    class="tab-pane fade show active"
+                    id="productInfo"
+                >
+
+                    <h2 class="tab-title">
+                        معرفی محصول
+                    </h2>
+
+                    <p class="introduction">
+
+                        {% if kala.information %}
+
+                            {{ kala.information }}
+
+                        {% else %}
+
+                            توضیحی برای این محصول ثبت نشده است.
+
+                        {% endif %}
+
+                    </p>
+
+                </div>
+
+
+                <!-- =================================================
+                     COMMENTS
+                     ================================================= -->
+
+                <div
+                    class="tab-pane fade"
+                    id="comments"
+                >
+
+                    <h2 class="tab-title">
+                        دیدگاه‌های کاربران
+                    </h2>
+
+
+                    <div class="comments-summary">
+
+                        <i class="fa fa-comment"></i>
+
+                        {{ comments.count }}
+
+                        دیدگاه برای این محصول ثبت شده است.
+
+                    </div>
+
+
+                    <!-- COMMENTS LIST -->
+
+                    <div class="comments-list">
+
+                        {% for comment in comments %}
+
+                            <div class="comment">
+
+
+                                <div class="comment-header">
+
+
+                                    <div class="comment-user">
+
+                                        <div class="comment-avatar">
+
+                                            <i class="fa fa-user"></i>
+
+                                        </div>
+
+                                        <strong>
+                                            {{ comment.contact.user.username }}
+                                        </strong>
+
+                                    </div>
+
+
+                                    <div class="comment-date">
+
+                                        {{ comment.created_at|date:"Y/m/d" }}
+
+                                    </div>
+
+                                </div>
+
+
+                                <div class="comment-message">
+
+                                    {{ comment.messege }}
+
+                                </div>
+
+                            </div>
+
+
+                        {% empty %}
+
+                            <div class="empty-message">
+
+                                هنوز دیدگاهی برای این محصول ثبت نشده است.
+
+                            </div>
+
+                        {% endfor %}
+
+                    </div>
+
+
+                    <!-- =================================================
+                         COMMENT FORM
+                         ================================================= -->
+
+                    {% if user.is_authenticated %}
+
+                        <div class="comment-form">
+
+                            <div class="comment-form-title">
+                                ثبت دیدگاه
+                            </div>
+
+
+                            <form
+                                method="POST"
+                                action="{% url 'accounts:add_comment' kala.id %}"
+                            >
+
+                                {% csrf_token %}
+
+
+                                <div class="mb-3">
+
+                                    <textarea
+                                        name="messege"
+                                        class="comment-textarea"
+                                        rows="5"
+                                        placeholder="دیدگاه خود را درباره این محصول بنویسید..."
+                                        required
+                                    ></textarea>
+
+                                </div>
+
+
+                                <button
+                                    type="submit"
+                                    class="comment-submit"
+                                >
+                                    ثبت دیدگاه
+                                </button>
+
+                            </form>
+
+                        </div>
+
+                    {% else %}
+
+                        <div class="empty-message">
+
+                            برای ثبت دیدگاه ابتدا وارد حساب کاربری خود شوید.
+
+                        </div>
+
+                    {% endif %}
+
+                </div>
+
+            </div>
+
+        </section>
+
+    </div>
+
+</div>
+
+{% endblock %}

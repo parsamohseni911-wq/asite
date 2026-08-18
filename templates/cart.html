@@ -1,0 +1,543 @@
+{% extends 'base.html' %}
+{% load static %}
+
+
+{% block content %}
+
+<!--Navbar:end--><!--Main:start-->
+<main class="container mt-xxxx-large">
+
+
+{% load static %}
+
+<!-- Cart Section:start -->
+<section class="cart-section py-4">
+
+    <!-- Tabs -->
+    <ul class="nav nav-tabs" role="tablist">
+
+        <li class="nav-item">
+            <a class="nav-link active"
+               id="cart-tab"
+               data-bs-toggle="tab"
+               href="#cart-pane"
+               role="tab">
+
+                سبد خرید
+
+                <span class="badge bg-secondary">
+                    {{ cart_items|length }}
+                </span>
+
+            </a>
+        </li>
+
+        <li class="nav-item">
+            <a class="nav-link"
+               id="nextCart-tab"
+               data-bs-toggle="tab"
+               href="#nextCart-pane"
+               role="tab">
+
+                لیست خرید بعدی
+
+                <span class="badge bg-secondary">0</span>
+
+            </a>
+        </li>
+
+    </ul>
+
+
+    <!-- Tab Content -->
+    <div class="tab-content mt-3">
+
+        <!-- ================= CART ================= -->
+        <div class="tab-pane fade show active"
+             id="cart-pane"
+             role="tabpanel">
+
+            <div class="row g-3">
+
+                <!-- Cart Items -->
+                <div class="col-lg-9">
+
+                    <div class="cart-header d-flex justify-content-between align-items-center mb-3">
+
+                        <p class="fw-bold mb-0">
+
+                            سبد خرید شما
+
+                            <span class="d-block fs-8 text-muted">
+                                {{ cart_items|length }} کالا
+                            </span>
+
+                        </p>
+
+                    </div>
+
+
+                    <div class="cart-content">
+
+                        <div class="card border-0">
+
+                            <div class="card-body">
+
+                                {% if cart_items %}
+
+                                    {% for item in cart_items %}
+
+                                        <div class="shopping-cart-item border-bottom p-3">
+
+                                            <div class="row align-items-center">
+
+                                                <!-- Product Image -->
+ <!-- Product Image -->
+<div class="col-md-3 text-center">
+
+    <div class="shopping-cart-item-right">
+
+        <a href="{% url 'products:single_product' item.product.id %}">
+
+            {% if item.product.image %}
+                <img src="{{ item.product.image.url }}"
+                     alt="{{ item.product.name }}"
+                     class="img-fluid border rounded cart-product-image">
+            {% else %}
+                <img src="{% static 'img/laptop-1.jpg' %}"
+                     alt="{{ item.product.name }}"
+                     class="img-fluid border rounded cart-product-image">
+            {% endif %}
+
+        </a>
+
+        <!-- Quantity -->
+        <div class="shop-item-edit-box d-flex justify-content-between align-items-center mt-2 p-2 border rounded">
+
+            <!-- Add -->
+            <a href="{% url 'products:add_to_cart' item.product.id %}"
+               class="cart-quantity-btn addition"
+               title="افزایش">
+                <i class="fas fa-plus"></i>
+            </a>
+
+            <!-- Quantity -->
+            <span class="fs-6 fw-bold">
+                {{ item.quantity }}
+            </span>
+
+            <!-- Decrease / Remove -->
+            {% if item.quantity > 1 %}
+
+                <a href="{% url 'products:decrease' item.product.id %}"
+                   class="cart-quantity-btn decrease"
+                   title="کاهش">
+                    <i class="fas fa-minus"></i>
+                </a>
+
+            {% else %}
+
+                <a href="{% url 'products:remove_from_cart' item.product.id %}"
+                   class="cart-quantity-btn decrease"
+                   title="حذف از سبد خرید">
+                    <i class="far fa-trash-alt"></i>
+                </a>
+
+            {% endif %}
+
+        </div>
+
+    </div>
+
+</div>
+
+
+                                                        </a>
+
+
+                                                        <!-- Quantity -->
+ <!-- Quantity -->
+
+
+                                                        </div>
+
+                                                    </div>
+
+                                                </div>
+
+
+                                                <!-- Product Info -->
+                                                <div class="col-md-9">
+
+                                                    <div class="shopping-cart-item-left text-start">
+
+                                                        <h3 class="fs-6 fw-bold">
+
+                                                            {{ item.product.name }}
+
+                                                        </h3>
+
+
+                                                        <span class="d-block mt-1 fs-8 text-success">
+
+                                                            <i class="far fa-check-circle me-1"></i>
+
+                                                            موجود در انبار
+
+                                                        </span>
+
+
+                                                        <span class="d-block mt-1 fs-8 text-muted">
+
+                                                            <i class="fas fa-truck-moving me-1"></i>
+
+                                                            آماده ارسال
+
+                                                        </span>
+
+
+                                                        <span class="fs-5 fw-bold mt-2 d-block">
+
+                                                            {{ item.total_price|floatformat:0 }}
+
+                                                            تومان
+
+                                                        </span>
+
+                                                    </div>
+
+
+                                               
+
+                                                    </a>
+
+                                                </div>
+
+                                            </div>
+
+                                        </div>
+
+                                    {% endfor %}
+
+                                {% else %}
+
+                                    <!-- Empty Cart -->
+
+
+<div class="text-center py-5">
+
+                                        <i class="fas fa-shopping-cart"
+                                           style="font-size:60px;color:#ccc;"></i>
+
+                                        <h5 class="mt-3">
+
+                                            سبد خرید شما خالی است
+
+                                        </h5>
+
+                                        <p class="text-muted fs-7">
+
+__________
+
+                                        </p>
+
+                                        <a href="{% url 'accounts:indexone' %}"
+                                           class="btn-auth2 px-4 py-2">
+
+                                            مشاهده محصولات
+
+                                        </a>
+
+                                    </div>
+
+                                {% endif %}
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <!-- ================= CART SIDEBAR ================= -->
+
+                <div class="col-lg-3">
+
+                    <div class="cart-cal border p-3 rounded bg-light">
+
+                        <div class="d-flex justify-content-between mb-2">
+
+                            <p class="fw-bold fs-7 mb-0">
+
+                                قیمت کالاها
+
+                            </p>
+
+                            <p class="fw-bold fs-7 text-muted mb-0">
+
+                                {{ cart_total|floatformat:0 }}
+
+                                تومان
+
+                            </p>
+
+                        </div>
+
+
+                        <div class="d-flex justify-content-between mb-2">
+
+                            <p class="fw-bold fs-7 mb-0">
+
+                                جمع سبد خرید
+
+                            </p>
+
+                            <p class="fw-bold fs-7 text-muted mb-0">
+
+                                {{ cart_total|floatformat:0 }}
+
+                                تومان
+
+                            </p>
+
+                        </div>
+
+
+                        <div class="d-flex justify-content-between mb-2">
+
+                            <p class="fw-bold fs-7 text-danger mb-0">
+
+                                سود شما از خرید
+
+                            </p>
+
+                            <p class="fw-bold fs-7 text-danger mb-0">
+
+                                0 تومان
+
+                            </p>
+
+                        </div>
+
+
+                        <div class="d-grid mb-3">
+
+<a href="{% url 'payments:start_payment' %}"
+   class="btn btn-primary w-100">
+    پرداخت و انجام خرید
+</a>
+                        </div>
+
+
+                        <div class="d-flex justify-content-between align-items-center p-2 border-top">
+
+                            <div class="d-flex align-items-center">
+                            </div>
+
+
+                            <p class="mb-0">
+
+                            </p>
+
+                        </div>
+
+                    </div>
+
+
+                    <p class="fs-8 mt-2 text-muted text-start">
+
+                        هزینه این سفارش هنوز پرداخت نشده و در صورت اتمام موجودی،
+                        کالاها از سبد حذف می‌شوند.
+
+                    </p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- ================= NEXT CART ================= -->
+
+
+<div class="tab-pane fade"
+             id="nextCart-pane"
+             role="tabpanel">
+
+            <div class="row g-3">
+
+                <div class="col-lg-9">
+
+                    <div class="cart-header d-flex justify-content-between align-items-center mb-3">
+
+                        <p class="fw-bold mb-0">
+
+                            لیست خرید بعدی شما
+
+                            <span class="d-block fs-8 text-muted">
+
+                                0 کالا
+
+                            </span>
+
+                        </p>
+
+                    </div>
+
+
+                    <div class="card border-0">
+
+                        <div class="card-body">
+
+                            <div class="text-center py-5">
+
+                                <i class="fas fa-clock"
+                                   style="font-size:55px;color:#ccc;"></i>
+
+                                <h5 class="mt-3">
+
+                                    لیست خرید بعدی خالی است
+
+                                </h5>
+
+                                <p class="text-muted fs-7">
+
+                                    محصولاتی که فعلاً قصد خریدشان را ندارید
+                                    می‌توانید در این قسمت قرار دهید.
+
+                                </p>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <div class="col-lg-3">
+
+                    <div class="add-to-cart border p-3 rounded bg-light text-start">
+
+                        <p class="fw-bold fs-7">
+
+                            لیست خرید بعدی چیست؟
+
+                        </p>
+
+                        <p class="fs-8 my-1 text-muted border-bottom pb-2">
+
+                            محصولاتی را که فعلاً قصد خرید آن‌ها را ندارید
+                            می‌توانید در لیست خرید بعدی قرار دهید.
+
+                        </p>
+
+                        <p class="fs-8 text-center my-2">
+
+                            <span class="fw-bold">0 کالا</span>
+
+                            در لیست خرید بعدی شماست
+
+                        </p>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+<!-- Cart Section:end -->
+
+
+<style>
+
+    /* Cart */
+
+    .cart-product-image {
+        width: 150px;
+        height: 150px;
+        object-fit: contain;
+    }
+
+
+    .shop-item-edit-box {
+        min-width: 130px;
+        background: #fff;
+    }
+
+
+    .cart-quantity-btn {
+        width: 30px;
+        height: 30px;
+
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        text-decoration: none !important;
+
+        color: #333;
+
+        transition: .2s;
+    }
+
+
+    .cart-quantity-btn:hover {
+        color: #0d6efd;
+        transform: scale(1.1);
+    }
+
+
+    .shopping-cart-item {
+        transition: .2s;
+    }
+
+
+    .shopping-cart-item:hover {
+        background: #fafafa;
+    }
+
+
+    .cart-cal {
+        position: sticky;
+        top: 20px;
+    }
+
+
+    @media (max-width: 768px) {
+
+        .cart-product-image {
+            width: 120px;
+            height: 120px;
+        }
+
+        .shopping-cart-item-left {
+            text-align: right !important;
+            margin-top: 15px;
+        }
+
+        .cart-cal {
+            position: static;
+        }
+
+    }
+
+</style>
+
+</main>
+
+
+
+                                    <!--Main:end-->
+
+
+{% endblock %}

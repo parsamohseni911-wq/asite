@@ -1,0 +1,107 @@
+
+{% load static %}
+
+<!DOCTYPE html>
+<html dir="rtl" lang="fa">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ورود | ثبت نام</title>
+    <link rel="stylesheet" href="{% static 'css/vendors/bootstrap/bootstrap.rtl.css'%}">
+    <link rel="stylesheet" href="{% static 'css/vendors/fontawesome/fontawesome.min.css'%}">
+    <link rel="stylesheet" href="{% static 'css/style.css'%}">
+</head>
+<body class="body-login">
+<div class="login-wrapper d-flex justify-content-center align-content-center flex-row w-100 vh-100">
+    <!-- ستون فرم -->
+    <div class="col-md-6 col-12 d-flex h-100 bg-white align-items-center justify-content-center p-4">
+        <div class="login-form text-center">
+
+            <h1 class="fw-bold fs-3 mb-3">ورود | ثبت نام</h1>
+            <p class="text-start">سلام!</p>
+            <p class="text-start"></p>
+<form class="mb-3"
+      method="post"
+      action="{% url 'accounts:complete' %}">
+
+    {% csrf_token %}
+
+    <input type="hidden"
+           name="next"
+           value="{{ next }}">
+
+    <div class="input-group">
+        <input name="number"
+               type="text"
+               id="number"
+               placeholder=" "
+               required>
+
+        <label for="number">
+            شماره موبایل
+        </label>
+    </div>
+
+    <div class="input-group">
+        <input name="adress"
+               type="text"
+               id="adress"
+               placeholder=" "
+               required>
+
+        <label for="adress">
+            نشانی
+        </label>
+    </div>
+
+    <div class="input-group">
+        <input name="postcode"
+               type="text"
+               id="postcode"
+               placeholder=" "
+               required>
+
+        <label for="postcode">
+            کد پستی
+        </label>
+    </div>
+
+    <button type="submit"
+            class="btn-auth w-100 fw-bold">
+        ذخیره
+    </button>
+
+</form>
+  
+                    <path
+                            fill="#fff"
+                            d="M44.59 4.21a63.28 63.28 0 0 0 4.33 120.9a67.6 67.6 0 0 0 32.36.35a57.13 57.13 0 0 0 25.9-13.46a57.44 57.44 0 0 0 16-26.26a74.3 74.3 0 0 0 1.61-33.58H65.27v24.69h34.47a29.72 29.72 0 0 1-12.66 19.52a36.2 36.2 0 0 1-13.93 5.5a41.3 41.3 0 0 1-15.1 0A37.2 37.2 0 0 1 44 95.74a39.3 39.3 0 0 1-14.5-19.42a38.3 38.3 0 0 1 0-24.63a39.25 39.25 0 0 1 9.18-14.91A37.17 37.17 0 0 1 76.13 27a34.3 34.3 0 0 1 13.64 8q5.83-5.8 11.64-11.63c2-2.09 4.18-4.08 6.15-6.22A61.2 61.2 0 0 0 87.2 4.59a64 64 0 0 0-42.61-.38"
+                    ></path>
+                    <path
+                            fill="#e33629"
+                            d="M44.59 4.21a64 64 0 0 1 42.61.37a61.2 61.2 0 0 1 20.35 12.62c-2 2.14-4.11 4.14-6.15 6.22Q95.58 29.23 89.77 35a34.3 34.3 0 0 0-13.64-8a37.17 37.17 0 0 0-37.46 9.74a39.25 39.25 0 0 0-9.18 14.91L8.76 35.6A63.53 63.53 0 0 1 44.59 4.21"
+                    ></path>
+                    <path
+                            fill="#f8bd00"
+                            d="M3.26 51.5a63 63 0 0 1 5.5-15.9l20.73 16.09a38.3 38.3 0 0 0 0 24.63q-10.36 8-20.73 16.08a63.33 63.33 0 0 1-5.5-40.9"
+                    ></path>
+                    <path
+                            fill="#587dbd"
+                            d="M65.27 52.15h59.52a74.3 74.3 0 0 1-1.61 33.58a57.44 57.44 0 0 1-16 26.26c-6.69-5.22-13.41-10.4-20.1-15.62a29.72 29.72 0 0 0 12.66-19.54H65.27c-.01-8.22 0-16.45 0-24.68"
+                    ></path>
+                    <path
+                            fill="#319f43"
+                            d="M8.75 92.4q10.37-8 20.73-16.08A39.3 39.3 0 0 0 44 95.74a37.2 37.2 0 0 0 14.08 6.08a41.3 41.3 0 0 0 15.1 0a36.2 36.2 0 0 0 13.93-5.5c6.69 5.22 13.41 10.4 20.1 15.62a57.13 57.13 0 0 1-25.9 13.47a67.6 67.6 0 0 1-32.36-.35a63 63 0 0 1-23-11.59A63.7 63.7 0 0 1 8.75 92.4"
+                    ></path>
+                </svg>
+            </a>
+            <p class="mt-3">ورود شما به معنای پذیرش شرایط و قوانین است.</p>
+        </div>
+    </div>
+    <!-- ستون تصویر -->
+    <div class="col-md-6 d-none d-md-block p-0">
+        <img src="{% static 'img/station.svg'%}" class="w-100 h-100 object-fit-cover" alt="background">
+    </div>
+</div>
+</body>
+</html>
